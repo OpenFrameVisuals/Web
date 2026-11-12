@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenFrame Visuals | Photography • Films • Aerials</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Montserrat & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        obsidian: '#050505',
+                        charcoal: '#0e0e10',
+                        slateDark: '#18181b',
+                    },
+                    letterSpacing: {
+                        widestPlus: '0.35em',
+                        ultraWide: '0.5em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Custom Glassmorphism */
+        .glass-panel {
+            background: rgba(20, 20, 22, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Cinematic Lens Glow Background */
+        .lens-ambient {
+            background: radial-gradient(circle at 75% 70%, rgba(255, 255, 255, 0.07) 0%, rgba(15, 15, 18, 0.4) 35%, rgba(5, 5, 5, 1) 75%);
+        }
+
+        /* Subtle Viewfinder Corner Brackets */
+        .viewfinder-box {
+            position: relative;
+        }
+        .viewfinder-box::before, .viewfinder-box::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-color: rgba(255, 255, 255, 0.35);
+            border-style: solid;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .viewfinder-box::before {
+            top: -1px; left: -1px;
+            border-width: 1.5px 0 0 1.5px;
+        }
+        .viewfinder-box::after {
+            bottom: -1px; right: -1px;
+            border-width: 0 1.5px 1.5px 0;
+        }
+        .viewfinder-box:hover::before, .viewfinder-box:hover::after {
+            width: 22px;
+            height: 22px;
+            border-color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Portfolio Image Transition */
+        .portfolio-img {
+            filter: grayscale(35%) contrast(108%);
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+        }
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.06);
+            filter: grayscale(0%) contrast(105%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52525b;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <!-- ==================== STICKY GLASS HEADER ==================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Monogram + Wordmark -->
+                <a href="#home" class="flex items-center gap-3.5 group">
+                    <svg class="w-10 h-10 text-white transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 28V12H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
+                        <path d="M72 12H88V28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
+                        <path d="M12 72V88H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
+                        <path d="M72 88H88V72" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
+                        <path d="M62 36C57.5 29.5 49.5 26 41 27.5C29 29.5 21 40.5 23 52.5C24.5 61.5 31 68.5 39.5 70.5" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+                        <path d="M36 73L63 45H78" stroke="currentColor" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter"/>
+                        <path d="M63 45V74" stroke="currentColor" stroke-width="6.5" stroke-linecap="square"/>
+                    </svg>
+                    <div class="flex flex-col">
+                        <span class="font-display text-sm sm:text-base tracking-[0.28em] text-white font-normal">
+                            <strong class="font-bold">OPEN</strong>FRAME
+                        </span>
+                        <span class="font-display text-[9px] tracking-[0.48em] text-zinc-400 uppercase mt-0.5">
+                            VISUALS
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#portfolio" class="text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Portfolio</a>
+                    <a href="#catalog" class="text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Catalog & Packages</a>
+                    <a href="#booking" class="text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Schedule & Orders</a>
+                    <a href="#contact" class="text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Contact</a>
+                </nav>
+
+                <!-- CTA & Mobile Menu Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="#booking" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-display text-xs font-semibold tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-lg shadow-white/10">
+                        <span>Book Session</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden p-2.5 rounded-lg text-zinc-300 hover:text-white hover:bg-white/10 transition">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Nav -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-6 py-5 space-y-4">
+            <a href="#portfolio" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Portfolio</a>
+            <a href="#catalog" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Catalog & Packages</a>
+            <a href="#booking" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Schedule & Orders</a>
+            <a href="#contact" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Contact</a>
+            <a href="#booking" class="block text-center w-full py-3 rounded-xl bg-white text-black font-display text-xs font-semibold tracking-widest uppercase">Book a Session</a>
+        </div>
+    </header>
+
+    <!-- ==================== CINEMATIC HERO SECTION ==================== -->
+    <section id="home" class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden lens-ambient">
+        <!-- Subtle Optical Ring Glow Accent (No random stock photo) -->
+        <div class="absolute right-[-10%] bottom-[-10%] w-[520px] h-[520px] rounded-full border border-white/[0.04] pointer-events-none hidden sm:block">
+            <div class="w-full h-full rounded-full border border-white/[0.05] scale-75"></div>
+        </div>
+
+        <!-- Viewfinder Grid Overlay Lines -->
+        <div class="absolute inset-8 sm:inset-14 border border-white/[0.04] pointer-events-none z-0 hidden sm:block">
+            <div class="absolute top-0 left-0 w-6 h-6 border-t border-l border-white/30"></div>
+            <div class="absolute top-0 right-0 w-6 h-6 border-t border-r border-white/30"></div>
+            <div class="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-white/30"></div>
+            <div class="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-white/30"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/10 text-xs font-mono">+</div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-3xl">
+                <!-- Status Pill -->
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-panel border border-white/15 mb-8">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="font-display text-[10px] sm:text-xs tracking-[0.22em] uppercase text-zinc-200">
+                        Bookings Open • November 2026 • Sri Lanka
+                    </span>
+                </div>
+
+                <!-- Main Brand Heading -->
+                <h1 class="font-display text-3xl sm:text-5xl md:text-6xl font-light tracking-[0.22em] sm:tracking-[0.28em] text-white uppercase leading-tight">
+                    <span class="font-bold">OPEN</span>FRAME<br>
+                    <span class="text-xl sm:text-3xl md:text-4xl tracking-[0.42em] text-zinc-300 font-extralight block mt-2">VISUALS</span>
+                </h1>
+
+                <!-- Tagline -->
+                <p class="mt-8 font-display text-sm sm:text-lg tracking-[0.3em] uppercase text-zinc-300 font-light leading-relaxed">
+                    Every Frame.<br class="sm:hidden"> A New Perspective.
+                </p>
+
+                <div class="w-16 h-[1px] bg-white/40 my-8"></div>
+
+                <!-- 3 Core Pillars -->
+                <div class="grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mb-10">
+                    <div class="flex flex-col items-start sm:items-center text-left sm:text-center border-r border-white/15 pr-3">
+                        <i class="fa-solid fa-camera text-lg sm:text-xl text-white/90 mb-2.5"></i>
+                        <span class="font-display text-[9px] sm:text-[11px] tracking-[0.2em] uppercase text-zinc-300">Photography</span>
+                    </div>
+                    <div class="flex flex-col items-start sm:items-center text-left sm:text-center border-r border-white/15 pr-3">
+                        <i class="fa-solid fa-video text-lg sm:text-xl text-white/90 mb-2.5"></i>
+                        <span class="font-display text-[9px] sm:text-[11px] tracking-[0.2em] uppercase text-zinc-300">Cinematography</span>
+                    </div>
+                    <div class="flex flex-col items-start sm:items-center text-left sm:text-center">
+                        <i class="fa-solid fa-helicopter text-lg sm:text-xl text-white/90 mb-2.5"></i>
+                        <span class="font-display text-[9px] sm:text-[11px] tracking-[0.2em] uppercase text-zinc-300">Aerials</span>
+                    </div>
+                </div>
+
+                <!-- Hero CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#booking" class="px-8 py-4 rounded-xl bg-white text-black font-display text-xs font-semibold tracking-[0.22em] uppercase text-center hover:bg-zinc-200 transition-all shadow-xl shadow-white/5">
+                        Book a Session
+                    </a>
+                    <a href="#catalog" class="px-8 py-4 rounded-xl glass-panel text-white font-display text-xs font-medium tracking-[0.22em] uppercase text-center hover:bg-white/10 transition-all">
+                        View Service Catalog
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== INTERACTIVE PORTFOLIO GALLERY (DYNAMIC FROM FIREBASE) ==================== -->
+    <section id="portfolio" class="py-24 bg-[#08080a] border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Selected Works</span>
+                    <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
+                        Visual <span class="font-semibold">Portfolio</span>
+                    </h2>
+                </div>
+
+                <!-- Category Filter Pills -->
+                <div class="flex flex-wrap gap-2" id="portfolio-filters">
+                    <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-full text-xs font-display tracking-widest uppercase bg-white text-black font-semibold transition-all">
+                        All Frames
+                    </button>
+                    <button data-filter="photography" class="filter-btn px-5 py-2.5 rounded-full text-xs font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                        Photography
+                    </button>
+                    <button data-filter="films" class="filter-btn px-5 py-2.5 rounded-full text-xs font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                        Films
+                    </button>
+                    <button data-filter="aerials" class="filter-btn px-5 py-2.5 rounded-full text-xs font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                        Aerials
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                    <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-xl mb-3"></i>
+                    <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Loading Studio Portfolio...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICE CATALOG & PACKAGES (DYNAMIC FROM FIREBASE) ==================== -->
+    <section id="catalog" class="py-24 bg-[#050505] border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Service Catalog</span>
+                <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
+                    Production <span class="font-semibold">Packages</span>
+                </h2>
+                <p class="text-zinc-400 text-sm mt-4 font-light leading-relaxed">
+                    Select a tailored package below to automatically load it into your booking schedule. Custom enterprise & destination shoots are also available.
+                </p>
+            </div>
+
+            <!-- Dynamic Packages Grid -->
+            <div id="packages-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                    <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-xl mb-3"></i>
+                    <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Loading Service Packages...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== INTERACTIVE SCHEDULE & ORDER BOOKING ==================== -->
+    <section id="booking" class="py-24 bg-[#08080a] border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-14">
+                <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Schedule & Orders</span>
+                <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
+                    Reserve Your <span class="font-semibold">Shoot Date</span>
+                </h2>
+                <p class="text-zinc-400 text-sm mt-3 font-light max-w-2xl">
+                    Check live availability starting November 2026. Tap any open date on the calendar and complete your production brief to lock in your schedule.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- LEFT COLUMN: UNLIMITED AVAILABILITY CALENDAR (5 cols) -->
+                <div class="lg:col-span-5 glass-panel rounded-2xl p-6 sm:p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 id="calendar-month-title" class="font-display text-base font-semibold tracking-[0.2em] uppercase text-white">
+                                November 2026
+                            </h3>
+                            <p class="text-[11px] text-zinc-400 mt-0.5">Select an available date</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="prev-month-btn" aria-label="Previous Month" class="w-9 h-9 rounded-lg border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition disabled:opacity-30 disabled:pointer-events-none">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button id="next-month-btn" aria-label="Next Month" class="w-9 h-9 rounded-lg border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Days of Week Header -->
+                    <div class="grid grid-cols-7 gap-1.5 text-center mb-3">
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Sun</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Mon</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Tue</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Wed</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Thu</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Fri</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Sat</span>
+                    </div>
+
+                    <!-- Calendar Days Grid -->
+                    <div id="calendar-days-grid" class="grid grid-cols-7 gap-1.5"></div>
+
+                    <!-- Legend -->
+                    <div class="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-[11px] text-zinc-400">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm border border-white/30 bg-white/5 inline-block"></span>
+                            <span>Available</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm bg-white inline-block"></span>
+                            <span class="text-white">Selected</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm bg-zinc-900 border border-zinc-800 inline-block"></span>
+                            <span class="line-through text-zinc-600">Booked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: ORDER & BOOKING FORM (7 cols) -->
+                <div class="lg:col-span-7 glass-panel rounded-2xl p-6 sm:p-8">
+                    <form id="booking-form" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <!-- Selected Date Display -->
+                            <div>
+                                <label class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                    Selected Shoot Date *
+                                </label>
+                                <div class="relative">
+                                    <input type="text" id="selected-date-input" readonly required
+                                           placeholder="Click a date on calendar"
+                                           class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm font-medium focus:outline-none focus:border-white cursor-pointer">
+                                    <i class="fa-regular fa-calendar absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Service / Package Select (Populated dynamically + Custom option) -->
+                            <div>
+                                <label for="package-select" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                    Service / Package *
+                                </label>
+                                <select id="package-select" required
+                                        class="w-full px-4 py-3.5 rounded-xl bg-black/80 border border-white/15 text-white text-sm focus:outline-none focus:border-white">
+                                    <option value="Custom Commercial / Event Production">Custom Commercial / Event Production</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <!-- Client Name -->
+                            <div>
+                                <label for="client-name" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                    Your Name / Brand *
+                                </label>
+                                <input type="text" id="client-name" required placeholder="e.g., Kavinda Perera"
+                                       class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                            </div>
+
+                            <!-- WhatsApp / Phone -->
+                            <div>
+                                <label for="client-phone" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                    WhatsApp / Contact Number *
+                                </label>
+                                <input type="tel" id="client-phone" required placeholder="+94 77 123 4567"
+                                       class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                            </div>
+                        </div>
+
+                        <!-- Shoot Location in Sri Lanka -->
+                        <div>
+                            <label for="shoot-location" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                Shoot Location (Sri Lanka) *
+                            </label>
+                            <input type="text" id="shoot-location" required placeholder="e.g., Colombo / Galle Fort / Ella / Kandy"
+                                   class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                        </div>
+
+                        <!-- Optional Production Add-ons -->
+                        <div>
+                            <span class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-3">
+                                Optional Add-Ons
+                            </span>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="flex items-center gap-2.5 p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
+                                    <input type="checkbox" name="addons" value="4K Drone Coverage" class="accent-white w-4 h-4">
+                                    <span class="text-xs text-zinc-300">4K Drone Aerials</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
+                                    <input type="checkbox" name="addons" value="Same-Day Teaser Edit" class="accent-white w-4 h-4">
+                                    <span class="text-xs text-zinc-300">Same-Day Edit</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
+                                    <input type="checkbox" name="addons" value="Extra 2 Hours" class="accent-white w-4 h-4">
+                                    <span class="text-xs text-zinc-300">Extra 2 Hours</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Project Notes -->
+                        <div>
+                            <label for="project-notes" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                Creative Brief / Event Details
+                            </label>
+                            <textarea id="project-notes" rows="3" placeholder="Tell us about your vision, event schedule, or specific shots needed..."
+                                      class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white"></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submit-booking-btn" class="w-full py-4 rounded-xl bg-white text-black font-display text-xs font-bold tracking-[0.25em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 flex items-center justify-center gap-2.5">
+                            <span>Confirm Schedule Request</span>
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer id="contact" class="bg-[#030303] border-t border-white/10 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 pb-12 border-b border-white/10">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <span class="font-display text-lg tracking-[0.3em] uppercase text-white">
+                            <strong class="font-bold">OPEN</strong>FRAME VISUALS
+                        </span>
+                    </div>
+                    <p class="font-display text-[11px] tracking-[0.28em] uppercase text-zinc-400 mt-2">
+                        Photography • Films • Aerials
+                    </p>
+                    <p class="text-zinc-500 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-zinc-300"></i>
+                        <span>Based in Sri Lanka • Available Islandwide & Worldwide</span>
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="https://wa.me/94770000000?text=Hi%20OpenFrame%20Visuals!%20I'd%20like%20to%20inquire%20about%20a%20shoot." 
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl glass-panel text-white text-xs font-display tracking-widest uppercase hover:bg-white hover:text-black transition">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>WhatsApp Inquiry</span>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                       class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                        <i class="fa-brands fa-instagram text-base"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
+                       class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                        <i class="fa-brands fa-youtube text-base"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
+                <p>&copy; 2026 OpenFrame Visuals. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <p class="font-display tracking-widest uppercase text-[10px]">Every Frame. A New Perspective.</p>
+                    <a href="admin.html" class="font-display tracking-widest uppercase text-[10px] text-zinc-600 hover:text-zinc-300 transition">Studio Admin</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== PORTFOLIO LIGHTBOX MODAL ==================== -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-md p-4">
+        <div class="relative max-w-4xl w-full glass-panel rounded-2xl overflow-hidden border border-white/20">
+            <button id="close-lightbox" aria-label="Close Preview" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-white hover:text-black transition flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="grid grid-cols-1 md:grid-cols-12">
+                <div class="md:col-span-7 bg-black flex items-center justify-center">
+                    <img id="lightbox-img" src="" alt="Preview" class="w-full max-h-[75vh] object-cover">
+                </div>
+                <div class="md:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <span id="lightbox-cat" class="font-display text-[10px] tracking-[0.25em] uppercase text-zinc-400"></span>
+                        <h3 id="lightbox-title" class="font-display text-2xl font-semibold text-white mt-2"></h3>
+                        <div class="w-10 h-[1px] bg-white/30 my-4"></div>
+                        <p id="lightbox-desc" class="text-sm text-zinc-300 font-light leading-relaxed">Captured by OpenFrame Visuals.</p>
+                        <a id="lightbox-video-link" href="#" target="_blank" class="hidden mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-lg glass-panel text-xs font-display tracking-widest uppercase text-white hover:bg-white hover:text-black transition">
+                            <i class="fa-solid fa-play text-[10px]"></i>
+                            <span>Watch Full Film</span>
+                        </a>
+                    </div>
+                    <div class="mt-8">
+                        <a href="#booking" id="lightbox-book-btn" class="block w-full py-3.5 rounded-xl bg-white text-black text-center font-display text-xs font-semibold tracking-widest uppercase hover:bg-zinc-200 transition">
+                            Book Similar Style
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== BOOKING CONFIRMATION MODAL ==================== -->
+    <div id="confirmation-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-4">
+        <div class="max-w-md w-full glass-panel rounded-2xl p-8 border border-white/25 text-center relative">
+            <div class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center mx-auto mb-5 text-xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <span class="font-display text-[10px] tracking-[0.3em] uppercase text-zinc-400">Order Received</span>
+            <h3 class="font-display text-2xl font-semibold text-white mt-1">Schedule Requested</h3>
+            <p class="text-xs text-zinc-300 mt-3 leading-relaxed">
+                Thank you! Your shoot date request has been saved. Our team will reach out via WhatsApp within 2 hours to finalize your production details.
+            </p>
+
+            <!-- Summary Box -->
+            <div id="booking-summary-box" class="mt-6 p-4 rounded-xl bg-black/60 border border-white/10 text-left space-y-2 text-xs text-zinc-300"></div>
+
+            <button id="close-confirmation" class="mt-6 w-full py-3.5 rounded-xl bg-white text-black font-display text-xs font-semibold tracking-widest uppercase hover:bg-zinc-200 transition">
+                Done
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== FIREBASE & INTERACTIVE LOGIC ==================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA5s9kytW7yte1jglGzoa-xhmdwl-aUa5w",
+            authDomain: "openframevisuals-bd5c7.firebaseapp.com",
+            projectId: "openframevisuals-bd5c7",
+            storageBucket: "openframevisuals-bd5c7.firebasestorage.app",
+            messagingSenderId: "861131525271",
+            appId: "1:861131525271:web:98cedbd90e3d29a0b5edd2",
+            measurementId: "G-MJLMB74DTY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 1. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // 2. Dynamic Portfolio Loader & Filtering
+        let allPortfolioItems = [];
+        let activeFilter = 'all';
+
+        async function loadPortfolio() {
+            const grid = document.getElementById('portfolio-grid');
+            try {
+                const q = query(collection(db, "portfolio"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
+                allPortfolioItems = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderPortfolio();
+            } catch (err) {
+                grid.innerHTML = `
+                    <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                        <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Portfolio items will appear here once uploaded via Admin Studio.</p>
+                    </div>`;
+            }
+        }
+
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolio-grid');
+            const filtered = activeFilter === 'all'
+                ? allPortfolioItems
+                : allPortfolioItems.filter(item => item.category === activeFilter);
+
+            if (!filtered.length) {
+                grid.innerHTML = `
+                    <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                        <i class="fa-solid fa-camera text-zinc-600 text-2xl mb-3"></i>
+                        <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">No frames published in this category yet.</p>
+                    </div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map((item, idx) => `
+                <div class="portfolio-item group relative rounded-2xl overflow-hidden glass-card cursor-pointer aspect-[4/5]" data-index="${idx}">
+                    <img src="${item.imageUrl}" alt="${item.title}" loading="lazy" class="portfolio-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                    <div class="absolute top-4 right-4 w-9 h-9 rounded-full glass-panel flex items-center justify-center text-white/80 group-hover:bg-white group-hover:text-black transition">
+                        <i class="fa-solid ${item.videoUrl ? 'fa-play' : 'fa-expand'} text-xs"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <span class="font-display text-[10px] tracking-[0.25em] uppercase text-zinc-400">${item.category}</span>
+                        <h3 class="font-display text-lg font-medium tracking-wider text-white mt-1">${item.title}</h3>
+                    </div>
+                </div>
+            `).join('');
+
+            // Attach Lightbox click events
+            document.querySelectorAll('.portfolio-item').forEach(card => {
+                card.addEventListener('click', () => {
+                    const item = filtered[card.dataset.index];
+                    openLightbox(item);
+                });
+            });
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-white', 'text-black', 'font-semibold');
+                    b.classList.add('glass-panel', 'text-zinc-300');
+                });
+                btn.classList.add('bg-white', 'text-black', 'font-semibold');
+                btn.classList.remove('glass-panel', 'text-zinc-300');
+                activeFilter = btn.getAttribute('data-filter');
+                renderPortfolio();
+            });
+        });
+
+        // Lightbox Controls
+        const lightboxModal = document.getElementById('lightbox-modal');
+        function openLightbox(item) {
+            document.getElementById('lightbox-img').src = item.imageUrl;
+            document.getElementById('lightbox-cat').textContent = item.category.toUpperCase() + ' • OPENFRAME VISUALS';
+            document.getElementById('lightbox-title').textContent = item.title;
+            const vidLink = document.getElementById('lightbox-video-link');
+            if (item.videoUrl) {
+                vidLink.href = item.videoUrl;
+                vidLink.classList.remove('hidden');
+            } else {
+                vidLink.classList.add('hidden');
+            }
+            lightboxModal.classList.remove('hidden');
+            lightboxModal.classList.add('flex');
+        }
+        const hideLightbox = () => {
+            lightboxModal.classList.add('hidden');
+            lightboxModal.classList.remove('flex');
+        };
+        document.getElementById('close-lightbox').addEventListener('click', hideLightbox);
+        document.getElementById('lightbox-book-btn').addEventListener('click', hideLightbox);
+        lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal) hideLightbox(); });
+
+        // 3. Dynamic Service Packages Loader
+        async function loadPackages() {
+            const grid = document.getElementById('packages-grid');
+            const selectEl = document.getElementById('package-select');
+            try {
+                const snap = await getDocs(collection(db, "packages"));
+                const pkgs = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                if (!pkgs.length) {
+                    grid.innerHTML = `
+                        <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                            <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Packages are being updated. Select "Custom Production" below to inquire.</p>
+                        </div>`;
+                    return;
+                }
+
+                grid.innerHTML = pkgs.map((pkg, idx) => {
+                    const isFeatured = idx === 1;
+                    return `
+                    <div class="glass-card viewfinder-box rounded-2xl p-8 flex flex-col justify-between ${isFeatured ? 'border-white/30 bg-gradient-to-b from-white/[0.08] to-transparent relative' : ''}">
+                        ${isFeatured ? `<div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white text-black font-display text-[9px] font-bold tracking-[0.25em] uppercase">Featured</div>` : ''}
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="px-3 py-1 rounded-full bg-white/10 font-display text-[10px] tracking-[0.2em] uppercase text-zinc-200">${pkg.category || 'Production'}</span>
+                                <i class="fa-solid fa-camera text-zinc-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-display text-xl font-semibold tracking-wider text-white">${pkg.name}</h3>
+                            
+                            <div class="my-6 pb-6 border-b border-white/10">
+                                <span class="font-display text-3xl font-light text-white">LKR ${pkg.price}</span>
+                            </div>
+
+                            <ul class="space-y-3.5 text-xs text-zinc-300 mb-8">
+                                ${(pkg.features || []).map(f => `
+                                    <li class="flex items-center gap-3">
+                                        <i class="fa-solid fa-check text-white text-[10px]"></i>
+                                        <span>${f}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <button type="button" onclick="window.selectPackage('${pkg.name} (LKR ${pkg.price})')" 
+                                class="w-full py-3.5 rounded-xl ${isFeatured ? 'bg-white text-black font-semibold hover:bg-zinc-200' : 'border border-white/25 text-white font-medium hover:bg-white hover:text-black'} font-display text-xs tracking-[0.2em] uppercase transition-all">
+                            Select Package
+                        </button>
+                    </div>`;
+                }).join('');
+
+                // Populate Dropdown
+                pkgs.forEach(pkg => {
+                    const opt = document.createElement('option');
+                    const label = `${pkg.name} (LKR ${pkg.price})`;
+                    opt.value = label;
+                    opt.textContent = `${pkg.name} — LKR ${pkg.price}`;
+                    selectEl.insertBefore(opt, selectEl.firstChild);
+                });
+                selectEl.selectedIndex = 0;
+            } catch (err) {
+                grid.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500">Unable to load packages.</div>`;
+            }
+        }
+
+        window.selectPackage = (packageLabel) => {
+            const selectEl = document.getElementById('package-select');
+            for (let i = 0; i < selectEl.options.length; i++) {
+                if (selectEl.options[i].value === packageLabel) {
+                    selectEl.selectedIndex = i;
+                    break;
+                }
+            }
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // 4. Unlimited Dynamic Schedule Calendar (Starting November 2026)
+        const minYear = 2026;
+        const minMonth = 10; // November (0-indexed)
+        let viewYear = 2026;
+        let viewMonth = 10;
+        let selectedDateISO = ''; // YYYY-MM-DD
+        let bookedDatesSet = new Set();
+
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const calendarTitle = document.getElementById('calendar-month-title');
+        const calendarGrid = document.getElementById('calendar-days-grid');
+        const prevBtn = document.getElementById('prev-month-btn');
+        const nextBtn = document.getElementById('next-month-btn');
+        const selectedDateInput = document.getElementById('selected-date-input');
+
+        async function loadBookedDates() {
+            try {
+                const snap = await getDocs(collection(db, "bookings"));
+                bookedDatesSet.clear();
+                snap.docs.forEach(d => {
+                    const data = d.data();
+                    if (data.status === 'confirmed' && data.date) {
+                        bookedDatesSet.add(data.date);
+                    }
+                });
+            } catch (e) {}
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            calendarTitle.textContent = `${monthNames[viewMonth]} ${viewYear}`;
+            calendarGrid.innerHTML = '';
+
+            // Disable going earlier than November 2026
+            prevBtn.disabled = (viewYear === minYear && viewMonth === minMonth);
+
+            const firstDayOfWeek = new Date(viewYear, viewMonth, 1).getDay();
+            const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'h-10 sm:h-11';
+                calendarGrid.appendChild(emptyCell);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const isoStr = `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const displayLabel = `${monthNames[viewMonth]} ${day}, ${viewYear}`;
+                const isBooked = bookedDatesSet.has(isoStr);
+                const isSelected = selectedDateISO === isoStr;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = day;
+                btn.className = 'h-10 sm:h-11 rounded-lg font-display text-xs transition-all flex items-center justify-center ';
+
+                if (isBooked) {
+                    btn.disabled = true;
+                    btn.title = 'Already Booked';
+                    btn.className += 'bg-zinc-900/80 text-zinc-600 line-through cursor-not-allowed border border-zinc-800/60';
+                } else if (isSelected) {
+                    btn.className += 'bg-white text-black font-bold shadow-md shadow-white/20 scale-105';
+                } else {
+                    btn.className += 'bg-white/[0.04] text-zinc-200 border border-white/10 hover:border-white hover:bg-white/15 cursor-pointer';
+                    btn.addEventListener('click', () => {
+                        selectedDateISO = isoStr;
+                        selectedDateInput.value = `${displayLabel} (${isoStr})`;
+                        renderCalendar();
+                    });
+                }
+
+                calendarGrid.appendChild(btn);
+            }
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (viewYear === minYear && viewMonth === minMonth) return;
+            viewMonth--;
+            if (viewMonth < 0) {
+                viewMonth = 11;
+                viewYear--;
+            }
+            renderCalendar();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            viewMonth++;
+            if (viewMonth > 11) {
+                viewMonth = 0;
+                viewYear++;
+            }
+            renderCalendar();
+        });
+
+        // 5. Submit Booking to Firebase Firestore
+        const bookingForm = document.getElementById('booking-form');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const summaryBox = document.getElementById('booking-summary-box');
+
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!selectedDateISO) {
+                alert("Please select an available shoot date from the calendar first.");
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-booking-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Submitting Request...</span> <i class="fa-solid fa-circle-notch fa-spin text-xs"></i>`;
+
+            const pkgVal = document.getElementById('package-select').value;
+            const nameVal = document.getElementById('client-name').value;
+            const phoneVal = document.getElementById('client-phone').value;
+            const locVal = document.getElementById('shoot-location').value;
+            const notesVal = document.getElementById('project-notes').value;
+            const checkedAddons = Array.from(document.querySelectorAll('input[name="addons"]:checked')).map(cb => cb.value);
+
+            const combinedNotes = [
+                `Location: ${locVal}`,
+                checkedAddons.length ? `Add-ons: ${checkedAddons.join(', ')}` : '',
+                notesVal ? `Brief: ${notesVal}` : ''
+            ].filter(Boolean).join(' | ');
+
+            try {
+                await addDoc(collection(db, "bookings"), {
+                    clientName: nameVal,
+                    phone: phoneVal,
+                    date: selectedDateISO,
+                    package: pkgVal,
+                    notes: combinedNotes,
+                    status: 'pending',
+                    createdAt: serverTimestamp()
+                });
+
+                summaryBox.innerHTML = `
+                    <div class="flex justify-between"><span class="text-zinc-500">Client:</span> <span class="text-white font-medium">${nameVal}</span></div>
+                    <div class="flex justify-between"><span class="text-zinc-500">Date:</span> <span class="text-white font-medium">${selectedDateInput.value}</span></div>
+                    <div class="flex justify-between"><span class="text-zinc-500">Location:</span> <span class="text-white font-medium">${locVal}</span></div>
+                    <div class="pt-2 border-t border-white/10">
+                        <span class="text-zinc-500 block">Selected Package:</span>
+                        <span class="text-white font-medium">${pkgVal}</span>
+                    </div>
+                    ${checkedAddons.length > 0 ? `
+                    <div class="pt-2 border-t border-white/10">
+                        <span class="text-zinc-500 block">Add-Ons:</span>
+                        <span class="text-zinc-200">${checkedAddons.join(', ')}</span>
+                    </div>` : ''}
+                    <div class="pt-2 border-t border-white/10 flex justify-between">
+                        <span class="text-zinc-500">WhatsApp:</span> <span class="text-white">${phoneVal}</span>
+                    </div>
+                `;
+
+                confirmationModal.classList.remove('hidden');
+                confirmationModal.classList.add('flex');
+                bookingForm.reset();
+                selectedDateISO = '';
+                renderCalendar();
+            } catch (err) {
+                alert("Could not submit booking: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span>Confirm Schedule Request</span> <i class="fa-solid fa-paper-plane text-xs"></i>`;
+            }
+        });
+
+        document.getElementById('close-confirmation').addEventListener('click', () => {
+            confirmationModal.classList.add('hidden');
+            confirmationModal.classList.remove('flex');
+        });
+
+        // Initialize Live Data
+        loadPortfolio();
+        loadPackages();
+        loadBookedDates();
+    </script>
+</body>
+</html>
