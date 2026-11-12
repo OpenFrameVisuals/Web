@@ -191,7 +191,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA5s9kytW7yte1jglGzoa-xhmdwl-aUa5w",
@@ -203,10 +202,12 @@
       measurementId: "G-MJLMB74DTY"
     };
 
+    const CLOUDINARY_CLOUD_NAME = "kknhouao";
+    const CLOUDINARY_UPLOAD_PRESET = "openframevisuals";
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const storage = getStorage(app);
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -278,6 +279,7 @@
       });
     }
 
+    // Free Upload via Cloudinary + Save Link to Firestore
     document.getElementById('upload-portfolio-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('upload-btn');
@@ -289,14 +291,21 @@
 
       try {
         const compressedBlob = await compressImage(file);
-        const fileRef = ref(storage, `portfolio/${Date.now()}.webp`);
-        await uploadBytes(fileRef, compressedBlob);
-        const imageUrl = await getDownloadURL(fileRef);
+        const formData = new FormData();
+        formData.append('file', compressedBlob, 'photo.webp');
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (!data.secure_url) throw new Error(data.error?.message || "Cloudinary upload failed");
 
         await addDoc(collection(db, "portfolio"), {
           title: document.getElementById('work-title').value,
           category: document.getElementById('work-category').value,
-          imageUrl: imageUrl,
+          imageUrl: data.secure_url,
           videoUrl: document.getElementById('work-video').value || '',
           createdAt: serverTimestamp()
         });
