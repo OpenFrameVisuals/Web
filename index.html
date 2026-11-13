@@ -40,7 +40,7 @@
 
         /* Floating Oval Glass Header */
         .glass-oval-nav {
-            background: rgba(18, 18, 22, 0.75);
+            background: rgba(18, 18, 22, 0.78);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.14);
@@ -68,6 +68,15 @@
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
         }
 
+        /* Hide Scrollbars for Clean Horizontal Filter Strip */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         /* 2D Glowing Sketch Exploded Camera Loop (60fps Hardware Accelerated) */
         .sketch-glow {
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
@@ -84,12 +93,12 @@
             display: grid;
             grid-auto-flow: column;
             grid-template-rows: repeat(2, minmax(0, 1fr));
-            grid-auto-columns: calc(50% - 0.5rem);
-            gap: 1rem;
+            grid-auto-columns: calc(50% - 0.375rem);
+            gap: 0.75rem;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
-            padding: 0.75rem 0.25rem 1.25rem 0.25rem;
+            padding: 0.5rem 0.15rem 1rem 0.15rem;
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
@@ -100,6 +109,7 @@
         @media (min-width: 640px) {
             .portfolio-slider {
                 grid-auto-columns: calc(33.333% - 0.67rem);
+                gap: 1rem;
             }
         }
         @media (min-width: 1024px) {
@@ -176,13 +186,13 @@
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
 
-    <!-- ==================== FLOATING OVAL GLASS HEADER (ALIGNED WITH HERO CONTENT) ==================== -->
+    <!-- ==================== FLOATING OVAL GLASS HEADER ==================== -->
     <header class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 lg:px-8 pointer-events-none">
         <div class="max-w-6xl mx-auto pointer-events-auto">
-            <div class="glass-oval-nav rounded-full px-5 sm:px-8 h-14 sm:h-16 flex items-center justify-between transition-all duration-300">
+            <div class="glass-oval-nav rounded-full px-4 sm:px-8 h-13 sm:h-16 py-2 flex items-center justify-between transition-all duration-300">
                 <!-- Brand Monogram + Wordmark -->
-                <a href="#home" class="flex items-center gap-2.5 sm:gap-3 group">
-                    <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="#home" class="flex items-center gap-2 sm:gap-3 group">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 28V12H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
                         <path d="M72 12H88V28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
                         <path d="M12 72V88H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
@@ -192,10 +202,10 @@
                         <path d="M63 45V74" stroke="currentColor" stroke-width="6.5" stroke-linecap="square"/>
                     </svg>
                     <div class="flex flex-col">
-                        <span class="font-display text-xs sm:text-sm tracking-[0.22em] text-white font-normal leading-none">
+                        <span class="font-display text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.22em] text-white font-normal leading-none">
                             <strong class="font-bold">OPEN</strong>FRAME
                         </span>
-                        <span class="font-display text-[7.5px] sm:text-[8px] tracking-[0.42em] text-zinc-400 uppercase mt-1 leading-none">
+                        <span class="font-display text-[7px] sm:text-[8px] tracking-[0.4em] text-zinc-400 uppercase mt-1 leading-none">
                             VISUALS
                         </span>
                     </div>
@@ -210,19 +220,19 @@
                 </nav>
 
                 <!-- CTA & Mobile Menu Toggle -->
-                <div class="flex items-center gap-2">
-                    <a href="#booking" class="inline-flex items-center gap-1.5 px-4 py-2 sm:px-6 sm:py-2.5 rounded-full bg-white text-black font-display text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-md shadow-white/10">
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                    <a href="#booking" class="inline-flex items-center gap-1.5 px-3.5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-white text-black font-display text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-md shadow-white/10">
                         <span>Book</span>
                         <i class="fa-solid fa-arrow-right text-[9px]"></i>
                     </a>
-                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden w-9 h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition">
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition">
                         <i class="fa-solid fa-bars text-sm"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Mobile Dropdown Oval Card -->
-            <div id="mobile-menu" class="hidden md:hidden mt-2.5 glass-oval-nav rounded-3xl px-6 py-5 space-y-3.5">
+            <div id="mobile-menu" class="hidden md:hidden mt-2 glass-oval-nav rounded-3xl px-6 py-4 space-y-2.5">
                 <a href="#portfolio" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Portfolio</a>
                 <a href="#catalog" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Catalog & Packages</a>
                 <a href="#booking" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Schedule & Orders</a>
@@ -231,29 +241,29 @@
         </div>
     </header>
 
-    <!-- ==================== CINEMATIC HERO WITH DETAILED SKETCH CAMERA LOOP ==================== -->
-    <section id="home" class="relative min-h-[88vh] sm:min-h-screen flex items-center pt-24 sm:pt-28 pb-12 overflow-hidden bg-[#050505]">
+    <!-- ==================== CINEMATIC HERO (ZERO WASTED SPACE ON MOBILE & PC) ==================== -->
+    <section id="home" class="relative md:min-h-screen flex items-center pt-20 sm:pt-28 pb-8 sm:pb-12 overflow-hidden bg-[#050505]">
         <!-- Subtle Radial Glow behind Sketch -->
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_52%,rgba(255,255,255,0.06)_0%,rgba(5,5,5,1)_65%)] pointer-events-none"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_72%_52%,rgba(255,255,255,0.06)_0%,rgba(5,5,5,1)_65%)] pointer-events-none"></div>
 
-        <!-- Viewfinder Grid Frame Positioned Strictly Below the Menu Bar -->
-        <div class="absolute top-20 sm:top-24 bottom-5 sm:bottom-8 left-3 right-3 sm:left-8 sm:right-8 border border-white/[0.04] pointer-events-none z-0">
-            <div class="absolute top-0 left-0 w-4 h-4 sm:w-6 sm:h-6 border-t border-l border-white/25"></div>
-            <div class="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 border-t border-r border-white/25"></div>
-            <div class="absolute bottom-0 left-0 w-4 h-4 sm:w-6 sm:h-6 border-b border-l border-white/25"></div>
-            <div class="absolute bottom-0 right-0 w-4 h-4 sm:w-6 sm:h-6 border-b border-r border-white/25"></div>
+        <!-- Viewfinder Grid Frame Positioned Strictly Below the Menu Bar & Tightly Wrapping Content -->
+        <div class="absolute top-[74px] sm:top-24 bottom-4 sm:bottom-8 left-3 right-3 sm:left-8 sm:right-8 border border-white/[0.04] pointer-events-none z-0">
+            <div class="absolute top-0 left-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-t border-l border-white/25"></div>
+            <div class="absolute top-0 right-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-t border-r border-white/25"></div>
+            <div class="absolute bottom-0 left-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-b border-l border-white/25"></div>
+            <div class="absolute bottom-0 right-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-b border-r border-white/25"></div>
         </div>
 
-        <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 w-full">
+        <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 w-full py-3 sm:py-0">
             <!-- Balanced Side-by-Side Grid on Both Mobile & PC -->
-            <div class="grid grid-cols-12 gap-3 sm:gap-6 items-center">
+            <div class="grid grid-cols-12 gap-2 sm:gap-6 items-center">
                 
                 <!-- LEFT COLUMN: BRAND COPY & EQUAL-SIZED CTAs (7 Cols) -->
                 <div class="col-span-7 z-20">
                     <!-- Status Pill -->
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border border-white/15 mb-4 sm:mb-6">
+                    <div class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full glass-panel border border-white/15 mb-3 sm:mb-6">
                         <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="font-display text-[9px] sm:text-xs tracking-[0.16em] sm:tracking-[0.22em] uppercase text-zinc-200 whitespace-nowrap">
+                        <span class="font-display text-[8.5px] sm:text-xs tracking-[0.14em] sm:tracking-[0.22em] uppercase text-zinc-200 whitespace-nowrap">
                             Bookings Open • Nov 2026
                         </span>
                     </div>
@@ -261,38 +271,38 @@
                     <!-- Main Brand Heading -->
                     <h1 class="font-display text-2xl sm:text-5xl lg:text-6xl font-light tracking-[0.16em] sm:tracking-[0.24em] text-white uppercase leading-tight">
                         <span class="font-bold">OPEN</span>FRAME<br>
-                        <span class="text-sm sm:text-3xl lg:text-4xl tracking-[0.34em] sm:tracking-[0.42em] text-zinc-300 font-extralight block mt-1 sm:mt-2">VISUALS</span>
+                        <span class="text-sm sm:text-3xl lg:text-4xl tracking-[0.34em] sm:tracking-[0.42em] text-zinc-300 font-extralight block mt-0.5 sm:mt-2">VISUALS</span>
                     </h1>
 
                     <!-- Tagline -->
-                    <p class="mt-3 sm:mt-5 font-display text-[11px] sm:text-base tracking-[0.16em] sm:tracking-[0.26em] uppercase text-zinc-300 font-light leading-relaxed">
+                    <p class="mt-2.5 sm:mt-5 font-display text-[10.5px] sm:text-base tracking-[0.14em] sm:tracking-[0.26em] uppercase text-zinc-300 font-light leading-relaxed">
                         Every Frame. A New Perspective.
                     </p>
 
-                    <div class="w-12 sm:w-16 h-[1px] bg-white/40 my-4 sm:my-6"></div>
+                    <div class="w-10 sm:w-16 h-[1px] bg-white/40 my-3 sm:my-6"></div>
 
                     <!-- 3 Core Pillars (Centered equally on both Mobile & Desktop) -->
-                    <div class="grid grid-cols-3 gap-1 sm:gap-4 max-w-md mb-5 sm:mb-8">
+                    <div class="grid grid-cols-3 gap-1 sm:gap-4 max-w-md mb-4 sm:mb-8">
                         <div class="flex flex-col items-center justify-center text-center border-r border-white/15 px-1">
-                            <i class="fa-solid fa-camera text-sm sm:text-lg text-white/90 mb-1.5 sm:mb-2"></i>
+                            <i class="fa-solid fa-camera text-xs sm:text-lg text-white/90 mb-1 sm:mb-2"></i>
                             <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Photo</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-r border-white/15 px-1">
-                            <i class="fa-solid fa-video text-sm sm:text-lg text-white/90 mb-1.5 sm:mb-2"></i>
+                            <i class="fa-solid fa-video text-xs sm:text-lg text-white/90 mb-1 sm:mb-2"></i>
                             <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Cinema</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center px-1">
-                            <i class="fa-solid fa-helicopter text-sm sm:text-lg text-white/90 mb-1.5 sm:mb-2"></i>
+                            <i class="fa-solid fa-helicopter text-xs sm:text-lg text-white/90 mb-1 sm:mb-2"></i>
                             <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Aerials</span>
                         </div>
                     </div>
 
                     <!-- Hero CTA Buttons (Strictly Identical Dimensions on Mobile & PC) -->
-                    <div class="flex flex-col sm:flex-row gap-2.5 sm:gap-3.5 max-w-[200px] sm:max-w-none">
-                        <a href="#booking" class="w-full sm:w-48 h-10 sm:h-12 inline-flex items-center justify-center rounded-full bg-white text-black font-display text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/5">
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3.5 max-w-[185px] sm:max-w-none">
+                        <a href="#booking" class="w-full sm:w-48 h-9 sm:h-12 inline-flex items-center justify-center rounded-full bg-white text-black font-display text-[9.5px] sm:text-xs font-semibold tracking-[0.18em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/5">
                             Book Session
                         </a>
-                        <a href="#catalog" class="w-full sm:w-48 h-10 sm:h-12 inline-flex items-center justify-center rounded-full glass-panel border border-white/15 text-white font-display text-[10px] sm:text-xs font-medium tracking-[0.18em] uppercase hover:bg-white/10 transition-all">
+                        <a href="#catalog" class="w-full sm:w-48 h-9 sm:h-12 inline-flex items-center justify-center rounded-full glass-panel border border-white/15 text-white font-display text-[9.5px] sm:text-xs font-medium tracking-[0.18em] uppercase hover:bg-white/10 transition-all">
                             Packages
                         </a>
                     </div>
@@ -326,11 +336,9 @@
 
                             <!-- PART 1: Detailed DSLR Camera Body Sketch & Markings -->
                             <g id="sk-body" class="sketch-part">
-                                <!-- Outer Chassis -->
                                 <rect x="40" y="112" width="205" height="142" rx="18" fill="rgba(255,255,255,0.025)" stroke="url(#glowStroke)" stroke-width="2"/>
-                                <!-- Inner Frame Line -->
                                 <rect x="47" y="119" width="191" height="128" rx="14" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
-                                <!-- Ergonomic Grip + Leatherette Texture Lines -->
+                                <!-- Ergonomic Grip -->
                                 <path d="M40 128 C25 128 21 146 21 183 C21 220 25 238 40 238" fill="rgba(255,255,255,0.03)" stroke="url(#glowStroke)" stroke-width="1.8"/>
                                 <line x1="28" y1="142" x2="28" y2="224" stroke="rgba(255,255,255,0.28)" stroke-width="1" stroke-dasharray="2 3"/>
                                 <line x1="33" y1="145" x2="33" y2="221" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" stroke-dasharray="2 3"/>
@@ -340,7 +348,7 @@
                                 <rect x="195" y="124" width="36" height="16" rx="2.5" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
                                 <text x="199" y="131" fill="rgba(255,255,255,0.65)" font-family="monospace" font-size="4.8" letter-spacing="0.5">1/250 F1.4</text>
                                 <text x="199" y="137" fill="rgba(165,243,252,0.75)" font-family="monospace" font-size="4.5" letter-spacing="0.5">ISO 100 RAW</text>
-                                <!-- Hotshoe & Dials with Knurling Ticks -->
+                                <!-- Hotshoe & Dials -->
                                 <rect x="132" y="72" width="30" height="8" rx="2" stroke="rgba(255,255,255,0.8)" stroke-width="1.4"/>
                                 <rect x="58" y="98" width="28" height="14" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4"/>
                                 <line x1="63" y1="98" x2="63" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
@@ -348,11 +356,10 @@
                                 <line x1="75" y1="98" x2="75" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
                                 <line x1="81" y1="98" x2="81" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
                                 <rect x="206" y="100" width="26" height="12" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4"/>
-                                <!-- Shutter Button + AF-ON / Custom Buttons -->
+                                <!-- Shutter Button & Custom Buttons -->
                                 <path d="M46 112 V105 H62 V112" stroke="#ffffff" stroke-width="1.6"/>
                                 <circle cx="88" cy="138" r="5" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
                                 <circle cx="88" cy="154" r="4" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
-                                <!-- Model & Sensor Spec Markings on Body -->
                                 <text x="56" y="131" fill="rgba(255,255,255,0.75)" font-family="Montserrat, sans-serif" font-weight="600" font-size="6" letter-spacing="1.2">OF-1R</text>
                                 <text x="56" y="238" fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="5.5" letter-spacing="1">35MM FULL-FRAME // 4K 120P</text>
                             </g>
@@ -372,7 +379,6 @@
                                 <ellipse cx="158" cy="180" rx="47" ry="53" fill="rgba(5,5,5,0.78)" stroke="url(#glowStroke)" stroke-width="2.2"/>
                                 <ellipse cx="158" cy="180" rx="39" ry="44" stroke="rgba(255,255,255,0.38)" stroke-width="1.1" stroke-dasharray="5 4"/>
                                 <circle cx="158" cy="127" r="3" fill="#ef4444"/>
-                                <!-- Electronic Gold Pin Contacts -->
                                 <line x1="145" y1="222" x2="171" y2="222" stroke="#facc15" stroke-width="1.8" stroke-dasharray="2 2"/>
                             </g>
 
@@ -422,40 +428,40 @@
     </section>
 
     <!-- ==================== 2-ROW HORIZONTAL SLIDING PORTFOLIO GALLERY ==================== -->
-    <section id="portfolio" class="py-24 bg-[#08080a] border-t border-white/5">
+    <section id="portfolio" class="py-12 md:py-24 bg-[#08080a] border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 md:mb-10 gap-4">
                 <div>
-                    <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Selected Works</span>
-                    <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
+                    <span class="font-display text-[10px] sm:text-[11px] tracking-[0.35em] uppercase text-zinc-400">Selected Works</span>
+                    <h2 class="font-display text-xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-1.5">
                         Visual <span class="font-semibold">Portfolio</span>
                     </h2>
                 </div>
 
-                <!-- Category Filter Pills + Horizontal Slide Controls -->
-                <div class="flex flex-wrap items-center justify-between md:justify-end gap-3">
-                    <div class="flex flex-wrap gap-2" id="portfolio-filters">
-                        <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase bg-white text-black font-semibold transition-all">
-                            All Frames
+                <!-- Single-Row Filter Pills + Aligned Slide Arrows -->
+                <div class="flex items-center justify-between md:justify-end gap-2 w-full md:w-auto">
+                    <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-0.5" id="portfolio-filters">
+                        <button data-filter="all" class="filter-btn active shrink-0 px-3.5 py-2 rounded-full text-[10px] sm:text-[11px] font-display tracking-widest uppercase bg-white text-black font-semibold transition-all">
+                            All
                         </button>
-                        <button data-filter="photography" class="filter-btn px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
-                            Photography
+                        <button data-filter="photography" class="filter-btn shrink-0 px-3.5 py-2 rounded-full text-[10px] sm:text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                            Photo
                         </button>
-                        <button data-filter="films" class="filter-btn px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                        <button data-filter="films" class="filter-btn shrink-0 px-3.5 py-2 rounded-full text-[10px] sm:text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
                             Films
                         </button>
-                        <button data-filter="aerials" class="filter-btn px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                        <button data-filter="aerials" class="filter-btn shrink-0 px-3.5 py-2 rounded-full text-[10px] sm:text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
                             Aerials
                         </button>
                     </div>
 
                     <!-- Left / Right Slide Buttons -->
-                    <div class="flex items-center gap-2 pl-2 border-l border-white/10">
-                        <button id="slide-left-btn" aria-label="Slide Left" class="w-9 h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
-                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                    <div class="flex items-center gap-1.5 shrink-0 pl-2 border-l border-white/10">
+                        <button id="slide-left-btn" aria-label="Slide Left" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                            <i class="fa-solid fa-chevron-left text-[11px]"></i>
                         </button>
-                        <button id="slide-right-btn" aria-label="Slide Right" class="w-9 h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
-                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        <button id="slide-right-btn" aria-label="Slide Right" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                            <i class="fa-solid fa-chevron-right text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -464,79 +470,79 @@
             <!-- Fixed 2-Row Horizontal Slider Container -->
             <div id="portfolio-wrapper">
                 <div class="portfolio-slider" id="portfolio-grid">
-                    <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
-                        <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-xl mb-3"></i>
-                        <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Loading Studio Portfolio...</p>
+                    <div class="col-span-full glass-panel rounded-2xl p-8 text-center">
+                        <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-lg mb-2"></i>
+                        <p class="font-display text-[11px] tracking-[0.22em] uppercase text-zinc-400">Loading Studio Portfolio...</p>
                     </div>
                 </div>
             </div>
 
             <!-- Subtle Swipe Hint -->
-            <div class="mt-3 flex items-center justify-end gap-2 text-[10px] font-display tracking-[0.2em] uppercase text-zinc-500">
-                <span>Swipe or use arrows to explore more frames</span>
+            <div class="mt-2 flex items-center justify-end gap-2 text-[9.5px] font-display tracking-[0.18em] uppercase text-zinc-500">
+                <span>Swipe or tap arrows for more</span>
                 <i class="fa-solid fa-arrows-left-right text-zinc-400"></i>
             </div>
         </div>
     </section>
 
     <!-- ==================== SERVICE CATALOG & PACKAGES ==================== -->
-    <section id="catalog" class="py-24 bg-[#050505] border-t border-white/5 relative">
+    <section id="catalog" class="py-12 md:py-24 bg-[#050505] border-t border-white/5 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Service Catalog</span>
-                <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
+            <div class="text-left md:text-center max-w-2xl md:mx-auto mb-8 md:mb-14">
+                <span class="font-display text-[10px] sm:text-[11px] tracking-[0.35em] uppercase text-zinc-400">Service Catalog</span>
+                <h2 class="font-display text-xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-1.5">
                     Production <span class="font-semibold">Packages</span>
                 </h2>
-                <p class="text-zinc-400 text-sm mt-4 font-light leading-relaxed">
-                    Select a tailored package below to automatically load it into your booking schedule. Custom enterprise & destination shoots are also available.
+                <p class="text-zinc-400 text-xs sm:text-sm mt-2.5 font-light leading-relaxed">
+                    Select a tailored package below to load it directly into your booking schedule.
                 </p>
             </div>
 
             <!-- Dynamic Packages Grid -->
-            <div id="packages-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
-                    <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-xl mb-3"></i>
-                    <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Loading Service Packages...</p>
+            <div id="packages-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-8">
+                <div class="col-span-full glass-panel rounded-2xl p-8 text-center">
+                    <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-lg mb-2"></i>
+                    <p class="font-display text-[11px] tracking-[0.22em] uppercase text-zinc-400">Loading Service Packages...</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ==================== INTERACTIVE SCHEDULE & ORDER BOOKING ==================== -->
-    <section id="booking" class="py-24 bg-[#08080a] border-t border-white/5">
+    <section id="booking" class="py-12 md:py-24 bg-[#08080a] border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-14">
-                <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Schedule & Orders</span>
-                <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
+            <div class="mb-8 md:mb-12">
+                <span class="font-display text-[10px] sm:text-[11px] tracking-[0.35em] uppercase text-zinc-400">Schedule & Orders</span>
+                <h2 class="font-display text-xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-1.5">
                     Reserve Your <span class="font-semibold">Shoot Date</span>
                 </h2>
-                <p class="text-zinc-400 text-sm mt-3 font-light max-w-2xl">
-                    Check live availability starting November 2026. Tap any open date on the calendar and complete your production brief to lock in your schedule.
+                <p class="text-zinc-400 text-xs sm:text-sm mt-2.5 font-light max-w-2xl">
+                    Check live availability starting November 2026. Tap an open date and submit your details to reserve.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
                 <!-- LEFT COLUMN: UNLIMITED AVAILABILITY CALENDAR (5 cols) -->
-                <div class="lg:col-span-5 glass-panel rounded-2xl p-6 sm:p-8">
-                    <div class="flex items-center justify-between mb-6">
+                <div class="lg:col-span-5 glass-panel rounded-2xl p-5 sm:p-8">
+                    <div class="flex items-center justify-between mb-5">
                         <div>
-                            <h3 id="calendar-month-title" class="font-display text-base font-semibold tracking-[0.2em] uppercase text-white">
+                            <h3 id="calendar-month-title" class="font-display text-sm sm:text-base font-semibold tracking-[0.2em] uppercase text-white">
                                 November 2026
                             </h3>
                             <p class="text-[11px] text-zinc-400 mt-0.5">Select an available date</p>
                         </div>
                         <div class="flex items-center gap-2">
-                            <button id="prev-month-btn" aria-label="Previous Month" class="w-9 h-9 rounded-lg border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition disabled:opacity-30 disabled:pointer-events-none">
+                            <button id="prev-month-btn" aria-label="Previous Month" class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition disabled:opacity-30 disabled:pointer-events-none">
                                 <i class="fa-solid fa-chevron-left text-xs"></i>
                             </button>
-                            <button id="next-month-btn" aria-label="Next Month" class="w-9 h-9 rounded-lg border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                            <button id="next-month-btn" aria-label="Next Month" class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
                                 <i class="fa-solid fa-chevron-right text-xs"></i>
                             </button>
                         </div>
                     </div>
 
                     <!-- Days of Week Header -->
-                    <div class="grid grid-cols-7 gap-1.5 text-center mb-3">
+                    <div class="grid grid-cols-7 gap-1.5 text-center mb-2.5">
                         <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Sun</span>
                         <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Mon</span>
                         <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Tue</span>
@@ -550,7 +556,7 @@
                     <div id="calendar-days-grid" class="grid grid-cols-7 gap-1.5"></div>
 
                     <!-- Legend -->
-                    <div class="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-[11px] text-zinc-400">
+                    <div class="mt-5 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-[11px] text-zinc-400">
                         <div class="flex items-center gap-2">
                             <span class="w-3 h-3 rounded-sm border border-white/30 bg-white/5 inline-block"></span>
                             <span>Available</span>
@@ -567,78 +573,78 @@
                 </div>
 
                 <!-- RIGHT COLUMN: ORDER & BOOKING FORM (7 cols) -->
-                <div class="lg:col-span-7 glass-panel rounded-2xl p-6 sm:p-8">
-                    <form id="booking-form" class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div class="lg:col-span-7 glass-panel rounded-2xl p-5 sm:p-8">
+                    <form id="booking-form" class="space-y-4 sm:space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                             <!-- Selected Date Display -->
                             <div>
-                                <label class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                <label class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                     Selected Shoot Date *
                                 </label>
                                 <div class="relative">
                                     <input type="text" id="selected-date-input" readonly required
-                                           placeholder="Click a date on calendar"
-                                           class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm font-medium focus:outline-none focus:border-white cursor-pointer">
+                                           placeholder="Tap a date on calendar"
+                                           class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm font-medium focus:outline-none focus:border-white cursor-pointer">
                                     <i class="fa-regular fa-calendar absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400"></i>
                                 </div>
                             </div>
 
                             <!-- Service / Package Select -->
                             <div>
-                                <label for="package-select" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                <label for="package-select" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                     Service / Package *
                                 </label>
                                 <select id="package-select" required
-                                        class="w-full px-4 py-3.5 rounded-xl bg-black/80 border border-white/15 text-white text-sm focus:outline-none focus:border-white">
+                                        class="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/15 text-white text-sm focus:outline-none focus:border-white">
                                     <option value="Custom Commercial / Event Production">Custom Commercial / Event Production</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                             <!-- Client Name -->
                             <div>
-                                <label for="client-name" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                <label for="client-name" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                     Your Name / Brand *
                                 </label>
                                 <input type="text" id="client-name" required placeholder="Enter your name or brand"
-                                       class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                                       class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
                             </div>
 
                             <!-- WhatsApp / Phone -->
                             <div>
-                                <label for="client-phone" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                <label for="client-phone" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                     WhatsApp / Contact Number *
                                 </label>
                                 <input type="tel" id="client-phone" required placeholder="Enter WhatsApp or contact number"
-                                       class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                                       class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
                             </div>
                         </div>
 
                         <!-- Shoot Location in Sri Lanka -->
                         <div>
-                            <label for="shoot-location" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                            <label for="shoot-location" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                 Shoot Location (Sri Lanka) *
                             </label>
                             <input type="text" id="shoot-location" required placeholder="e.g., Colombo / Galle Fort / Ella / Kandy"
-                                   class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                                   class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
                         </div>
 
                         <!-- Optional Production Add-ons -->
                         <div>
-                            <span class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-3">
+                            <span class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
                                 Optional Add-Ons
                             </span>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <label class="flex items-center gap-2.5 p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                <label class="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
                                     <input type="checkbox" name="addons" value="4K Drone Coverage" class="accent-white w-4 h-4">
                                     <span class="text-xs text-zinc-300">4K Drone Aerials</span>
                                 </label>
-                                <label class="flex items-center gap-2.5 p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
+                                <label class="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
                                     <input type="checkbox" name="addons" value="Same-Day Teaser Edit" class="accent-white w-4 h-4">
                                     <span class="text-xs text-zinc-300">Same-Day Edit</span>
                                 </label>
-                                <label class="flex items-center gap-2.5 p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
+                                <label class="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
                                     <input type="checkbox" name="addons" value="Extra 2 Hours" class="accent-white w-4 h-4">
                                     <span class="text-xs text-zinc-300">Extra 2 Hours</span>
                                 </label>
@@ -647,15 +653,15 @@
 
                         <!-- Project Notes -->
                         <div>
-                            <label for="project-notes" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                            <label for="project-notes" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                 Creative Brief / Event Details
                             </label>
-                            <textarea id="project-notes" rows="3" placeholder="Tell us about your vision, event schedule, or specific shots needed..."
+                            <textarea id="project-notes" rows="2" placeholder="Tell us about your vision, event schedule, or specific shots needed..."
                                       class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white"></textarea>
                         </div>
 
                         <!-- Submit Button -->
-                        <button type="submit" id="submit-booking-btn" class="w-full py-4 rounded-xl bg-white text-black font-display text-xs font-bold tracking-[0.25em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 flex items-center justify-center gap-2.5">
+                        <button type="submit" id="submit-booking-btn" class="w-full py-3.5 sm:py-4 rounded-xl bg-white text-black font-display text-xs font-bold tracking-[0.22em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 flex items-center justify-center gap-2.5">
                             <span>Confirm Schedule Request</span>
                             <i class="fa-solid fa-paper-plane text-xs"></i>
                         </button>
@@ -665,48 +671,49 @@
         </div>
     </section>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer id="contact" class="bg-[#030303] border-t border-white/10 py-16">
+    <!-- ==================== COMPACT & ALIGNED FOOTER ==================== -->
+    <footer id="contact" class="bg-[#030303] border-t border-white/10 py-10 md:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 pb-12 border-b border-white/10">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-10 pb-8 md:pb-12 border-b border-white/10">
                 <div>
                     <div class="flex items-center gap-3">
-                        <span class="font-display text-lg tracking-[0.3em] uppercase text-white">
+                        <span class="font-display text-base sm:text-lg tracking-[0.3em] uppercase text-white">
                             <strong class="font-bold">OPEN</strong>FRAME VISUALS
                         </span>
                     </div>
-                    <p class="font-display text-[11px] tracking-[0.28em] uppercase text-zinc-400 mt-2">
+                    <p class="font-display text-[10px] sm:text-[11px] tracking-[0.26em] uppercase text-zinc-400 mt-1.5">
                         Photography • Films • Aerials
                     </p>
-                    <p class="text-zinc-500 text-xs mt-3 flex items-center gap-2">
+                    <p class="text-zinc-500 text-xs mt-2.5 flex items-center gap-2">
                         <i class="fa-solid fa-location-dot text-zinc-300"></i>
                         <span>Based in Sri Lanka • Available Islandwide & Worldwide</span>
                     </p>
                 </div>
 
-                <div class="flex flex-wrap items-center gap-4">
+                <!-- Single-Row Aligned Action & Social Buttons on Both Mobile & PC -->
+                <div class="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                     <a href="https://wa.me/94770000000?text=Hi%20OpenFrame%20Visuals!%20I'd%20like%20to%20inquire%20about%20a%20shoot." 
                        target="_blank" rel="noopener noreferrer"
-                       class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl glass-panel text-white text-xs font-display tracking-widest uppercase hover:bg-white hover:text-black transition">
+                       class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 sm:px-5 h-11 rounded-xl glass-panel text-white text-[11px] font-display tracking-widest uppercase hover:bg-white hover:text-black transition whitespace-nowrap">
                         <i class="fa-brands fa-whatsapp text-base"></i>
                         <span>WhatsApp Inquiry</span>
                     </a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                       class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                       class="w-11 h-11 shrink-0 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
                         <i class="fa-brands fa-instagram text-base"></i>
                     </a>
                     <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
-                       class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                       class="w-11 h-11 shrink-0 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
                         <i class="fa-brands fa-youtube text-base"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
+            <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-zinc-500 gap-3">
                 <p>&copy; 2026 OpenFrame Visuals. All rights reserved.</p>
-                <div class="flex items-center gap-6">
+                <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-6">
                     <p class="font-display tracking-widest uppercase text-[10px]">Every Frame. A New Perspective.</p>
-                    <a href="admin.html" class="font-display tracking-widest uppercase text-[10px] text-zinc-600 hover:text-zinc-300 transition">Studio Admin</a>
+                    <a href="admin.html" class="font-display tracking-widest uppercase text-[10px] text-zinc-500 hover:text-white transition whitespace-nowrap">Studio Admin</a>
                 </div>
             </div>
         </div>
@@ -786,17 +793,14 @@
 
             let startTime = performance.now();
             function tick(now) {
-                const t = (now - startTime) * 0.001; // seconds
+                const t = (now - startTime) * 0.001;
 
-                // Ultra-smooth harmonic wave between 0 (assembled) and 1 (exploded)
                 const wave = 0.5 - 0.5 * Math.cos(t * 0.9);
                 const e = Math.pow(wave, 1.3);
 
-                // Subtle continuous hover float
                 const floatY = Math.sin(t * 1.35) * 4.5;
                 parts.svg.style.transform = `translate3d(0, ${floatY}px, 0)`;
 
-                // Clean diagonal optical-axis explosion (dx: +1, dy: -0.2)
                 parts.body.style.transform = `translate3d(${-e * 30}px, ${e * 6}px, 0)`;
                 parts.sensor.style.transform = `translate3d(${-e * 10}px, ${e * 2}px, 0)`;
                 parts.sensor.style.opacity = 0.35 + e * 0.65;
@@ -856,8 +860,8 @@
             } catch (err) {
                 portfolioGrid.className = 'block';
                 portfolioGrid.innerHTML = `
-                    <div class="glass-panel rounded-2xl p-12 text-center">
-                        <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Portfolio items will appear here once uploaded via Admin Studio.</p>
+                    <div class="glass-panel rounded-2xl p-8 text-center">
+                        <p class="font-display text-xs tracking-[0.22em] uppercase text-zinc-400">Portfolio items will appear here once uploaded via Admin Studio.</p>
                     </div>`;
             }
         }
@@ -870,9 +874,9 @@
             if (!filtered.length) {
                 portfolioGrid.className = 'block';
                 portfolioGrid.innerHTML = `
-                    <div class="glass-panel rounded-2xl p-12 text-center">
-                        <i class="fa-solid fa-camera text-zinc-600 text-2xl mb-3"></i>
-                        <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">No frames published in this category yet.</p>
+                    <div class="glass-panel rounded-2xl p-8 text-center">
+                        <i class="fa-solid fa-camera text-zinc-600 text-xl mb-2"></i>
+                        <p class="font-display text-xs tracking-[0.22em] uppercase text-zinc-400">No frames published in this category yet.</p>
                     </div>`;
                 return;
             }
@@ -883,12 +887,12 @@
             portfolioGrid.innerHTML = filtered.map((item, idx) => `
                 <div class="portfolio-item gallery-tile group relative rounded-xl overflow-hidden cursor-pointer aspect-square" data-index="${idx}">
                     <img src="${item.imageUrl}" alt="${item.title}" loading="lazy" class="portfolio-img w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent opacity-60 group-hover:opacity-95 transition-opacity duration-300"></div>
-                    <div class="absolute top-3 right-3 w-7 h-7 rounded-full glass-panel flex items-center justify-center text-white/80 opacity-0 group-hover:opacity-100 group-hover:bg-white group-hover:text-black transition-all duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent opacity-65 group-hover:opacity-95 transition-opacity duration-300"></div>
+                    <div class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full glass-panel flex items-center justify-center text-white/80 opacity-0 group-hover:opacity-100 group-hover:bg-white group-hover:text-black transition-all duration-300">
                         <i class="fa-solid ${item.videoUrl ? 'fa-play' : 'fa-expand'} text-[10px]"></i>
                     </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-                        <span class="font-display text-[9px] tracking-[0.22em] uppercase text-zinc-400 block">${item.category}</span>
+                    <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-4 translate-y-0.5 group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="font-display text-[8.5px] sm:text-[9px] tracking-[0.22em] uppercase text-zinc-400 block">${item.category}</span>
                         <h3 class="font-display text-xs sm:text-sm font-medium tracking-wider text-white truncate mt-0.5">${item.title}</h3>
                     </div>
                 </div>
@@ -949,8 +953,8 @@
 
                 if (!pkgs.length) {
                     grid.innerHTML = `
-                        <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
-                            <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Packages are being updated. Select "Custom Production" below to inquire.</p>
+                        <div class="col-span-full glass-panel rounded-2xl p-8 text-center">
+                            <p class="font-display text-xs tracking-[0.22em] uppercase text-zinc-400">Packages are being updated. Select "Custom Production" below to inquire.</p>
                         </div>`;
                     return;
                 }
@@ -958,20 +962,20 @@
                 grid.innerHTML = pkgs.map((pkg, idx) => {
                     const isFeatured = idx === 1;
                     return `
-                    <div class="glass-card viewfinder-box rounded-2xl p-8 flex flex-col justify-between ${isFeatured ? 'border-white/30 bg-gradient-to-b from-white/[0.08] to-transparent relative' : ''}">
-                        ${isFeatured ? `<div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white text-black font-display text-[9px] font-bold tracking-[0.25em] uppercase">Featured</div>` : ''}
+                    <div class="glass-card viewfinder-box rounded-2xl p-6 sm:p-8 flex flex-col justify-between ${isFeatured ? 'border-white/30 bg-gradient-to-b from-white/[0.08] to-transparent relative' : ''}">
+                        ${isFeatured ? `<div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white text-black font-display text-[9px] font-bold tracking-[0.25em] uppercase">Featured</div>` : ''}
                         <div>
-                            <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center justify-between mb-5">
                                 <span class="px-3 py-1 rounded-full bg-white/10 font-display text-[10px] tracking-[0.2em] uppercase text-zinc-200">${pkg.category || 'Production'}</span>
-                                <i class="fa-solid fa-camera text-zinc-400 text-lg"></i>
+                                <i class="fa-solid fa-camera text-zinc-400 text-base"></i>
                             </div>
-                            <h3 class="font-display text-xl font-semibold tracking-wider text-white">${pkg.name}</h3>
+                            <h3 class="font-display text-lg sm:text-xl font-semibold tracking-wider text-white">${pkg.name}</h3>
                             
-                            <div class="my-6 pb-6 border-b border-white/10">
-                                <span class="font-display text-3xl font-light text-white">LKR ${pkg.price}</span>
+                            <div class="my-4 sm:my-6 pb-4 sm:pb-6 border-b border-white/10">
+                                <span class="font-display text-2xl sm:text-3xl font-light text-white">LKR ${pkg.price}</span>
                             </div>
 
-                            <ul class="space-y-3.5 text-xs text-zinc-300 mb-8">
+                            <ul class="space-y-3 text-xs text-zinc-300 mb-6 sm:mb-8">
                                 ${(pkg.features || []).map(f => `
                                     <li class="flex items-center gap-3">
                                         <i class="fa-solid fa-check text-white text-[10px]"></i>
@@ -1056,7 +1060,7 @@
 
             for (let i = 0; i < firstDayOfWeek; i++) {
                 const emptyCell = document.createElement('div');
-                emptyCell.className = 'h-10 sm:h-11';
+                emptyCell.className = 'h-9 sm:h-11';
                 calendarGrid.appendChild(emptyCell);
             }
 
@@ -1069,7 +1073,7 @@
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.textContent = day;
-                btn.className = 'h-10 sm:h-11 rounded-lg font-display text-xs transition-all flex items-center justify-center ';
+                btn.className = 'h-9 sm:h-11 rounded-lg font-display text-xs transition-all flex items-center justify-center ';
 
                 if (isBooked) {
                     btn.disabled = true;
