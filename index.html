@@ -49,10 +49,10 @@
 
         /* Custom Glassmorphism */
         .glass-panel {
-            background: rgba(20, 20, 22, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(20, 20, 22, 0.72);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .glass-card {
@@ -68,7 +68,6 @@
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
         }
 
-        /* Hide Scrollbars for Clean Horizontal Filter Strip */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -77,11 +76,10 @@
             scrollbar-width: none;
         }
 
-        /* 2D Glowing Sketch Exploded Camera Loop (60fps Hardware Accelerated) */
+        /* 2D Glowing Sketch Exploded Camera Loop */
         .sketch-glow {
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
         }
-
         .sketch-part {
             will-change: transform, opacity;
             transform-box: fill-box;
@@ -118,7 +116,6 @@
             }
         }
 
-        /* Compact Gallery Card Hover Pop & Smooth Zoom */
         .gallery-tile {
             scroll-snap-align: start;
             background: rgba(255, 255, 255, 0.02);
@@ -140,7 +137,6 @@
             filter: grayscale(0%) contrast(105%);
         }
 
-        /* Subtle Viewfinder Corner Brackets */
         .viewfinder-box {
             position: relative;
         }
@@ -168,20 +164,10 @@
             border-color: rgba(255, 255, 255, 0.85);
         }
 
-        /* Custom Page Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #050505;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #27272a;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #52525b;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525b; }
     </style>
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
@@ -189,9 +175,9 @@
     <!-- ==================== FLOATING OVAL GLASS HEADER ==================== -->
     <header class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 lg:px-8 pointer-events-none">
         <div class="max-w-6xl mx-auto pointer-events-auto">
-            <div class="glass-oval-nav rounded-full px-4 sm:px-8 h-13 sm:h-16 py-2 flex items-center justify-between transition-all duration-300">
+            <div class="glass-oval-nav rounded-full px-3.5 sm:px-7 h-13 sm:h-16 py-2 flex items-center justify-between transition-all duration-300">
                 <!-- Brand Monogram + Wordmark -->
-                <a href="#home" class="flex items-center gap-2 sm:gap-3 group">
+                <a href="#home" class="flex items-center gap-2 sm:gap-3 group shrink-0">
                     <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 28V12H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
                         <path d="M72 12H88V28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
@@ -202,51 +188,71 @@
                         <path d="M63 45V74" stroke="currentColor" stroke-width="6.5" stroke-linecap="square"/>
                     </svg>
                     <div class="flex flex-col">
-                        <span class="font-display text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.22em] text-white font-normal leading-none">
+                        <span class="font-display text-xs sm:text-sm tracking-[0.18em] sm:tracking-[0.22em] text-white font-normal leading-none">
                             <strong class="font-bold">OPEN</strong>FRAME
                         </span>
-                        <span class="font-display text-[7px] sm:text-[8px] tracking-[0.4em] text-zinc-400 uppercase mt-1 leading-none">
+                        <span class="font-display text-[7px] sm:text-[8px] tracking-[0.38em] text-zinc-400 uppercase mt-1 leading-none">
                             VISUALS
                         </span>
                     </div>
                 </a>
 
                 <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex items-center space-x-9">
+                <nav class="hidden lg:flex items-center space-x-7">
                     <a href="#portfolio" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Portfolio</a>
                     <a href="#catalog" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Catalog</a>
                     <a href="#booking" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Schedule</a>
                     <a href="#contact" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Contact</a>
                 </nav>
 
-                <!-- CTA & Mobile Menu Toggle -->
+                <!-- Client Auth + Book CTA + Mobile Toggle -->
                 <div class="flex items-center gap-1.5 sm:gap-2">
-                    <a href="#booking" class="inline-flex items-center gap-1.5 px-3.5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-white text-black font-display text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-md shadow-white/10">
+                    <!-- Logged Out State: Sign In Button -->
+                    <button id="nav-signin-btn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 border border-white/15 text-white font-display text-[9.5px] sm:text-[10.5px] tracking-widest uppercase hover:bg-white/20 transition whitespace-nowrap">
+                        <i class="fa-regular fa-user text-[10px]"></i>
+                        <span>Sign In</span>
+                    </button>
+
+                    <!-- Logged In State: My Orders Button -->
+                    <button id="nav-orders-btn" type="button" class="hidden items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-emerald-500/20 border border-emerald-400/35 text-emerald-200 font-display text-[9.5px] sm:text-[10.5px] font-semibold tracking-widest uppercase hover:bg-emerald-500/30 transition whitespace-nowrap">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>My Orders</span>
+                        <span id="nav-orders-count" class="px-1.5 py-0.2 rounded-full bg-emerald-400 text-black text-[9px] font-bold">0</span>
+                    </button>
+
+                    <!-- Book CTA -->
+                    <a href="#booking" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-white text-black font-display text-[9.5px] sm:text-[11px] font-semibold tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-md shadow-white/10 whitespace-nowrap">
                         <span>Book</span>
                         <i class="fa-solid fa-arrow-right text-[9px]"></i>
                     </a>
-                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition">
+
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition">
                         <i class="fa-solid fa-bars text-sm"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Mobile Dropdown Oval Card -->
-            <div id="mobile-menu" class="hidden md:hidden mt-2 glass-oval-nav rounded-3xl px-6 py-4 space-y-2.5">
+            <div id="mobile-menu" class="hidden lg:hidden mt-2 glass-oval-nav rounded-3xl px-6 py-4 space-y-2.5">
                 <a href="#portfolio" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Portfolio</a>
                 <a href="#catalog" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Catalog & Packages</a>
                 <a href="#booking" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Schedule & Orders</a>
                 <a href="#contact" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Contact</a>
+                <div class="pt-2 border-t border-white/10 flex items-center justify-between">
+                    <button id="mobile-account-action" type="button" class="text-xs font-display tracking-widest uppercase text-emerald-300 py-1">
+                        Client Portal / My Orders
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- ==================== CINEMATIC HERO (ZERO WASTED SPACE ON MOBILE & PC) ==================== -->
+    <!-- ==================== CINEMATIC HERO ==================== -->
     <section id="home" class="relative md:min-h-screen flex items-center pt-20 sm:pt-28 pb-8 sm:pb-12 overflow-hidden bg-[#050505]">
-        <!-- Subtle Radial Glow behind Sketch -->
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_72%_52%,rgba(255,255,255,0.06)_0%,rgba(5,5,5,1)_65%)] pointer-events-none"></div>
 
-        <!-- Viewfinder Grid Frame Positioned Strictly Below the Menu Bar & Tightly Wrapping Content -->
+        <!-- Viewfinder Grid Frame -->
         <div class="absolute top-[74px] sm:top-24 bottom-4 sm:bottom-8 left-3 right-3 sm:left-8 sm:right-8 border border-white/[0.04] pointer-events-none z-0">
             <div class="absolute top-0 left-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-t border-l border-white/25"></div>
             <div class="absolute top-0 right-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-t border-r border-white/25"></div>
@@ -255,12 +261,9 @@
         </div>
 
         <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 w-full py-3 sm:py-0">
-            <!-- Balanced Side-by-Side Grid on Both Mobile & PC -->
             <div class="grid grid-cols-12 gap-2 sm:gap-6 items-center">
-                
-                <!-- LEFT COLUMN: BRAND COPY & EQUAL-SIZED CTAs (7 Cols) -->
+                <!-- LEFT COLUMN -->
                 <div class="col-span-7 z-20">
-                    <!-- Status Pill -->
                     <div class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full glass-panel border border-white/15 mb-3 sm:mb-6">
                         <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         <span class="font-display text-[8.5px] sm:text-xs tracking-[0.14em] sm:tracking-[0.22em] uppercase text-zinc-200 whitespace-nowrap">
@@ -268,20 +271,17 @@
                         </span>
                     </div>
 
-                    <!-- Main Brand Heading -->
                     <h1 class="font-display text-2xl sm:text-5xl lg:text-6xl font-light tracking-[0.16em] sm:tracking-[0.24em] text-white uppercase leading-tight">
                         <span class="font-bold">OPEN</span>FRAME<br>
                         <span class="text-sm sm:text-3xl lg:text-4xl tracking-[0.34em] sm:tracking-[0.42em] text-zinc-300 font-extralight block mt-0.5 sm:mt-2">VISUALS</span>
                     </h1>
 
-                    <!-- Tagline -->
                     <p class="mt-2.5 sm:mt-5 font-display text-[10.5px] sm:text-base tracking-[0.14em] sm:tracking-[0.26em] uppercase text-zinc-300 font-light leading-relaxed">
                         Every Frame. A New Perspective.
                     </p>
 
                     <div class="w-10 sm:w-16 h-[1px] bg-white/40 my-3 sm:my-6"></div>
 
-                    <!-- 3 Core Pillars (Centered equally on both Mobile & Desktop) -->
                     <div class="grid grid-cols-3 gap-1 sm:gap-4 max-w-md mb-4 sm:mb-8">
                         <div class="flex flex-col items-center justify-center text-center border-r border-white/15 px-1">
                             <i class="fa-solid fa-camera text-xs sm:text-lg text-white/90 mb-1 sm:mb-2"></i>
@@ -297,7 +297,6 @@
                         </div>
                     </div>
 
-                    <!-- Hero CTA Buttons (Strictly Identical Dimensions on Mobile & PC) -->
                     <div class="flex flex-col sm:flex-row gap-2 sm:gap-3.5 max-w-[185px] sm:max-w-none">
                         <a href="#booking" class="w-full sm:w-48 h-9 sm:h-12 inline-flex items-center justify-center rounded-full bg-white text-black font-display text-[9.5px] sm:text-xs font-semibold tracking-[0.18em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/5">
                             Book Session
@@ -308,7 +307,7 @@
                     </div>
                 </div>
 
-                <!-- RIGHT COLUMN: DETAILED 2D GLOWING SKETCH CAMERA WITH TECHNICAL NUMBERS -->
+                <!-- RIGHT COLUMN: 2D GLOWING SKETCH CAMERA -->
                 <div class="col-span-5 flex items-center justify-center sm:justify-start">
                     <div class="w-full max-w-[460px]">
                         <svg id="sketch-camera-svg" viewBox="-20 15 570 330" class="w-full h-auto sketch-glow overflow-visible select-none" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -330,25 +329,19 @@
                                 </linearGradient>
                             </defs>
 
-                            <!-- Optical Axis Guide Line & Calibrated Tick Marks -->
                             <line x1="70" y1="205" x2="475" y2="128" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
                             <line x1="160" y1="242" x2="430" y2="190" stroke="rgba(255,255,255,0.1)" stroke-width="0.8" stroke-dasharray="2 4"/>
 
-                            <!-- PART 1: Detailed DSLR Camera Body Sketch & Markings -->
                             <g id="sk-body" class="sketch-part">
                                 <rect x="40" y="112" width="205" height="142" rx="18" fill="rgba(255,255,255,0.025)" stroke="url(#glowStroke)" stroke-width="2"/>
                                 <rect x="47" y="119" width="191" height="128" rx="14" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
-                                <!-- Ergonomic Grip -->
                                 <path d="M40 128 C25 128 21 146 21 183 C21 220 25 238 40 238" fill="rgba(255,255,255,0.03)" stroke="url(#glowStroke)" stroke-width="1.8"/>
                                 <line x1="28" y1="142" x2="28" y2="224" stroke="rgba(255,255,255,0.28)" stroke-width="1" stroke-dasharray="2 3"/>
                                 <line x1="33" y1="145" x2="33" y2="221" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" stroke-dasharray="2 3"/>
-                                <!-- Pentaprism Viewfinder Hump -->
                                 <path d="M98 112 L116 80 H178 L196 112" fill="rgba(255,255,255,0.025)" stroke="url(#glowStroke)" stroke-width="2" stroke-linejoin="round"/>
-                                <!-- Top LCD Info Screen & ISO/Shutter Numbers -->
                                 <rect x="195" y="124" width="36" height="16" rx="2.5" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
                                 <text x="199" y="131" fill="rgba(255,255,255,0.65)" font-family="monospace" font-size="4.8" letter-spacing="0.5">1/250 F1.4</text>
                                 <text x="199" y="137" fill="rgba(165,243,252,0.75)" font-family="monospace" font-size="4.5" letter-spacing="0.5">ISO 100 RAW</text>
-                                <!-- Hotshoe & Dials -->
                                 <rect x="132" y="72" width="30" height="8" rx="2" stroke="rgba(255,255,255,0.8)" stroke-width="1.4"/>
                                 <rect x="58" y="98" width="28" height="14" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4"/>
                                 <line x1="63" y1="98" x2="63" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
@@ -356,7 +349,6 @@
                                 <line x1="75" y1="98" x2="75" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
                                 <line x1="81" y1="98" x2="81" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
                                 <rect x="206" y="100" width="26" height="12" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4"/>
-                                <!-- Shutter Button & Custom Buttons -->
                                 <path d="M46 112 V105 H62 V112" stroke="#ffffff" stroke-width="1.6"/>
                                 <circle cx="88" cy="138" r="5" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
                                 <circle cx="88" cy="154" r="4" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
@@ -364,7 +356,6 @@
                                 <text x="56" y="238" fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="5.5" letter-spacing="1">35MM FULL-FRAME // 4K 120P</text>
                             </g>
 
-                            <!-- PART 2: Glowing CMOS Sensor Chip -->
                             <g id="sk-sensor" class="sketch-part">
                                 <rect x="116" y="156" width="60" height="46" rx="5" fill="#050505" stroke="rgba(255,255,255,0.65)" stroke-width="1.4"/>
                                 <rect x="122" y="162" width="48" height="34" rx="2" fill="url(#sensorGlow)" stroke="#67e8f9" stroke-width="1.3"/>
@@ -374,7 +365,6 @@
                                 <text x="125" y="152" fill="rgba(165,243,252,0.7)" font-family="monospace" font-size="5" letter-spacing="0.8">CMOS 45.7MP</text>
                             </g>
 
-                            <!-- PART 3: Precision Lens Mount Ring -->
                             <g id="sk-mount" class="sketch-part">
                                 <ellipse cx="158" cy="180" rx="47" ry="53" fill="rgba(5,5,5,0.78)" stroke="url(#glowStroke)" stroke-width="2.2"/>
                                 <ellipse cx="158" cy="180" rx="39" ry="44" stroke="rgba(255,255,255,0.38)" stroke-width="1.1" stroke-dasharray="5 4"/>
@@ -382,7 +372,6 @@
                                 <line x1="145" y1="222" x2="171" y2="222" stroke="#facc15" stroke-width="1.8" stroke-dasharray="2 2"/>
                             </g>
 
-                            <!-- PART 4: Aperture Iris & Rear Lens Barrel -->
                             <g id="sk-barrel" class="sketch-part">
                                 <ellipse cx="186" cy="174" rx="45" ry="51" fill="rgba(10,10,14,0.82)" stroke="url(#glowStroke)" stroke-width="2"/>
                                 <ellipse cx="189" cy="173" rx="43" ry="49" stroke="#ef4444" stroke-width="2" stroke-opacity="0.9"/>
@@ -391,14 +380,12 @@
                                 <text x="168" y="118" fill="rgba(255,255,255,0.55)" font-family="monospace" font-size="5.2" letter-spacing="1">f/1.4 - f/16</text>
                             </g>
 
-                            <!-- PART 5: Internal Optical Glass Element 1 -->
                             <g id="sk-glass1" class="sketch-part">
                                 <ellipse cx="216" cy="168" rx="39" ry="45" fill="url(#lensGlowFill)" stroke="#a5f3fc" stroke-width="1.7"/>
                                 <path d="M195 147 A27 31 0 0 1 230 140" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M203 196 A23 27 0 0 0 234 189" stroke="rgba(255,255,255,0.45)" stroke-width="1.1" stroke-linecap="round"/>
                             </g>
 
-                            <!-- PART 6: Knurled Manual Focus Ring & Focal Distance Numbers -->
                             <g id="sk-ring" class="sketch-part">
                                 <ellipse cx="246" cy="162" rx="44" ry="50" fill="rgba(5,5,5,0.68)" stroke="url(#glowStroke)" stroke-width="2.3"/>
                                 <ellipse cx="246" cy="162" rx="44" ry="50" stroke="#ffffff" stroke-width="4.5" stroke-dasharray="1.5 5" stroke-opacity="0.65"/>
@@ -407,13 +394,11 @@
                                 <text x="228" y="223" fill="rgba(165,243,252,0.65)" font-family="monospace" font-size="5" letter-spacing="0.8">0.38m  1m  3m  ∞</text>
                             </g>
 
-                            <!-- PART 7: Front Fluorite Glass Element 2 -->
                             <g id="sk-glass2" class="sketch-part">
                                 <ellipse cx="276" cy="156" rx="40" ry="46" fill="url(#lensGlowFill)" stroke="#ffffff" stroke-width="1.7"/>
                                 <ellipse cx="262" cy="141" rx="9" ry="4.5" transform="rotate(-32 262 141)" fill="rgba(255,255,255,0.6)"/>
                             </g>
 
-                            <!-- PART 8: Front Filter Ring & Lens Hood Spec -->
                             <g id="sk-hood" class="sketch-part">
                                 <ellipse cx="306" cy="150" rx="45" ry="51" fill="rgba(5,5,5,0.55)" stroke="url(#glowStroke)" stroke-width="2.2"/>
                                 <ellipse cx="306" cy="150" rx="40" ry="45" stroke="rgba(255,255,255,0.35)" stroke-width="1.1"/>
@@ -422,7 +407,6 @@
                         </svg>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -438,7 +422,6 @@
                     </h2>
                 </div>
 
-                <!-- Single-Row Filter Pills + Aligned Slide Arrows -->
                 <div class="flex items-center justify-between md:justify-end gap-2 w-full md:w-auto">
                     <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-0.5" id="portfolio-filters">
                         <button data-filter="all" class="filter-btn active shrink-0 px-3.5 py-2 rounded-full text-[10px] sm:text-[11px] font-display tracking-widest uppercase bg-white text-black font-semibold transition-all">
@@ -455,7 +438,6 @@
                         </button>
                     </div>
 
-                    <!-- Left / Right Slide Buttons -->
                     <div class="flex items-center gap-1.5 shrink-0 pl-2 border-l border-white/10">
                         <button id="slide-left-btn" aria-label="Slide Left" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
                             <i class="fa-solid fa-chevron-left text-[11px]"></i>
@@ -467,7 +449,6 @@
                 </div>
             </div>
 
-            <!-- Fixed 2-Row Horizontal Slider Container -->
             <div id="portfolio-wrapper">
                 <div class="portfolio-slider" id="portfolio-grid">
                     <div class="col-span-full glass-panel rounded-2xl p-8 text-center">
@@ -477,7 +458,6 @@
                 </div>
             </div>
 
-            <!-- Subtle Swipe Hint -->
             <div class="mt-2 flex items-center justify-end gap-2 text-[9.5px] font-display tracking-[0.18em] uppercase text-zinc-500">
                 <span>Swipe or tap arrows for more</span>
                 <i class="fa-solid fa-arrows-left-right text-zinc-400"></i>
@@ -498,7 +478,6 @@
                 </p>
             </div>
 
-            <!-- Dynamic Packages Grid -->
             <div id="packages-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-8">
                 <div class="col-span-full glass-panel rounded-2xl p-8 text-center">
                     <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-lg mb-2"></i>
@@ -511,18 +490,30 @@
     <!-- ==================== INTERACTIVE SCHEDULE & ORDER BOOKING ==================== -->
     <section id="booking" class="py-12 md:py-24 bg-[#08080a] border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-8 md:mb-12">
-                <span class="font-display text-[10px] sm:text-[11px] tracking-[0.35em] uppercase text-zinc-400">Schedule & Orders</span>
-                <h2 class="font-display text-xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-1.5">
-                    Reserve Your <span class="font-semibold">Shoot Date</span>
-                </h2>
-                <p class="text-zinc-400 text-xs sm:text-sm mt-2.5 font-light max-w-2xl">
-                    Check live availability starting November 2026. Tap an open date and submit your details to reserve.
-                </p>
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 md:mb-12">
+                <div>
+                    <span class="font-display text-[10px] sm:text-[11px] tracking-[0.35em] uppercase text-zinc-400">Schedule & Orders</span>
+                    <h2 class="font-display text-xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-1.5">
+                        Reserve Your <span class="font-semibold">Shoot Date</span>
+                    </h2>
+                    <p class="text-zinc-400 text-xs sm:text-sm mt-2.5 font-light max-w-2xl">
+                        Sign in with Google or Email to track your booking approval status live in My Orders.
+                    </p>
+                </div>
+
+                <!-- Quick Client Account Banner -->
+                <div id="booking-auth-banner" class="glass-panel rounded-2xl px-4 py-3 flex items-center justify-between sm:justify-end gap-3 shrink-0">
+                    <div id="booking-auth-text" class="text-xs text-zinc-300">
+                        <span class="text-zinc-400">Track your order approval?</span>
+                    </div>
+                    <button id="booking-auth-action-btn" type="button" class="px-3.5 py-2 rounded-xl bg-white text-black font-display text-[10px] font-bold tracking-widest uppercase hover:bg-zinc-200 transition whitespace-nowrap">
+                        Sign In
+                    </button>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
-                <!-- LEFT COLUMN: UNLIMITED AVAILABILITY CALENDAR (5 cols) -->
+                <!-- LEFT COLUMN: AVAILABILITY CALENDAR (5 cols) -->
                 <div class="lg:col-span-5 glass-panel rounded-2xl p-5 sm:p-8">
                     <div class="flex items-center justify-between mb-5">
                         <div>
@@ -541,7 +532,6 @@
                         </div>
                     </div>
 
-                    <!-- Days of Week Header -->
                     <div class="grid grid-cols-7 gap-1.5 text-center mb-2.5">
                         <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Sun</span>
                         <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Mon</span>
@@ -552,10 +542,8 @@
                         <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Sat</span>
                     </div>
 
-                    <!-- Calendar Days Grid -->
                     <div id="calendar-days-grid" class="grid grid-cols-7 gap-1.5"></div>
 
-                    <!-- Legend -->
                     <div class="mt-5 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-[11px] text-zinc-400">
                         <div class="flex items-center gap-2">
                             <span class="w-3 h-3 rounded-sm border border-white/30 bg-white/5 inline-block"></span>
@@ -576,7 +564,6 @@
                 <div class="lg:col-span-7 glass-panel rounded-2xl p-5 sm:p-8">
                     <form id="booking-form" class="space-y-4 sm:space-y-6">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                            <!-- Selected Date Display -->
                             <div>
                                 <label class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                     Selected Shoot Date *
@@ -589,7 +576,6 @@
                                 </div>
                             </div>
 
-                            <!-- Service / Package Select -->
                             <div>
                                 <label for="package-select" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                     Service / Package *
@@ -602,35 +588,41 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                            <!-- Client Name -->
                             <div>
                                 <label for="client-name" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                     Your Name / Brand *
                                 </label>
-                                <input type="text" id="client-name" required placeholder="Enter your name or brand"
+                                <input type="text" id="client-name" required placeholder="Auto-filled from Google or enter name"
                                        class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
                             </div>
 
-                            <!-- WhatsApp / Phone -->
                             <div>
                                 <label for="client-phone" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                     WhatsApp / Contact Number *
                                 </label>
-                                <input type="tel" id="client-phone" required placeholder="Enter WhatsApp or contact number"
+                                <input type="tel" id="client-phone" required placeholder="e.g. 077 123 4567"
                                        class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
                             </div>
                         </div>
 
-                        <!-- Shoot Location in Sri Lanka -->
-                        <div>
-                            <label for="shoot-location" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
-                                Shoot Location (Sri Lanka) *
-                            </label>
-                            <input type="text" id="shoot-location" required placeholder="e.g., Colombo / Galle Fort / Ella / Kandy"
-                                   class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                            <div>
+                                <label for="client-email" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
+                                    Email Address *
+                                </label>
+                                <input type="email" id="client-email" required placeholder="Auto-filled from Google or enter email"
+                                       class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                            </div>
+
+                            <div>
+                                <label for="shoot-location" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
+                                    Shoot Location (Sri Lanka) *
+                                </label>
+                                <input type="text" id="shoot-location" required placeholder="e.g., Colombo / Galle Fort / Ella"
+                                       class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                            </div>
                         </div>
 
-                        <!-- Optional Production Add-ons -->
                         <div>
                             <span class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
                                 Optional Add-Ons
@@ -651,7 +643,6 @@
                             </div>
                         </div>
 
-                        <!-- Project Notes -->
                         <div>
                             <label for="project-notes" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-1.5">
                                 Creative Brief / Event Details
@@ -660,7 +651,6 @@
                                       class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white"></textarea>
                         </div>
 
-                        <!-- Submit Button -->
                         <button type="submit" id="submit-booking-btn" class="w-full py-3.5 sm:py-4 rounded-xl bg-white text-black font-display text-xs font-bold tracking-[0.22em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 flex items-center justify-center gap-2.5">
                             <span>Confirm Schedule Request</span>
                             <i class="fa-solid fa-paper-plane text-xs"></i>
@@ -690,7 +680,6 @@
                     </p>
                 </div>
 
-                <!-- Single-Row Aligned Action & Social Buttons on Both Mobile & PC -->
                 <div class="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                     <a href="https://wa.me/94770000000?text=Hi%20OpenFrame%20Visuals!%20I'd%20like%20to%20inquire%20about%20a%20shoot." 
                        target="_blank" rel="noopener noreferrer"
@@ -718,6 +707,99 @@
             </div>
         </div>
     </footer>
+
+    <!-- ==================== CLIENT AUTH MODAL (GOOGLE & EMAIL) ==================== -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-4">
+        <div class="max-w-md w-full glass-panel rounded-3xl p-6 sm:p-8 border border-white/20 relative">
+            <button id="close-auth-modal" aria-label="Close Auth" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 text-zinc-300 hover:bg-white hover:text-black transition flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="font-display text-[9.5px] tracking-[0.28em] uppercase text-zinc-400">OpenFrame Client Portal</span>
+                <h3 class="font-display text-xl font-semibold text-white mt-1">Sign In to Track Orders</h3>
+                <p class="text-xs text-zinc-400 mt-1.5">View your submitted shoots & live studio confirmation status.</p>
+            </div>
+
+            <!-- Google Sign-In Button -->
+            <button id="google-signin-btn" type="button" class="w-full py-3.5 px-4 rounded-xl bg-white text-black font-display text-xs font-bold tracking-[0.15em] uppercase hover:bg-zinc-200 transition flex items-center justify-center gap-3 shadow-lg">
+                <i class="fa-brands fa-google text-sm"></i>
+                <span>Continue with Google</span>
+            </button>
+
+            <div class="relative my-5 flex items-center justify-center">
+                <div class="border-t border-white/10 w-full"></div>
+                <span class="px-3 text-[10px] font-display tracking-widest uppercase text-zinc-500 bg-[#141416]">OR</span>
+                <div class="border-t border-white/10 w-full"></div>
+            </div>
+
+            <!-- Email / Password Toggle Tabs -->
+            <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10 mb-4">
+                <button id="tab-email-login" type="button" class="py-2 rounded-lg bg-white/15 text-white font-display text-[10px] font-semibold tracking-widest uppercase transition">
+                    Email Sign In
+                </button>
+                <button id="tab-email-signup" type="button" class="py-2 rounded-lg text-zinc-400 hover:text-white font-display text-[10px] tracking-widest uppercase transition">
+                    Create Account
+                </button>
+            </div>
+
+            <!-- Email Auth Form -->
+            <form id="email-auth-form" class="space-y-3">
+                <div id="signup-name-wrapper" class="hidden">
+                    <label class="block font-display text-[9.5px] tracking-[0.2em] uppercase text-zinc-400 mb-1">Full Name</label>
+                    <input type="text" id="auth-fullname" placeholder="Your Name" class="w-full px-3.5 py-2.5 rounded-xl bg-black/70 border border-white/15 text-white text-xs focus:outline-none focus:border-white">
+                </div>
+                <div>
+                    <label class="block font-display text-[9.5px] tracking-[0.2em] uppercase text-zinc-400 mb-1">Email Address</label>
+                    <input type="email" id="auth-email" required placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-black/70 border border-white/15 text-white text-xs focus:outline-none focus:border-white">
+                </div>
+                <div>
+                    <label class="block font-display text-[9.5px] tracking-[0.2em] uppercase text-zinc-400 mb-1">Password</label>
+                    <input type="password" id="auth-password" required minlength="6" placeholder="Minimum 6 characters" class="w-full px-3.5 py-2.5 rounded-xl bg-black/70 border border-white/15 text-white text-xs focus:outline-none focus:border-white">
+                </div>
+                <button type="submit" id="email-auth-submit" class="w-full py-3 rounded-xl bg-white/15 hover:bg-white hover:text-black text-white font-display text-xs font-semibold tracking-[0.18em] uppercase transition">
+                    Sign In with Email
+                </button>
+            </form>
+
+            <p id="auth-error-msg" class="hidden mt-3 text-xs text-red-400 text-center"></p>
+        </div>
+    </div>
+
+    <!-- ==================== CUSTOMER "MY ORDERS" DASHBOARD MODAL ==================== -->
+    <div id="my-orders-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4">
+        <div class="max-w-2xl w-full glass-panel rounded-3xl border border-white/20 flex flex-col max-h-[88vh] overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                    <span class="font-display text-[9.5px] tracking-[0.28em] uppercase text-emerald-400">Client Portal</span>
+                    <h3 class="font-display text-lg sm:text-xl font-semibold text-white truncate">My Shoot Orders</h3>
+                    <p id="user-profile-subtitle" class="text-[11px] text-zinc-400 truncate mt-0.5"></p>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <button id="client-signout-btn" type="button" class="px-3 py-2 rounded-xl bg-red-500/15 hover:bg-red-500 text-red-300 hover:text-white font-display text-[9.5px] font-semibold tracking-widest uppercase transition">
+                        Sign Out
+                    </button>
+                    <button id="close-orders-modal" aria-label="Close Orders" class="w-9 h-9 rounded-full bg-white/10 text-zinc-300 hover:bg-white hover:text-black transition flex items-center justify-center">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Orders List Body -->
+            <div id="my-orders-list" class="p-4 sm:p-6 overflow-y-auto space-y-3.5 flex-1">
+                <div class="text-center py-8 text-xs text-zinc-400">Loading your orders...</div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 sm:px-6 border-t border-white/10 bg-black/40 flex items-center justify-between gap-3">
+                <span class="text-[11px] text-zinc-400">Status updates live when confirmed by studio.</span>
+                <a href="#booking" id="orders-new-booking-btn" class="px-4 py-2 rounded-xl bg-white text-black font-display text-[10px] font-bold tracking-widest uppercase hover:bg-zinc-200 transition whitespace-nowrap">
+                    + New Shoot
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- ==================== PORTFOLIO LIGHTBOX MODAL ==================== -->
     <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-md p-4">
@@ -752,31 +834,55 @@
 
     <!-- ==================== BOOKING CONFIRMATION MODAL ==================== -->
     <div id="confirmation-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-4">
-        <div class="max-w-md w-full glass-panel rounded-2xl p-8 border border-white/25 text-center relative">
-            <div class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center mx-auto mb-5 text-xl">
+        <div class="max-w-md w-full glass-panel rounded-2xl p-6 sm:p-8 border border-white/25 text-center relative">
+            <div class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center mx-auto mb-4 text-xl">
                 <i class="fa-solid fa-check"></i>
             </div>
             <span class="font-display text-[10px] tracking-[0.3em] uppercase text-zinc-400">Order Received</span>
             <h3 class="font-display text-2xl font-semibold text-white mt-1">Schedule Requested</h3>
-            <p class="text-xs text-zinc-300 mt-3 leading-relaxed">
-                Thank you! Your shoot date has been reserved on our schedule. Our team will reach out via WhatsApp shortly to finalize your production details.
+            <p class="text-xs text-zinc-300 mt-2.5 leading-relaxed">
+                Your shoot date has been reserved! Track approval status anytime inside <strong>My Orders</strong>.
             </p>
 
-            <!-- Summary Box -->
-            <div id="booking-summary-box" class="mt-6 p-4 rounded-xl bg-black/60 border border-white/10 text-left space-y-2 text-xs text-zinc-300"></div>
+            <div id="booking-summary-box" class="mt-5 p-4 rounded-xl bg-black/60 border border-white/10 text-left space-y-2 text-xs text-zinc-300"></div>
 
-            <button id="close-confirmation" class="mt-6 w-full py-3.5 rounded-xl bg-white text-black font-display text-xs font-semibold tracking-widest uppercase hover:bg-zinc-200 transition">
-                Done
-            </button>
+            <div class="mt-5 flex flex-col sm:flex-row gap-2.5">
+                <button id="view-my-orders-after-book" type="button" class="flex-1 py-3.5 rounded-xl bg-emerald-500 text-black font-display text-xs font-bold tracking-widest uppercase hover:bg-emerald-400 transition">
+                    View My Orders
+                </button>
+                <button id="close-confirmation" type="button" class="flex-1 py-3.5 rounded-xl bg-white text-black font-display text-xs font-semibold tracking-widest uppercase hover:bg-zinc-200 transition">
+                    Done
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- ==================== INTERACTIVE LOGIC & 60FPS 2D SKETCH CAMERA LOOP ==================== -->
+    <!-- ==================== INTERACTIVE LOGIC, FIREBASE AUTH & REAL-TIME ORDER TRACKING ==================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, addDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import {
+            getAuth,
+            GoogleAuthProvider,
+            signInWithPopup,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            updateProfile,
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import {
+            getFirestore,
+            collection,
+            getDocs,
+            addDoc,
+            query,
+            where,
+            orderBy,
+            onSnapshot,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-        // 0. Butter-Smooth 60fps 2D Sketch Exploded Camera Loop
+        // 0. 60fps 2D Sketch Exploded Camera Loop
         function initSmoothSketchLoop() {
             const parts = {
                 body: document.getElementById('sk-body'),
@@ -794,13 +900,11 @@
             let startTime = performance.now();
             function tick(now) {
                 const t = (now - startTime) * 0.001;
-
                 const wave = 0.5 - 0.5 * Math.cos(t * 0.9);
                 const e = Math.pow(wave, 1.3);
-
                 const floatY = Math.sin(t * 1.35) * 4.5;
-                parts.svg.style.transform = `translate3d(0, ${floatY}px, 0)`;
 
+                parts.svg.style.transform = `translate3d(0, ${floatY}px, 0)`;
                 parts.body.style.transform = `translate3d(${-e * 30}px, ${e * 6}px, 0)`;
                 parts.sensor.style.transform = `translate3d(${-e * 10}px, ${e * 2}px, 0)`;
                 parts.sensor.style.opacity = 0.35 + e * 0.65;
@@ -817,7 +921,7 @@
         }
         initSmoothSketchLoop();
 
-        // Firebase Configuration
+        // Firebase Initialization
         const firebaseConfig = {
             apiKey: "AIzaSyA5s9kytW7yte1jglGzoa-xhmdwl-aUa5w",
             authDomain: "openframevisuals-bd5c7.firebaseapp.com",
@@ -829,7 +933,210 @@
         };
 
         const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
         const db = getFirestore(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        // ==================== CLIENT AUTH & LIVE ORDER TRACKING ====================
+        let currentUser = null;
+        let unsubscribeUserOrders = null;
+        let isSignUpMode = false;
+
+        const authModal = document.getElementById('auth-modal');
+        const myOrdersModal = document.getElementById('my-orders-modal');
+        const navSignInBtn = document.getElementById('nav-signin-btn');
+        const navOrdersBtn = document.getElementById('nav-orders-btn');
+        const navOrdersCount = document.getElementById('nav-orders-count');
+        const authErrorMsg = document.getElementById('auth-error-msg');
+
+        function openAuthModal() {
+            authErrorMsg.classList.add('hidden');
+            authModal.classList.remove('hidden');
+            authModal.classList.add('flex');
+        }
+        function closeAuthModal() {
+            authModal.classList.add('hidden');
+            authModal.classList.remove('flex');
+        }
+        function openOrdersModal() {
+            myOrdersModal.classList.remove('hidden');
+            myOrdersModal.classList.add('flex');
+        }
+        function closeOrdersModal() {
+            myOrdersModal.classList.add('hidden');
+            myOrdersModal.classList.remove('flex');
+        }
+
+        navSignInBtn.addEventListener('click', openAuthModal);
+        navOrdersBtn.addEventListener('click', openOrdersModal);
+        document.getElementById('close-auth-modal').addEventListener('click', closeAuthModal);
+        document.getElementById('close-orders-modal').addEventListener('click', closeOrdersModal);
+        document.getElementById('orders-new-booking-btn').addEventListener('click', closeOrdersModal);
+
+        document.getElementById('mobile-account-action').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.add('hidden');
+            if (currentUser) openOrdersModal();
+            else openAuthModal();
+        });
+
+        document.getElementById('booking-auth-action-btn').addEventListener('click', () => {
+            if (currentUser) openOrdersModal();
+            else openAuthModal();
+        });
+
+        // Google Sign-In
+        document.getElementById('google-signin-btn').addEventListener('click', async () => {
+            authErrorMsg.classList.add('hidden');
+            try {
+                await signInWithPopup(auth, googleProvider);
+                closeAuthModal();
+            } catch (err) {
+                authErrorMsg.textContent = err.message;
+                authErrorMsg.classList.remove('hidden');
+            }
+        });
+
+        // Toggle Email Sign-In vs Create Account
+        const tabEmailLogin = document.getElementById('tab-email-login');
+        const tabEmailSignup = document.getElementById('tab-email-signup');
+        const signupNameWrapper = document.getElementById('signup-name-wrapper');
+        const emailAuthSubmit = document.getElementById('email-auth-submit');
+
+        tabEmailLogin.addEventListener('click', () => {
+            isSignUpMode = false;
+            tabEmailLogin.classList.add('bg-white/15', 'text-white', 'font-semibold');
+            tabEmailLogin.classList.remove('text-zinc-400');
+            tabEmailSignup.classList.remove('bg-white/15', 'text-white', 'font-semibold');
+            tabEmailSignup.classList.add('text-zinc-400');
+            signupNameWrapper.classList.add('hidden');
+            emailAuthSubmit.textContent = 'Sign In with Email';
+        });
+
+        tabEmailSignup.addEventListener('click', () => {
+            isSignUpMode = true;
+            tabEmailSignup.classList.add('bg-white/15', 'text-white', 'font-semibold');
+            tabEmailSignup.classList.remove('text-zinc-400');
+            tabEmailLogin.classList.remove('bg-white/15', 'text-white', 'font-semibold');
+            tabEmailLogin.classList.add('text-zinc-400');
+            signupNameWrapper.classList.remove('hidden');
+            emailAuthSubmit.textContent = 'Create Client Account';
+        });
+
+        // Email Auth Form Submit
+        document.getElementById('email-auth-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            authErrorMsg.classList.add('hidden');
+            const email = document.getElementById('auth-email').value.trim();
+            const pass = document.getElementById('auth-password').value;
+            const fullName = document.getElementById('auth-fullname').value.trim();
+
+            emailAuthSubmit.disabled = true;
+            try {
+                if (isSignUpMode) {
+                    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+                    if (fullName) {
+                        await updateProfile(cred.user, { displayName: fullName });
+                    }
+                } else {
+                    await signInWithEmailAndPassword(auth, email, pass);
+                }
+                closeAuthModal();
+            } catch (err) {
+                authErrorMsg.textContent = err.message;
+                authErrorMsg.classList.remove('hidden');
+            } finally {
+                emailAuthSubmit.disabled = false;
+            }
+        });
+
+        document.getElementById('client-signout-btn').addEventListener('click', async () => {
+            await signOut(auth);
+            closeOrdersModal();
+        });
+
+        // Auth State Observer & Auto-Fill + Real-Time Orders Listener
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            const bookingAuthText = document.getElementById('booking-auth-text');
+            const bookingAuthActionBtn = document.getElementById('booking-auth-action-btn');
+
+            if (unsubscribeUserOrders) {
+                unsubscribeUserOrders();
+                unsubscribeUserOrders = null;
+            }
+
+            if (user) {
+                navSignInBtn.classList.add('hidden');
+                navOrdersBtn.classList.remove('hidden');
+                navOrdersBtn.classList.add('inline-flex');
+
+                const identityLabel = user.displayName || user.email || 'Client';
+                document.getElementById('user-profile-subtitle').textContent = `${identityLabel} (${user.email})`;
+
+                // Auto-fill Booking Form fields from Google / Email profile
+                const nameInput = document.getElementById('client-name');
+                const emailInput = document.getElementById('client-email');
+                if (user.displayName && !nameInput.value) nameInput.value = user.displayName;
+                if (user.email && !emailInput.value) emailInput.value = user.email;
+
+                bookingAuthText.innerHTML = `<span class="text-emerald-300 font-medium"><i class="fa-solid fa-circle-check mr-1"></i>Signed in as ${identityLabel}</span>`;
+                bookingAuthActionBtn.textContent = 'My Orders';
+
+                // Subscribe to Live Orders for this User (by UID or Email)
+                const ordersListEl = document.getElementById('my-orders-list');
+                const q = query(collection(db, "bookings"), where("userEmail", "==", user.email));
+
+                unsubscribeUserOrders = onSnapshot(q, (snapshot) => {
+                    const userOrders = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                    userOrders.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+                    navOrdersCount.textContent = userOrders.length;
+
+                    if (!userOrders.length) {
+                        ordersListEl.innerHTML = `
+                            <div class="glass-card rounded-2xl p-8 text-center">
+                                <i class="fa-regular fa-calendar-plus text-zinc-500 text-2xl mb-2"></i>
+                                <p class="font-display text-xs tracking-[0.2em] uppercase text-zinc-300">No Orders Found Yet</p>
+                                <p class="text-xs text-zinc-500 mt-1">Any shoot you reserve with ${user.email} will appear here with live studio approval updates.</p>
+                            </div>`;
+                        return;
+                    }
+
+                    ordersListEl.innerHTML = userOrders.map(order => {
+                        const isConfirmed = order.status === 'confirmed';
+                        const badgeClass = isConfirmed
+                            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40'
+                            : 'bg-amber-500/20 text-amber-300 border-amber-400/40';
+                        const badgeText = isConfirmed ? 'CONFIRMED BY STUDIO' : 'PENDING STUDIO REVIEW';
+                        const badgeIcon = isConfirmed ? 'fa-circle-check' : 'fa-clock';
+
+                        return `
+                        <div class="glass-card rounded-2xl p-4 sm:p-5 border ${isConfirmed ? 'border-emerald-500/30' : 'border-white/10'}">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[9.5px] font-display font-bold tracking-widest uppercase ${badgeClass}">
+                                    <i class="fa-solid ${badgeIcon}"></i> ${badgeText}
+                                </span>
+                                <span class="font-display text-xs font-semibold text-white">
+                                    <i class="fa-regular fa-calendar mr-1 text-zinc-400"></i>${order.date}
+                                </span>
+                            </div>
+                            <h4 class="font-display text-sm sm:text-base font-semibold text-white">${order.package}</h4>
+                            <p class="text-xs text-zinc-300 mt-1.5 leading-relaxed">${order.notes || 'Standard Production'}</p>
+                            <div class="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-zinc-400">
+                                <span>Client: <strong class="text-zinc-200">${order.clientName}</strong></span>
+                                <span>WhatsApp: <strong class="text-zinc-200">${order.phone}</strong></span>
+                            </div>
+                        </div>`;
+                    }).join('');
+                });
+            } else {
+                navSignInBtn.classList.remove('hidden');
+                navOrdersBtn.classList.add('hidden');
+                navOrdersBtn.classList.remove('inline-flex');
+                bookingAuthText.innerHTML = `<span class="text-zinc-400">Track your order approval?</span>`;
+                bookingAuthActionBtn.textContent = 'Sign In';
+            }
+        });
 
         // 1. Mobile Navigation Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -1018,7 +1325,7 @@
 
         // 4. Unlimited Dynamic Schedule Calendar (Starting November 2026)
         const minYear = 2026;
-        const minMonth = 10; // November (0-indexed)
+        const minMonth = 10;
         let viewYear = 2026;
         let viewMonth = 10;
         let selectedDateISO = '';
@@ -1113,7 +1420,7 @@
             renderCalendar();
         });
 
-        // 5. Submit Booking to Firebase Firestore & Immediately Lock Date
+        // 5. Submit Booking to Firebase Firestore & Link to Client Google/Email Account
         const bookingForm = document.getElementById('booking-form');
         const confirmationModal = document.getElementById('confirmation-modal');
         const summaryBox = document.getElementById('booking-summary-box');
@@ -1130,20 +1437,24 @@
             submitBtn.innerHTML = `<span>Submitting Request...</span> <i class="fa-solid fa-circle-notch fa-spin text-xs"></i>`;
 
             const pkgVal = document.getElementById('package-select').value;
-            const nameVal = document.getElementById('client-name').value;
-            const phoneVal = document.getElementById('client-phone').value;
-            const locVal = document.getElementById('shoot-location').value;
-            const notesVal = document.getElementById('project-notes').value;
+            const nameVal = document.getElementById('client-name').value.trim();
+            const phoneVal = document.getElementById('client-phone').value.trim();
+            const emailVal = document.getElementById('client-email').value.trim().toLowerCase();
+            const locVal = document.getElementById('shoot-location').value.trim();
+            const notesVal = document.getElementById('project-notes').value.trim();
             const checkedAddons = Array.from(document.querySelectorAll('input[name="addons"]:checked')).map(cb => cb.value);
 
             const combinedNotes = [
                 `Location: ${locVal}`,
+                `Email: ${emailVal}`,
                 checkedAddons.length ? `Add-ons: ${checkedAddons.join(', ')}` : '',
                 notesVal ? `Brief: ${notesVal}` : ''
             ].filter(Boolean).join(' | ');
 
             try {
                 await addDoc(collection(db, "bookings"), {
+                    userId: currentUser ? currentUser.uid : null,
+                    userEmail: currentUser ? currentUser.email.toLowerCase() : emailVal,
                     clientName: nameVal,
                     phone: phoneVal,
                     date: selectedDateISO,
@@ -1161,11 +1472,9 @@
                         <span class="text-zinc-500 block">Selected Package:</span>
                         <span class="text-white font-medium">${pkgVal}</span>
                     </div>
-                    ${checkedAddons.length > 0 ? `
-                    <div class="pt-2 border-t border-white/10">
-                        <span class="text-zinc-500 block">Add-Ons:</span>
-                        <span class="text-zinc-200">${checkedAddons.join(', ')}</span>
-                    </div>` : ''}
+                    <div class="pt-2 border-t border-white/10 flex justify-between">
+                        <span class="text-zinc-500">Email:</span> <span class="text-white">${emailVal}</span>
+                    </div>
                     <div class="pt-2 border-t border-white/10 flex justify-between">
                         <span class="text-zinc-500">WhatsApp:</span> <span class="text-white">${phoneVal}</span>
                     </div>
@@ -1175,6 +1484,12 @@
                 confirmationModal.classList.remove('hidden');
                 confirmationModal.classList.add('flex');
                 bookingForm.reset();
+
+                if (currentUser) {
+                    if (currentUser.displayName) document.getElementById('client-name').value = currentUser.displayName;
+                    if (currentUser.email) document.getElementById('client-email').value = currentUser.email;
+                }
+
                 selectedDateISO = '';
                 renderCalendar();
             } catch (err) {
@@ -1188,6 +1503,13 @@
         document.getElementById('close-confirmation').addEventListener('click', () => {
             confirmationModal.classList.add('hidden');
             confirmationModal.classList.remove('flex');
+        });
+
+        document.getElementById('view-my-orders-after-book').addEventListener('click', () => {
+            confirmationModal.classList.add('hidden');
+            confirmationModal.classList.remove('flex');
+            if (currentUser) openOrdersModal();
+            else openAuthModal();
         });
 
         // Initialize Live Data
