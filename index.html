@@ -25,10 +25,6 @@
                         obsidian: '#050505',
                         charcoal: '#0e0e10',
                         slateDark: '#18181b',
-                    },
-                    letterSpacing: {
-                        widestPlus: '0.35em',
-                        ultraWide: '0.5em',
                     }
                 }
             }
@@ -40,6 +36,15 @@
             background-color: #050505;
             color: #ffffff;
             overflow-x: hidden;
+        }
+
+        /* Floating Oval Glass Header */
+        .glass-oval-nav {
+            background: rgba(18, 18, 22, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.12);
         }
 
         /* Custom Glassmorphism */
@@ -63,9 +68,66 @@
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
         }
 
-        /* Cinematic Lens Glow Background */
-        .lens-ambient {
-            background: radial-gradient(circle at 75% 70%, rgba(255, 255, 255, 0.07) 0%, rgba(15, 15, 18, 0.4) 35%, rgba(5, 5, 5, 1) 75%);
+        /* 2D Glowing Sketch Exploded Camera Loop (60fps Hardware Accelerated) */
+        .sketch-glow {
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+        }
+
+        .sketch-part {
+            will-change: transform, opacity;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+
+        /* 2-Row Horizontal Slider Track */
+        .portfolio-slider {
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            grid-auto-columns: calc(50% - 0.5rem);
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 0.75rem 0.25rem 1.25rem 0.25rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .portfolio-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .portfolio-slider {
+                grid-auto-columns: calc(33.333% - 0.67rem);
+            }
+        }
+        @media (min-width: 1024px) {
+            .portfolio-slider {
+                grid-auto-columns: calc(25% - 0.75rem);
+            }
+        }
+
+        /* Compact Gallery Card Hover Pop & Smooth Zoom */
+        .gallery-tile {
+            scroll-snap-align: start;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .gallery-tile:hover {
+            transform: scale(1.04);
+            z-index: 20;
+            border-color: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 18px 36px -10px rgba(0, 0, 0, 0.95);
+        }
+        .gallery-tile .portfolio-img {
+            filter: grayscale(25%) contrast(106%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+        }
+        .gallery-tile:hover .portfolio-img {
+            transform: scale(1.08);
+            filter: grayscale(0%) contrast(105%);
         }
 
         /* Subtle Viewfinder Corner Brackets */
@@ -96,17 +158,7 @@
             border-color: rgba(255, 255, 255, 0.85);
         }
 
-        /* Portfolio Image Transition */
-        .portfolio-img {
-            filter: grayscale(35%) contrast(108%);
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
-        }
-        .portfolio-item:hover .portfolio-img {
-            transform: scale(1.06);
-            filter: grayscale(0%) contrast(105%);
-        }
-
-        /* Custom Scrollbar */
+        /* Custom Page Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -124,13 +176,13 @@
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
 
-    <!-- ==================== STICKY GLASS HEADER ==================== -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+    <!-- ==================== FLOATING OVAL GLASS HEADER (ALIGNED WITH HERO CONTENT) ==================== -->
+    <header class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 lg:px-8 pointer-events-none">
+        <div class="max-w-6xl mx-auto pointer-events-auto">
+            <div class="glass-oval-nav rounded-full px-5 sm:px-8 h-14 sm:h-16 flex items-center justify-between transition-all duration-300">
                 <!-- Brand Monogram + Wordmark -->
-                <a href="#home" class="flex items-center gap-3.5 group">
-                    <svg class="w-10 h-10 text-white transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="#home" class="flex items-center gap-2.5 sm:gap-3 group">
+                    <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 28V12H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
                         <path d="M72 12H88V28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
                         <path d="M12 72V88H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
@@ -140,118 +192,239 @@
                         <path d="M63 45V74" stroke="currentColor" stroke-width="6.5" stroke-linecap="square"/>
                     </svg>
                     <div class="flex flex-col">
-                        <span class="font-display text-sm sm:text-base tracking-[0.28em] text-white font-normal">
+                        <span class="font-display text-xs sm:text-sm tracking-[0.22em] text-white font-normal leading-none">
                             <strong class="font-bold">OPEN</strong>FRAME
                         </span>
-                        <span class="font-display text-[9px] tracking-[0.48em] text-zinc-400 uppercase mt-0.5">
+                        <span class="font-display text-[7.5px] sm:text-[8px] tracking-[0.42em] text-zinc-400 uppercase mt-1 leading-none">
                             VISUALS
                         </span>
                     </div>
                 </a>
 
                 <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#portfolio" class="text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Portfolio</a>
-                    <a href="#catalog" class="text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Catalog & Packages</a>
-                    <a href="#booking" class="text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Schedule & Orders</a>
-                    <a href="#contact" class="text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Contact</a>
+                <nav class="hidden md:flex items-center space-x-9">
+                    <a href="#portfolio" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Portfolio</a>
+                    <a href="#catalog" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Catalog</a>
+                    <a href="#booking" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Schedule</a>
+                    <a href="#contact" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Contact</a>
                 </nav>
 
                 <!-- CTA & Mobile Menu Toggle -->
-                <div class="flex items-center gap-3">
-                    <a href="#booking" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-display text-xs font-semibold tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-lg shadow-white/10">
-                        <span>Book Session</span>
-                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                <div class="flex items-center gap-2">
+                    <a href="#booking" class="inline-flex items-center gap-1.5 px-4 py-2 sm:px-6 sm:py-2.5 rounded-full bg-white text-black font-display text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-md shadow-white/10">
+                        <span>Book</span>
+                        <i class="fa-solid fa-arrow-right text-[9px]"></i>
                     </a>
-                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden p-2.5 rounded-lg text-zinc-300 hover:text-white hover:bg-white/10 transition">
-                        <i class="fa-solid fa-bars text-lg"></i>
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden w-9 h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition">
+                        <i class="fa-solid fa-bars text-sm"></i>
                     </button>
                 </div>
             </div>
-        </div>
 
-        <!-- Mobile Dropdown Nav -->
-        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-6 py-5 space-y-4">
-            <a href="#portfolio" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Portfolio</a>
-            <a href="#catalog" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Catalog & Packages</a>
-            <a href="#booking" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Schedule & Orders</a>
-            <a href="#contact" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Contact</a>
-            <a href="#booking" class="block text-center w-full py-3 rounded-xl bg-white text-black font-display text-xs font-semibold tracking-widest uppercase">Book a Session</a>
+            <!-- Mobile Dropdown Oval Card -->
+            <div id="mobile-menu" class="hidden md:hidden mt-2.5 glass-oval-nav rounded-3xl px-6 py-5 space-y-3.5">
+                <a href="#portfolio" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Portfolio</a>
+                <a href="#catalog" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Catalog & Packages</a>
+                <a href="#booking" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Schedule & Orders</a>
+                <a href="#contact" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Contact</a>
+            </div>
         </div>
     </header>
 
-    <!-- ==================== CINEMATIC HERO SECTION ==================== -->
-    <section id="home" class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden lens-ambient">
-        <!-- Subtle Optical Ring Glow Accent (No random stock photo) -->
-        <div class="absolute right-[-10%] bottom-[-10%] w-[520px] h-[520px] rounded-full border border-white/[0.04] pointer-events-none hidden sm:block">
-            <div class="w-full h-full rounded-full border border-white/[0.05] scale-75"></div>
+    <!-- ==================== CINEMATIC HERO WITH DETAILED SKETCH CAMERA LOOP ==================== -->
+    <section id="home" class="relative min-h-[88vh] sm:min-h-screen flex items-center pt-24 sm:pt-28 pb-12 overflow-hidden bg-[#050505]">
+        <!-- Subtle Radial Glow behind Sketch -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_52%,rgba(255,255,255,0.06)_0%,rgba(5,5,5,1)_65%)] pointer-events-none"></div>
+
+        <!-- Viewfinder Grid Frame Positioned Strictly Below the Menu Bar -->
+        <div class="absolute top-20 sm:top-24 bottom-5 sm:bottom-8 left-3 right-3 sm:left-8 sm:right-8 border border-white/[0.04] pointer-events-none z-0">
+            <div class="absolute top-0 left-0 w-4 h-4 sm:w-6 sm:h-6 border-t border-l border-white/25"></div>
+            <div class="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 border-t border-r border-white/25"></div>
+            <div class="absolute bottom-0 left-0 w-4 h-4 sm:w-6 sm:h-6 border-b border-l border-white/25"></div>
+            <div class="absolute bottom-0 right-0 w-4 h-4 sm:w-6 sm:h-6 border-b border-r border-white/25"></div>
         </div>
 
-        <!-- Viewfinder Grid Overlay Lines -->
-        <div class="absolute inset-8 sm:inset-14 border border-white/[0.04] pointer-events-none z-0 hidden sm:block">
-            <div class="absolute top-0 left-0 w-6 h-6 border-t border-l border-white/30"></div>
-            <div class="absolute top-0 right-0 w-6 h-6 border-t border-r border-white/30"></div>
-            <div class="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-white/30"></div>
-            <div class="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-white/30"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/10 text-xs font-mono">+</div>
-        </div>
+        <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 w-full">
+            <!-- Balanced Side-by-Side Grid on Both Mobile & PC -->
+            <div class="grid grid-cols-12 gap-3 sm:gap-6 items-center">
+                
+                <!-- LEFT COLUMN: BRAND COPY & EQUAL-SIZED CTAs (7 Cols) -->
+                <div class="col-span-7 z-20">
+                    <!-- Status Pill -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border border-white/15 mb-4 sm:mb-6">
+                        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="font-display text-[9px] sm:text-xs tracking-[0.16em] sm:tracking-[0.22em] uppercase text-zinc-200 whitespace-nowrap">
+                            Bookings Open • Nov 2026
+                        </span>
+                    </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="max-w-3xl">
-                <!-- Status Pill -->
-                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-panel border border-white/15 mb-8">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span class="font-display text-[10px] sm:text-xs tracking-[0.22em] uppercase text-zinc-200">
-                        Bookings Open • November 2026 • Sri Lanka
-                    </span>
+                    <!-- Main Brand Heading -->
+                    <h1 class="font-display text-2xl sm:text-5xl lg:text-6xl font-light tracking-[0.16em] sm:tracking-[0.24em] text-white uppercase leading-tight">
+                        <span class="font-bold">OPEN</span>FRAME<br>
+                        <span class="text-sm sm:text-3xl lg:text-4xl tracking-[0.34em] sm:tracking-[0.42em] text-zinc-300 font-extralight block mt-1 sm:mt-2">VISUALS</span>
+                    </h1>
+
+                    <!-- Tagline -->
+                    <p class="mt-3 sm:mt-5 font-display text-[11px] sm:text-base tracking-[0.16em] sm:tracking-[0.26em] uppercase text-zinc-300 font-light leading-relaxed">
+                        Every Frame. A New Perspective.
+                    </p>
+
+                    <div class="w-12 sm:w-16 h-[1px] bg-white/40 my-4 sm:my-6"></div>
+
+                    <!-- 3 Core Pillars (Centered equally on both Mobile & Desktop) -->
+                    <div class="grid grid-cols-3 gap-1 sm:gap-4 max-w-md mb-5 sm:mb-8">
+                        <div class="flex flex-col items-center justify-center text-center border-r border-white/15 px-1">
+                            <i class="fa-solid fa-camera text-sm sm:text-lg text-white/90 mb-1.5 sm:mb-2"></i>
+                            <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Photo</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-r border-white/15 px-1">
+                            <i class="fa-solid fa-video text-sm sm:text-lg text-white/90 mb-1.5 sm:mb-2"></i>
+                            <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Cinema</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center px-1">
+                            <i class="fa-solid fa-helicopter text-sm sm:text-lg text-white/90 mb-1.5 sm:mb-2"></i>
+                            <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Aerials</span>
+                        </div>
+                    </div>
+
+                    <!-- Hero CTA Buttons (Strictly Identical Dimensions on Mobile & PC) -->
+                    <div class="flex flex-col sm:flex-row gap-2.5 sm:gap-3.5 max-w-[200px] sm:max-w-none">
+                        <a href="#booking" class="w-full sm:w-48 h-10 sm:h-12 inline-flex items-center justify-center rounded-full bg-white text-black font-display text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/5">
+                            Book Session
+                        </a>
+                        <a href="#catalog" class="w-full sm:w-48 h-10 sm:h-12 inline-flex items-center justify-center rounded-full glass-panel border border-white/15 text-white font-display text-[10px] sm:text-xs font-medium tracking-[0.18em] uppercase hover:bg-white/10 transition-all">
+                            Packages
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Main Brand Heading -->
-                <h1 class="font-display text-3xl sm:text-5xl md:text-6xl font-light tracking-[0.22em] sm:tracking-[0.28em] text-white uppercase leading-tight">
-                    <span class="font-bold">OPEN</span>FRAME<br>
-                    <span class="text-xl sm:text-3xl md:text-4xl tracking-[0.42em] text-zinc-300 font-extralight block mt-2">VISUALS</span>
-                </h1>
+                <!-- RIGHT COLUMN: DETAILED 2D GLOWING SKETCH CAMERA WITH TECHNICAL NUMBERS -->
+                <div class="col-span-5 flex items-center justify-center sm:justify-start">
+                    <div class="w-full max-w-[460px]">
+                        <svg id="sketch-camera-svg" viewBox="-20 15 570 330" class="w-full h-auto sketch-glow overflow-visible select-none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="glowStroke" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+                                    <stop offset="50%" stop-color="#bae6fd" stop-opacity="0.72"/>
+                                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.4"/>
+                                </linearGradient>
+                                <radialGradient id="lensGlowFill" cx="35%" cy="35%" r="70%">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.24"/>
+                                    <stop offset="55%" stop-color="#38bdf8" stop-opacity="0.09"/>
+                                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2"/>
+                                </radialGradient>
+                                <linearGradient id="sensorGlow" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#34d399" stop-opacity="0.4"/>
+                                    <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.5"/>
+                                    <stop offset="100%" stop-color="#c084fc" stop-opacity="0.4"/>
+                                </linearGradient>
+                            </defs>
 
-                <!-- Tagline -->
-                <p class="mt-8 font-display text-sm sm:text-lg tracking-[0.3em] uppercase text-zinc-300 font-light leading-relaxed">
-                    Every Frame.<br class="sm:hidden"> A New Perspective.
-                </p>
+                            <!-- Optical Axis Guide Line & Calibrated Tick Marks -->
+                            <line x1="70" y1="205" x2="475" y2="128" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+                            <line x1="160" y1="242" x2="430" y2="190" stroke="rgba(255,255,255,0.1)" stroke-width="0.8" stroke-dasharray="2 4"/>
 
-                <div class="w-16 h-[1px] bg-white/40 my-8"></div>
+                            <!-- PART 1: Detailed DSLR Camera Body Sketch & Markings -->
+                            <g id="sk-body" class="sketch-part">
+                                <!-- Outer Chassis -->
+                                <rect x="40" y="112" width="205" height="142" rx="18" fill="rgba(255,255,255,0.025)" stroke="url(#glowStroke)" stroke-width="2"/>
+                                <!-- Inner Frame Line -->
+                                <rect x="47" y="119" width="191" height="128" rx="14" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+                                <!-- Ergonomic Grip + Leatherette Texture Lines -->
+                                <path d="M40 128 C25 128 21 146 21 183 C21 220 25 238 40 238" fill="rgba(255,255,255,0.03)" stroke="url(#glowStroke)" stroke-width="1.8"/>
+                                <line x1="28" y1="142" x2="28" y2="224" stroke="rgba(255,255,255,0.28)" stroke-width="1" stroke-dasharray="2 3"/>
+                                <line x1="33" y1="145" x2="33" y2="221" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" stroke-dasharray="2 3"/>
+                                <!-- Pentaprism Viewfinder Hump -->
+                                <path d="M98 112 L116 80 H178 L196 112" fill="rgba(255,255,255,0.025)" stroke="url(#glowStroke)" stroke-width="2" stroke-linejoin="round"/>
+                                <!-- Top LCD Info Screen & ISO/Shutter Numbers -->
+                                <rect x="195" y="124" width="36" height="16" rx="2.5" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+                                <text x="199" y="131" fill="rgba(255,255,255,0.65)" font-family="monospace" font-size="4.8" letter-spacing="0.5">1/250 F1.4</text>
+                                <text x="199" y="137" fill="rgba(165,243,252,0.75)" font-family="monospace" font-size="4.5" letter-spacing="0.5">ISO 100 RAW</text>
+                                <!-- Hotshoe & Dials with Knurling Ticks -->
+                                <rect x="132" y="72" width="30" height="8" rx="2" stroke="rgba(255,255,255,0.8)" stroke-width="1.4"/>
+                                <rect x="58" y="98" width="28" height="14" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4"/>
+                                <line x1="63" y1="98" x2="63" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                <line x1="69" y1="98" x2="69" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                <line x1="75" y1="98" x2="75" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                <line x1="81" y1="98" x2="81" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                <rect x="206" y="100" width="26" height="12" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4"/>
+                                <!-- Shutter Button + AF-ON / Custom Buttons -->
+                                <path d="M46 112 V105 H62 V112" stroke="#ffffff" stroke-width="1.6"/>
+                                <circle cx="88" cy="138" r="5" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+                                <circle cx="88" cy="154" r="4" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+                                <!-- Model & Sensor Spec Markings on Body -->
+                                <text x="56" y="131" fill="rgba(255,255,255,0.75)" font-family="Montserrat, sans-serif" font-weight="600" font-size="6" letter-spacing="1.2">OF-1R</text>
+                                <text x="56" y="238" fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="5.5" letter-spacing="1">35MM FULL-FRAME // 4K 120P</text>
+                            </g>
 
-                <!-- 3 Core Pillars -->
-                <div class="grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mb-10">
-                    <div class="flex flex-col items-start sm:items-center text-left sm:text-center border-r border-white/15 pr-3">
-                        <i class="fa-solid fa-camera text-lg sm:text-xl text-white/90 mb-2.5"></i>
-                        <span class="font-display text-[9px] sm:text-[11px] tracking-[0.2em] uppercase text-zinc-300">Photography</span>
-                    </div>
-                    <div class="flex flex-col items-start sm:items-center text-left sm:text-center border-r border-white/15 pr-3">
-                        <i class="fa-solid fa-video text-lg sm:text-xl text-white/90 mb-2.5"></i>
-                        <span class="font-display text-[9px] sm:text-[11px] tracking-[0.2em] uppercase text-zinc-300">Cinematography</span>
-                    </div>
-                    <div class="flex flex-col items-start sm:items-center text-left sm:text-center">
-                        <i class="fa-solid fa-helicopter text-lg sm:text-xl text-white/90 mb-2.5"></i>
-                        <span class="font-display text-[9px] sm:text-[11px] tracking-[0.2em] uppercase text-zinc-300">Aerials</span>
+                            <!-- PART 2: Glowing CMOS Sensor Chip -->
+                            <g id="sk-sensor" class="sketch-part">
+                                <rect x="116" y="156" width="60" height="46" rx="5" fill="#050505" stroke="rgba(255,255,255,0.65)" stroke-width="1.4"/>
+                                <rect x="122" y="162" width="48" height="34" rx="2" fill="url(#sensorGlow)" stroke="#67e8f9" stroke-width="1.3"/>
+                                <line x1="138" y1="162" x2="138" y2="196" stroke="rgba(255,255,255,0.28)" stroke-width="0.7"/>
+                                <line x1="154" y1="162" x2="154" y2="196" stroke="rgba(255,255,255,0.28)" stroke-width="0.7"/>
+                                <line x1="122" y1="179" x2="170" y2="179" stroke="rgba(255,255,255,0.28)" stroke-width="0.7"/>
+                                <text x="125" y="152" fill="rgba(165,243,252,0.7)" font-family="monospace" font-size="5" letter-spacing="0.8">CMOS 45.7MP</text>
+                            </g>
+
+                            <!-- PART 3: Precision Lens Mount Ring -->
+                            <g id="sk-mount" class="sketch-part">
+                                <ellipse cx="158" cy="180" rx="47" ry="53" fill="rgba(5,5,5,0.78)" stroke="url(#glowStroke)" stroke-width="2.2"/>
+                                <ellipse cx="158" cy="180" rx="39" ry="44" stroke="rgba(255,255,255,0.38)" stroke-width="1.1" stroke-dasharray="5 4"/>
+                                <circle cx="158" cy="127" r="3" fill="#ef4444"/>
+                                <!-- Electronic Gold Pin Contacts -->
+                                <line x1="145" y1="222" x2="171" y2="222" stroke="#facc15" stroke-width="1.8" stroke-dasharray="2 2"/>
+                            </g>
+
+                            <!-- PART 4: Aperture Iris & Rear Lens Barrel -->
+                            <g id="sk-barrel" class="sketch-part">
+                                <ellipse cx="186" cy="174" rx="45" ry="51" fill="rgba(10,10,14,0.82)" stroke="url(#glowStroke)" stroke-width="2"/>
+                                <ellipse cx="189" cy="173" rx="43" ry="49" stroke="#ef4444" stroke-width="2" stroke-opacity="0.9"/>
+                                <polygon points="186,147 208,160 208,188 186,201 164,188 164,160" stroke="rgba(255,255,255,0.7)" stroke-width="1.3" fill="rgba(255,255,255,0.03)"/>
+                                <circle cx="186" cy="174" r="13" stroke="rgba(165,243,252,0.55)" stroke-width="1.1"/>
+                                <text x="168" y="118" fill="rgba(255,255,255,0.55)" font-family="monospace" font-size="5.2" letter-spacing="1">f/1.4 - f/16</text>
+                            </g>
+
+                            <!-- PART 5: Internal Optical Glass Element 1 -->
+                            <g id="sk-glass1" class="sketch-part">
+                                <ellipse cx="216" cy="168" rx="39" ry="45" fill="url(#lensGlowFill)" stroke="#a5f3fc" stroke-width="1.7"/>
+                                <path d="M195 147 A27 31 0 0 1 230 140" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M203 196 A23 27 0 0 0 234 189" stroke="rgba(255,255,255,0.45)" stroke-width="1.1" stroke-linecap="round"/>
+                            </g>
+
+                            <!-- PART 6: Knurled Manual Focus Ring & Focal Distance Numbers -->
+                            <g id="sk-ring" class="sketch-part">
+                                <ellipse cx="246" cy="162" rx="44" ry="50" fill="rgba(5,5,5,0.68)" stroke="url(#glowStroke)" stroke-width="2.3"/>
+                                <ellipse cx="246" cy="162" rx="44" ry="50" stroke="#ffffff" stroke-width="4.5" stroke-dasharray="1.5 5" stroke-opacity="0.65"/>
+                                <ellipse cx="246" cy="162" rx="37" ry="42" stroke="rgba(255,255,255,0.3)" stroke-width="1.1"/>
+                                <text x="225" y="106" fill="rgba(255,255,255,0.65)" font-family="monospace" font-size="5.2" letter-spacing="1">24  35  50  70mm</text>
+                                <text x="228" y="223" fill="rgba(165,243,252,0.65)" font-family="monospace" font-size="5" letter-spacing="0.8">0.38m  1m  3m  ∞</text>
+                            </g>
+
+                            <!-- PART 7: Front Fluorite Glass Element 2 -->
+                            <g id="sk-glass2" class="sketch-part">
+                                <ellipse cx="276" cy="156" rx="40" ry="46" fill="url(#lensGlowFill)" stroke="#ffffff" stroke-width="1.7"/>
+                                <ellipse cx="262" cy="141" rx="9" ry="4.5" transform="rotate(-32 262 141)" fill="rgba(255,255,255,0.6)"/>
+                            </g>
+
+                            <!-- PART 8: Front Filter Ring & Lens Hood Spec -->
+                            <g id="sk-hood" class="sketch-part">
+                                <ellipse cx="306" cy="150" rx="45" ry="51" fill="rgba(5,5,5,0.55)" stroke="url(#glowStroke)" stroke-width="2.2"/>
+                                <ellipse cx="306" cy="150" rx="40" ry="45" stroke="rgba(255,255,255,0.35)" stroke-width="1.1"/>
+                                <text x="284" y="212" fill="rgba(255,255,255,0.6)" font-family="monospace" font-size="5.5" letter-spacing="1.2">Ø82MM • 1:1.4</text>
+                            </g>
+                        </svg>
                     </div>
                 </div>
 
-                <!-- Hero CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#booking" class="px-8 py-4 rounded-xl bg-white text-black font-display text-xs font-semibold tracking-[0.22em] uppercase text-center hover:bg-zinc-200 transition-all shadow-xl shadow-white/5">
-                        Book a Session
-                    </a>
-                    <a href="#catalog" class="px-8 py-4 rounded-xl glass-panel text-white font-display text-xs font-medium tracking-[0.22em] uppercase text-center hover:bg-white/10 transition-all">
-                        View Service Catalog
-                    </a>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== INTERACTIVE PORTFOLIO GALLERY (DYNAMIC FROM FIREBASE) ==================== -->
+    <!-- ==================== 2-ROW HORIZONTAL SLIDING PORTFOLIO GALLERY ==================== -->
     <section id="portfolio" class="py-24 bg-[#08080a] border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
                 <div>
                     <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Selected Works</span>
                     <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
@@ -259,34 +432,54 @@
                     </h2>
                 </div>
 
-                <!-- Category Filter Pills -->
-                <div class="flex flex-wrap gap-2" id="portfolio-filters">
-                    <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-full text-xs font-display tracking-widest uppercase bg-white text-black font-semibold transition-all">
-                        All Frames
-                    </button>
-                    <button data-filter="photography" class="filter-btn px-5 py-2.5 rounded-full text-xs font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
-                        Photography
-                    </button>
-                    <button data-filter="films" class="filter-btn px-5 py-2.5 rounded-full text-xs font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
-                        Films
-                    </button>
-                    <button data-filter="aerials" class="filter-btn px-5 py-2.5 rounded-full text-xs font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
-                        Aerials
-                    </button>
+                <!-- Category Filter Pills + Horizontal Slide Controls -->
+                <div class="flex flex-wrap items-center justify-between md:justify-end gap-3">
+                    <div class="flex flex-wrap gap-2" id="portfolio-filters">
+                        <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase bg-white text-black font-semibold transition-all">
+                            All Frames
+                        </button>
+                        <button data-filter="photography" class="filter-btn px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                            Photography
+                        </button>
+                        <button data-filter="films" class="filter-btn px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                            Films
+                        </button>
+                        <button data-filter="aerials" class="filter-btn px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                            Aerials
+                        </button>
+                    </div>
+
+                    <!-- Left / Right Slide Buttons -->
+                    <div class="flex items-center gap-2 pl-2 border-l border-white/10">
+                        <button id="slide-left-btn" aria-label="Slide Left" class="w-9 h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button id="slide-right-btn" aria-label="Slide Right" class="w-9 h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Dynamic Portfolio Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
-                <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
-                    <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-xl mb-3"></i>
-                    <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Loading Studio Portfolio...</p>
+            <!-- Fixed 2-Row Horizontal Slider Container -->
+            <div id="portfolio-wrapper">
+                <div class="portfolio-slider" id="portfolio-grid">
+                    <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                        <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-xl mb-3"></i>
+                        <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Loading Studio Portfolio...</p>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Subtle Swipe Hint -->
+            <div class="mt-3 flex items-center justify-end gap-2 text-[10px] font-display tracking-[0.2em] uppercase text-zinc-500">
+                <span>Swipe or use arrows to explore more frames</span>
+                <i class="fa-solid fa-arrows-left-right text-zinc-400"></i>
             </div>
         </div>
     </section>
 
-    <!-- ==================== SERVICE CATALOG & PACKAGES (DYNAMIC FROM FIREBASE) ==================== -->
+    <!-- ==================== SERVICE CATALOG & PACKAGES ==================== -->
     <section id="catalog" class="py-24 bg-[#050505] border-t border-white/5 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -390,7 +583,7 @@
                                 </div>
                             </div>
 
-                            <!-- Service / Package Select (Populated dynamically + Custom option) -->
+                            <!-- Service / Package Select -->
                             <div>
                                 <label for="package-select" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
                                     Service / Package *
@@ -408,7 +601,7 @@
                                 <label for="client-name" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
                                     Your Name / Brand *
                                 </label>
-                                <input type="text" id="client-name" required placeholder="e.g., Kavinda Perera"
+                                <input type="text" id="client-name" required placeholder="Enter your name or brand"
                                        class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
                             </div>
 
@@ -417,7 +610,7 @@
                                 <label for="client-phone" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
                                     WhatsApp / Contact Number *
                                 </label>
-                                <input type="tel" id="client-phone" required placeholder="+94 77 123 4567"
+                                <input type="tel" id="client-phone" required placeholder="Enter WhatsApp or contact number"
                                        class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
                             </div>
                         </div>
@@ -559,7 +752,7 @@
             <span class="font-display text-[10px] tracking-[0.3em] uppercase text-zinc-400">Order Received</span>
             <h3 class="font-display text-2xl font-semibold text-white mt-1">Schedule Requested</h3>
             <p class="text-xs text-zinc-300 mt-3 leading-relaxed">
-                Thank you! Your shoot date request has been saved. Our team will reach out via WhatsApp within 2 hours to finalize your production details.
+                Thank you! Your shoot date has been reserved on our schedule. Our team will reach out via WhatsApp shortly to finalize your production details.
             </p>
 
             <!-- Summary Box -->
@@ -571,11 +764,56 @@
         </div>
     </div>
 
-    <!-- ==================== FIREBASE & INTERACTIVE LOGIC ==================== -->
+    <!-- ==================== INTERACTIVE LOGIC & 60FPS 2D SKETCH CAMERA LOOP ==================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getFirestore, collection, getDocs, addDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+        // 0. Butter-Smooth 60fps 2D Sketch Exploded Camera Loop
+        function initSmoothSketchLoop() {
+            const parts = {
+                body: document.getElementById('sk-body'),
+                sensor: document.getElementById('sk-sensor'),
+                mount: document.getElementById('sk-mount'),
+                barrel: document.getElementById('sk-barrel'),
+                glass1: document.getElementById('sk-glass1'),
+                ring: document.getElementById('sk-ring'),
+                glass2: document.getElementById('sk-glass2'),
+                hood: document.getElementById('sk-hood'),
+                svg: document.getElementById('sketch-camera-svg')
+            };
+            if (!parts.body) return;
+
+            let startTime = performance.now();
+            function tick(now) {
+                const t = (now - startTime) * 0.001; // seconds
+
+                // Ultra-smooth harmonic wave between 0 (assembled) and 1 (exploded)
+                const wave = 0.5 - 0.5 * Math.cos(t * 0.9);
+                const e = Math.pow(wave, 1.3);
+
+                // Subtle continuous hover float
+                const floatY = Math.sin(t * 1.35) * 4.5;
+                parts.svg.style.transform = `translate3d(0, ${floatY}px, 0)`;
+
+                // Clean diagonal optical-axis explosion (dx: +1, dy: -0.2)
+                parts.body.style.transform = `translate3d(${-e * 30}px, ${e * 6}px, 0)`;
+                parts.sensor.style.transform = `translate3d(${-e * 10}px, ${e * 2}px, 0)`;
+                parts.sensor.style.opacity = 0.35 + e * 0.65;
+                parts.mount.style.transform = `translate3d(${e * 8}px, ${-e * 1.6}px, 0)`;
+                parts.barrel.style.transform = `translate3d(${e * 30}px, ${-e * 6}px, 0)`;
+                parts.glass1.style.transform = `translate3d(${e * 56}px, ${-e * 11.2}px, 0) rotate(${e * 12}deg)`;
+                parts.ring.style.transform = `translate3d(${e * 84}px, ${-e * 16.8}px, 0) rotate(${-e * 20}deg)`;
+                parts.glass2.style.transform = `translate3d(${e * 112}px, ${-e * 22.4}px, 0) rotate(${e * 16}deg)`;
+                parts.hood.style.transform = `translate3d(${e * 140}px, ${-e * 28}px, 0)`;
+
+                requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+        initSmoothSketchLoop();
+
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyA5s9kytW7yte1jglGzoa-xhmdwl-aUa5w",
             authDomain: "openframevisuals-bd5c7.firebaseapp.com",
@@ -597,55 +835,65 @@
             link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
         });
 
-        // 2. Dynamic Portfolio Loader & Filtering
+        // 2. 2-Row Horizontal Slider Portfolio Loader & Filtering
         let allPortfolioItems = [];
         let activeFilter = 'all';
+        const portfolioGrid = document.getElementById('portfolio-grid');
+
+        document.getElementById('slide-left-btn').addEventListener('click', () => {
+            portfolioGrid.scrollBy({ left: -portfolioGrid.clientWidth * 0.85, behavior: 'smooth' });
+        });
+        document.getElementById('slide-right-btn').addEventListener('click', () => {
+            portfolioGrid.scrollBy({ left: portfolioGrid.clientWidth * 0.85, behavior: 'smooth' });
+        });
 
         async function loadPortfolio() {
-            const grid = document.getElementById('portfolio-grid');
             try {
                 const q = query(collection(db, "portfolio"), orderBy("createdAt", "desc"));
                 const snap = await getDocs(q);
                 allPortfolioItems = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 renderPortfolio();
             } catch (err) {
-                grid.innerHTML = `
-                    <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                portfolioGrid.className = 'block';
+                portfolioGrid.innerHTML = `
+                    <div class="glass-panel rounded-2xl p-12 text-center">
                         <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Portfolio items will appear here once uploaded via Admin Studio.</p>
                     </div>`;
             }
         }
 
         function renderPortfolio() {
-            const grid = document.getElementById('portfolio-grid');
             const filtered = activeFilter === 'all'
                 ? allPortfolioItems
                 : allPortfolioItems.filter(item => item.category === activeFilter);
 
             if (!filtered.length) {
-                grid.innerHTML = `
-                    <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                portfolioGrid.className = 'block';
+                portfolioGrid.innerHTML = `
+                    <div class="glass-panel rounded-2xl p-12 text-center">
                         <i class="fa-solid fa-camera text-zinc-600 text-2xl mb-3"></i>
                         <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">No frames published in this category yet.</p>
                     </div>`;
                 return;
             }
 
-            grid.innerHTML = filtered.map((item, idx) => `
-                <div class="portfolio-item group relative rounded-2xl overflow-hidden glass-card cursor-pointer aspect-[4/5]" data-index="${idx}">
+            portfolioGrid.className = 'portfolio-slider';
+            portfolioGrid.scrollTo({ left: 0, behavior: 'smooth' });
+
+            portfolioGrid.innerHTML = filtered.map((item, idx) => `
+                <div class="portfolio-item gallery-tile group relative rounded-xl overflow-hidden cursor-pointer aspect-square" data-index="${idx}">
                     <img src="${item.imageUrl}" alt="${item.title}" loading="lazy" class="portfolio-img w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-                    <div class="absolute top-4 right-4 w-9 h-9 rounded-full glass-panel flex items-center justify-center text-white/80 group-hover:bg-white group-hover:text-black transition">
-                        <i class="fa-solid ${item.videoUrl ? 'fa-play' : 'fa-expand'} text-xs"></i>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent opacity-60 group-hover:opacity-95 transition-opacity duration-300"></div>
+                    <div class="absolute top-3 right-3 w-7 h-7 rounded-full glass-panel flex items-center justify-center text-white/80 opacity-0 group-hover:opacity-100 group-hover:bg-white group-hover:text-black transition-all duration-300">
+                        <i class="fa-solid ${item.videoUrl ? 'fa-play' : 'fa-expand'} text-[10px]"></i>
                     </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <span class="font-display text-[10px] tracking-[0.25em] uppercase text-zinc-400">${item.category}</span>
-                        <h3 class="font-display text-lg font-medium tracking-wider text-white mt-1">${item.title}</h3>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="font-display text-[9px] tracking-[0.22em] uppercase text-zinc-400 block">${item.category}</span>
+                        <h3 class="font-display text-xs sm:text-sm font-medium tracking-wider text-white truncate mt-0.5">${item.title}</h3>
                     </div>
                 </div>
             `).join('');
 
-            // Attach Lightbox click events
             document.querySelectorAll('.portfolio-item').forEach(card => {
                 card.addEventListener('click', () => {
                     const item = filtered[card.dataset.index];
@@ -740,7 +988,6 @@
                     </div>`;
                 }).join('');
 
-                // Populate Dropdown
                 pkgs.forEach(pkg => {
                     const opt = document.createElement('option');
                     const label = `${pkg.name} (LKR ${pkg.price})`;
@@ -770,7 +1017,7 @@
         const minMonth = 10; // November (0-indexed)
         let viewYear = 2026;
         let viewMonth = 10;
-        let selectedDateISO = ''; // YYYY-MM-DD
+        let selectedDateISO = '';
         let bookedDatesSet = new Set();
 
         const monthNames = [
@@ -790,7 +1037,7 @@
                 bookedDatesSet.clear();
                 snap.docs.forEach(d => {
                     const data = d.data();
-                    if (data.status === 'confirmed' && data.date) {
+                    if ((data.status === 'confirmed' || data.status === 'pending') && data.date) {
                         bookedDatesSet.add(data.date);
                     }
                 });
@@ -802,7 +1049,6 @@
             calendarTitle.textContent = `${monthNames[viewMonth]} ${viewYear}`;
             calendarGrid.innerHTML = '';
 
-            // Disable going earlier than November 2026
             prevBtn.disabled = (viewYear === minYear && viewMonth === minMonth);
 
             const firstDayOfWeek = new Date(viewYear, viewMonth, 1).getDay();
@@ -863,7 +1109,7 @@
             renderCalendar();
         });
 
-        // 5. Submit Booking to Firebase Firestore
+        // 5. Submit Booking to Firebase Firestore & Immediately Lock Date
         const bookingForm = document.getElementById('booking-form');
         const confirmationModal = document.getElementById('confirmation-modal');
         const summaryBox = document.getElementById('booking-summary-box');
@@ -921,6 +1167,7 @@
                     </div>
                 `;
 
+                bookedDatesSet.add(selectedDateISO);
                 confirmationModal.classList.remove('hidden');
                 confirmationModal.classList.add('flex');
                 bookingForm.reset();
