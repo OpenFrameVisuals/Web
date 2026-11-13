@@ -1,437 +1,1195 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OpenFrame Admin | Studio Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #050505;
-      color: #ffffff;
-    }
-    .glass {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenFrame Visuals | Photography • Films • Aerials</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Montserrat & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        obsidian: '#050505',
+                        charcoal: '#0e0e10',
+                        slateDark: '#18181b',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Floating Oval Glass Header */
+        .glass-oval-nav {
+            background: rgba(18, 18, 22, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        /* Custom Glassmorphism */
+        .glass-panel {
+            background: rgba(20, 20, 22, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+        }
+
+        /* 2D Glowing Sketch Exploded Camera Loop (60fps Hardware Accelerated) */
+        .sketch-glow {
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+        }
+
+        .sketch-part {
+            will-change: transform, opacity;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+
+        /* 2-Row Horizontal Slider Track */
+        .portfolio-slider {
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            grid-auto-columns: calc(50% - 0.5rem);
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 0.75rem 0.25rem 1.25rem 0.25rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .portfolio-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .portfolio-slider {
+                grid-auto-columns: calc(33.333% - 0.67rem);
+            }
+        }
+        @media (min-width: 1024px) {
+            .portfolio-slider {
+                grid-auto-columns: calc(25% - 0.75rem);
+            }
+        }
+
+        /* Compact Gallery Card Hover Pop & Smooth Zoom */
+        .gallery-tile {
+            scroll-snap-align: start;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .gallery-tile:hover {
+            transform: scale(1.04);
+            z-index: 20;
+            border-color: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 18px 36px -10px rgba(0, 0, 0, 0.95);
+        }
+        .gallery-tile .portfolio-img {
+            filter: grayscale(25%) contrast(106%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+        }
+        .gallery-tile:hover .portfolio-img {
+            transform: scale(1.08);
+            filter: grayscale(0%) contrast(105%);
+        }
+
+        /* Subtle Viewfinder Corner Brackets */
+        .viewfinder-box {
+            position: relative;
+        }
+        .viewfinder-box::before, .viewfinder-box::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-color: rgba(255, 255, 255, 0.35);
+            border-style: solid;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .viewfinder-box::before {
+            top: -1px; left: -1px;
+            border-width: 1.5px 0 0 1.5px;
+        }
+        .viewfinder-box::after {
+            bottom: -1px; right: -1px;
+            border-width: 0 1.5px 1.5px 0;
+        }
+        .viewfinder-box:hover::before, .viewfinder-box:hover::after {
+            width: 22px;
+            height: 22px;
+            border-color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Custom Page Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52525b;
+        }
+    </style>
 </head>
-<body class="min-h-screen antialiased selection:bg-white selection:text-black">
+<body class="antialiased selection:bg-white selection:text-black">
 
-  <!-- LOGIN SCREEN -->
-  <div id="login-screen" class="min-h-screen flex items-center justify-center px-6">
-    <div class="glass p-8 md:p-10 rounded-3xl w-full max-w-md text-center">
-      <svg class="w-12 h-12 text-white mx-auto mb-4" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5">
-        <path d="M10 30 V10 H30 M70 10 H90 V30 M90 70 V90 H70 M30 90 H10 V70" />
-        <path d="M58 28 A24 24 0 1 0 38 72 L62 42 H76 M62 42 V75" stroke-width="6" stroke-linecap="square" />
-      </svg>
-      <h1 class="text-sm font-semibold tracking-[0.3em] mb-1">OPENFRAME STUDIO</h1>
-      <p class="text-[10px] tracking-[0.3em] text-zinc-400 mb-8">ADMIN CONTROL PANEL</p>
+    <!-- ==================== FLOATING OVAL GLASS HEADER (ALIGNED WITH HERO CONTENT) ==================== -->
+    <header class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 lg:px-8 pointer-events-none">
+        <div class="max-w-6xl mx-auto pointer-events-auto">
+            <div class="glass-oval-nav rounded-full px-5 sm:px-8 h-14 sm:h-16 flex items-center justify-between transition-all duration-300">
+                <!-- Brand Monogram + Wordmark -->
+                <a href="#home" class="flex items-center gap-2.5 sm:gap-3 group">
+                    <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 28V12H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
+                        <path d="M72 12H88V28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
+                        <path d="M12 72V88H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
+                        <path d="M72 88H88V72" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
+                        <path d="M62 36C57.5 29.5 49.5 26 41 27.5C29 29.5 21 40.5 23 52.5C24.5 61.5 31 68.5 39.5 70.5" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
+                        <path d="M36 73L63 45H78" stroke="currentColor" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter"/>
+                        <path d="M63 45V74" stroke="currentColor" stroke-width="6.5" stroke-linecap="square"/>
+                    </svg>
+                    <div class="flex flex-col">
+                        <span class="font-display text-xs sm:text-sm tracking-[0.22em] text-white font-normal leading-none">
+                            <strong class="font-bold">OPEN</strong>FRAME
+                        </span>
+                        <span class="font-display text-[7.5px] sm:text-[8px] tracking-[0.42em] text-zinc-400 uppercase mt-1 leading-none">
+                            VISUALS
+                        </span>
+                    </div>
+                </a>
 
-      <form id="login-form" class="space-y-4 text-left">
-        <div>
-          <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-1.5">ADMIN EMAIL</label>
-          <input type="email" id="admin-email" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs focus:outline-none focus:border-white">
-        </div>
-        <div>
-          <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-1.5">PASSWORD</label>
-          <input type="password" id="admin-pass" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs focus:outline-none focus:border-white">
-        </div>
-        <button type="submit" id="login-btn" class="w-full py-3.5 bg-white text-black text-xs font-semibold tracking-[0.25em] rounded-xl hover:bg-zinc-200 transition mt-2">
-          ACCESS DASHBOARD
-        </button>
-        <p id="login-error" class="text-xs text-red-400 text-center hidden"></p>
-      </form>
-      <a href="index.html" class="inline-block mt-6 text-[10px] tracking-[0.2em] text-zinc-500 hover:text-white">← BACK TO WEBSITE</a>
-    </div>
-  </div>
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-9">
+                    <a href="#portfolio" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Portfolio</a>
+                    <a href="#catalog" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Catalog</a>
+                    <a href="#booking" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Schedule</a>
+                    <a href="#contact" class="text-[11px] font-display tracking-widest uppercase text-zinc-300 hover:text-white transition-colors">Contact</a>
+                </nav>
 
-  <!-- DASHBOARD SCREEN -->
-  <div id="dashboard-screen" class="hidden">
-    <header class="glass border-b border-white/10 sticky top-0 z-40">
-      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <span class="text-xs font-semibold tracking-[0.28em]">OPENFRAME</span>
-          <span class="px-2.5 py-1 rounded-full bg-white/10 text-[9px] tracking-[0.2em] text-zinc-300">BACKEND</span>
+                <!-- CTA & Mobile Menu Toggle -->
+                <div class="flex items-center gap-2">
+                    <a href="#booking" class="inline-flex items-center gap-1.5 px-4 py-2 sm:px-6 sm:py-2.5 rounded-full bg-white text-black font-display text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-md shadow-white/10">
+                        <span>Book</span>
+                        <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                    </a>
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden w-9 h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition">
+                        <i class="fa-solid fa-bars text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Dropdown Oval Card -->
+            <div id="mobile-menu" class="hidden md:hidden mt-2.5 glass-oval-nav rounded-3xl px-6 py-5 space-y-3.5">
+                <a href="#portfolio" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Portfolio</a>
+                <a href="#catalog" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Catalog & Packages</a>
+                <a href="#booking" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Schedule & Orders</a>
+                <a href="#contact" class="block text-xs font-display tracking-widest uppercase text-zinc-300 hover:text-white py-1">Contact</a>
+            </div>
         </div>
-        <div class="flex items-center gap-4">
-          <a href="index.html" target="_blank" class="text-[10px] tracking-[0.2em] text-zinc-400 hover:text-white">VIEW LIVE SITE ↗</a>
-          <button id="logout-btn" class="px-4 py-2 glass rounded-full text-[10px] tracking-[0.2em] hover:bg-red-500/20 hover:text-red-300 transition">
-            LOGOUT
-          </button>
-        </div>
-      </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-10">
-      <!-- Tabs -->
-      <div class="flex flex-wrap gap-3 mb-10">
-        <button data-tab="bookings-tab" class="tab-btn px-6 py-2.5 rounded-full bg-white text-black text-xs font-semibold tracking-[0.2em]">
-          BOOKINGS & SCHEDULE
-        </button>
-        <button data-tab="portfolio-tab" class="tab-btn px-6 py-2.5 rounded-full glass text-zinc-300 text-xs tracking-[0.2em]">
-          PORTFOLIO MANAGER
-        </button>
-        <button data-tab="packages-tab" class="tab-btn px-6 py-2.5 rounded-full glass text-zinc-300 text-xs tracking-[0.2em]">
-          SERVICE PACKAGES
-        </button>
-      </div>
+    <!-- ==================== CINEMATIC HERO WITH DETAILED SKETCH CAMERA LOOP ==================== -->
+    <section id="home" class="relative min-h-[88vh] sm:min-h-screen flex items-center pt-24 sm:pt-28 pb-12 overflow-hidden bg-[#050505]">
+        <!-- Subtle Radial Glow behind Sketch -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_52%,rgba(255,255,255,0.06)_0%,rgba(5,5,5,1)_65%)] pointer-events-none"></div>
 
-      <!-- TAB 1: BOOKINGS & SCHEDULE -->
-      <section id="bookings-tab" class="tab-content space-y-8">
-        <div class="glass p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <h3 class="text-xs font-semibold tracking-[0.2em]">MANUAL CALENDAR LOCK</h3>
-            <p class="text-[11px] text-zinc-400 mt-1">Block dates booked via Instagram DM or phone calls.</p>
-          </div>
-          <form id="block-date-form" class="flex flex-wrap items-center gap-3 w-full md:w-auto">
-            <input type="date" id="manual-date" required class="px-4 py-2.5 rounded-xl bg-zinc-900 border border-white/15 text-xs">
-            <input type="text" id="manual-note" placeholder="Client / Note (e.g. IG Booking)" class="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs">
-            <button type="submit" class="px-5 py-2.5 bg-white text-black text-xs font-semibold tracking-[0.15em] rounded-xl">
-              BLOCK DATE
+        <!-- Viewfinder Grid Frame Positioned Strictly Below the Menu Bar -->
+        <div class="absolute top-20 sm:top-24 bottom-5 sm:bottom-8 left-3 right-3 sm:left-8 sm:right-8 border border-white/[0.04] pointer-events-none z-0">
+            <div class="absolute top-0 left-0 w-4 h-4 sm:w-6 sm:h-6 border-t border-l border-white/25"></div>
+            <div class="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 border-t border-r border-white/25"></div>
+            <div class="absolute bottom-0 left-0 w-4 h-4 sm:w-6 sm:h-6 border-b border-l border-white/25"></div>
+            <div class="absolute bottom-0 right-0 w-4 h-4 sm:w-6 sm:h-6 border-b border-r border-white/25"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 w-full">
+            <!-- Balanced Side-by-Side Grid on Both Mobile & PC -->
+            <div class="grid grid-cols-12 gap-3 sm:gap-6 items-center">
+                
+                <!-- LEFT COLUMN: BRAND COPY & EQUAL-SIZED CTAs (7 Cols) -->
+                <div class="col-span-7 z-20">
+                    <!-- Status Pill -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border border-white/15 mb-4 sm:mb-6">
+                        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="font-display text-[9px] sm:text-xs tracking-[0.16em] sm:tracking-[0.22em] uppercase text-zinc-200 whitespace-nowrap">
+                            Bookings Open • Nov 2026
+                        </span>
+                    </div>
+
+                    <!-- Main Brand Heading -->
+                    <h1 class="font-display text-2xl sm:text-5xl lg:text-6xl font-light tracking-[0.16em] sm:tracking-[0.24em] text-white uppercase leading-tight">
+                        <span class="font-bold">OPEN</span>FRAME<br>
+                        <span class="text-sm sm:text-3xl lg:text-4xl tracking-[0.34em] sm:tracking-[0.42em] text-zinc-300 font-extralight block mt-1 sm:mt-2">VISUALS</span>
+                    </h1>
+
+                    <!-- Tagline -->
+                    <p class="mt-3 sm:mt-5 font-display text-[11px] sm:text-base tracking-[0.16em] sm:tracking-[0.26em] uppercase text-zinc-300 font-light leading-relaxed">
+                        Every Frame. A New Perspective.
+                    </p>
+
+                    <div class="w-12 sm:w-16 h-[1px] bg-white/40 my-4 sm:my-6"></div>
+
+                    <!-- 3 Core Pillars (Centered equally on both Mobile & Desktop) -->
+                    <div class="grid grid-cols-3 gap-1 sm:gap-4 max-w-md mb-5 sm:mb-8">
+                        <div class="flex flex-col items-center justify-center text-center border-r border-white/15 px-1">
+                            <i class="fa-solid fa-camera text-sm sm:text-lg text-white/90 mb-1.5 sm:mb-2"></i>
+                            <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Photo</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center border-r border-white/15 px-1">
+                            <i class="fa-solid fa-video text-sm sm:text-lg text-white/90 mb-1.5 sm:mb-2"></i>
+                            <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Cinema</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center px-1">
+                            <i class="fa-solid fa-helicopter text-sm sm:text-lg text-white/90 mb-1.5 sm:mb-2"></i>
+                            <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Aerials</span>
+                        </div>
+                    </div>
+
+                    <!-- Hero CTA Buttons (Strictly Identical Dimensions on Mobile & PC) -->
+                    <div class="flex flex-col sm:flex-row gap-2.5 sm:gap-3.5 max-w-[200px] sm:max-w-none">
+                        <a href="#booking" class="w-full sm:w-48 h-10 sm:h-12 inline-flex items-center justify-center rounded-full bg-white text-black font-display text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/5">
+                            Book Session
+                        </a>
+                        <a href="#catalog" class="w-full sm:w-48 h-10 sm:h-12 inline-flex items-center justify-center rounded-full glass-panel border border-white/15 text-white font-display text-[10px] sm:text-xs font-medium tracking-[0.18em] uppercase hover:bg-white/10 transition-all">
+                            Packages
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: DETAILED 2D GLOWING SKETCH CAMERA WITH TECHNICAL NUMBERS -->
+                <div class="col-span-5 flex items-center justify-center sm:justify-start">
+                    <div class="w-full max-w-[460px]">
+                        <svg id="sketch-camera-svg" viewBox="-20 15 570 330" class="w-full h-auto sketch-glow overflow-visible select-none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="glowStroke" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+                                    <stop offset="50%" stop-color="#bae6fd" stop-opacity="0.72"/>
+                                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.4"/>
+                                </linearGradient>
+                                <radialGradient id="lensGlowFill" cx="35%" cy="35%" r="70%">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.24"/>
+                                    <stop offset="55%" stop-color="#38bdf8" stop-opacity="0.09"/>
+                                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2"/>
+                                </radialGradient>
+                                <linearGradient id="sensorGlow" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#34d399" stop-opacity="0.4"/>
+                                    <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.5"/>
+                                    <stop offset="100%" stop-color="#c084fc" stop-opacity="0.4"/>
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Optical Axis Guide Line & Calibrated Tick Marks -->
+                            <line x1="70" y1="205" x2="475" y2="128" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="4 6"/>
+                            <line x1="160" y1="242" x2="430" y2="190" stroke="rgba(255,255,255,0.1)" stroke-width="0.8" stroke-dasharray="2 4"/>
+
+                            <!-- PART 1: Detailed DSLR Camera Body Sketch & Markings -->
+                            <g id="sk-body" class="sketch-part">
+                                <!-- Outer Chassis -->
+                                <rect x="40" y="112" width="205" height="142" rx="18" fill="rgba(255,255,255,0.025)" stroke="url(#glowStroke)" stroke-width="2"/>
+                                <!-- Inner Frame Line -->
+                                <rect x="47" y="119" width="191" height="128" rx="14" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+                                <!-- Ergonomic Grip + Leatherette Texture Lines -->
+                                <path d="M40 128 C25 128 21 146 21 183 C21 220 25 238 40 238" fill="rgba(255,255,255,0.03)" stroke="url(#glowStroke)" stroke-width="1.8"/>
+                                <line x1="28" y1="142" x2="28" y2="224" stroke="rgba(255,255,255,0.28)" stroke-width="1" stroke-dasharray="2 3"/>
+                                <line x1="33" y1="145" x2="33" y2="221" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" stroke-dasharray="2 3"/>
+                                <!-- Pentaprism Viewfinder Hump -->
+                                <path d="M98 112 L116 80 H178 L196 112" fill="rgba(255,255,255,0.025)" stroke="url(#glowStroke)" stroke-width="2" stroke-linejoin="round"/>
+                                <!-- Top LCD Info Screen & ISO/Shutter Numbers -->
+                                <rect x="195" y="124" width="36" height="16" rx="2.5" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+                                <text x="199" y="131" fill="rgba(255,255,255,0.65)" font-family="monospace" font-size="4.8" letter-spacing="0.5">1/250 F1.4</text>
+                                <text x="199" y="137" fill="rgba(165,243,252,0.75)" font-family="monospace" font-size="4.5" letter-spacing="0.5">ISO 100 RAW</text>
+                                <!-- Hotshoe & Dials with Knurling Ticks -->
+                                <rect x="132" y="72" width="30" height="8" rx="2" stroke="rgba(255,255,255,0.8)" stroke-width="1.4"/>
+                                <rect x="58" y="98" width="28" height="14" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4"/>
+                                <line x1="63" y1="98" x2="63" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                <line x1="69" y1="98" x2="69" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                <line x1="75" y1="98" x2="75" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                <line x1="81" y1="98" x2="81" y2="112" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                                <rect x="206" y="100" width="26" height="12" rx="3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4"/>
+                                <!-- Shutter Button + AF-ON / Custom Buttons -->
+                                <path d="M46 112 V105 H62 V112" stroke="#ffffff" stroke-width="1.6"/>
+                                <circle cx="88" cy="138" r="5" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+                                <circle cx="88" cy="154" r="4" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+                                <!-- Model & Sensor Spec Markings on Body -->
+                                <text x="56" y="131" fill="rgba(255,255,255,0.75)" font-family="Montserrat, sans-serif" font-weight="600" font-size="6" letter-spacing="1.2">OF-1R</text>
+                                <text x="56" y="238" fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="5.5" letter-spacing="1">35MM FULL-FRAME // 4K 120P</text>
+                            </g>
+
+                            <!-- PART 2: Glowing CMOS Sensor Chip -->
+                            <g id="sk-sensor" class="sketch-part">
+                                <rect x="116" y="156" width="60" height="46" rx="5" fill="#050505" stroke="rgba(255,255,255,0.65)" stroke-width="1.4"/>
+                                <rect x="122" y="162" width="48" height="34" rx="2" fill="url(#sensorGlow)" stroke="#67e8f9" stroke-width="1.3"/>
+                                <line x1="138" y1="162" x2="138" y2="196" stroke="rgba(255,255,255,0.28)" stroke-width="0.7"/>
+                                <line x1="154" y1="162" x2="154" y2="196" stroke="rgba(255,255,255,0.28)" stroke-width="0.7"/>
+                                <line x1="122" y1="179" x2="170" y2="179" stroke="rgba(255,255,255,0.28)" stroke-width="0.7"/>
+                                <text x="125" y="152" fill="rgba(165,243,252,0.7)" font-family="monospace" font-size="5" letter-spacing="0.8">CMOS 45.7MP</text>
+                            </g>
+
+                            <!-- PART 3: Precision Lens Mount Ring -->
+                            <g id="sk-mount" class="sketch-part">
+                                <ellipse cx="158" cy="180" rx="47" ry="53" fill="rgba(5,5,5,0.78)" stroke="url(#glowStroke)" stroke-width="2.2"/>
+                                <ellipse cx="158" cy="180" rx="39" ry="44" stroke="rgba(255,255,255,0.38)" stroke-width="1.1" stroke-dasharray="5 4"/>
+                                <circle cx="158" cy="127" r="3" fill="#ef4444"/>
+                                <!-- Electronic Gold Pin Contacts -->
+                                <line x1="145" y1="222" x2="171" y2="222" stroke="#facc15" stroke-width="1.8" stroke-dasharray="2 2"/>
+                            </g>
+
+                            <!-- PART 4: Aperture Iris & Rear Lens Barrel -->
+                            <g id="sk-barrel" class="sketch-part">
+                                <ellipse cx="186" cy="174" rx="45" ry="51" fill="rgba(10,10,14,0.82)" stroke="url(#glowStroke)" stroke-width="2"/>
+                                <ellipse cx="189" cy="173" rx="43" ry="49" stroke="#ef4444" stroke-width="2" stroke-opacity="0.9"/>
+                                <polygon points="186,147 208,160 208,188 186,201 164,188 164,160" stroke="rgba(255,255,255,0.7)" stroke-width="1.3" fill="rgba(255,255,255,0.03)"/>
+                                <circle cx="186" cy="174" r="13" stroke="rgba(165,243,252,0.55)" stroke-width="1.1"/>
+                                <text x="168" y="118" fill="rgba(255,255,255,0.55)" font-family="monospace" font-size="5.2" letter-spacing="1">f/1.4 - f/16</text>
+                            </g>
+
+                            <!-- PART 5: Internal Optical Glass Element 1 -->
+                            <g id="sk-glass1" class="sketch-part">
+                                <ellipse cx="216" cy="168" rx="39" ry="45" fill="url(#lensGlowFill)" stroke="#a5f3fc" stroke-width="1.7"/>
+                                <path d="M195 147 A27 31 0 0 1 230 140" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M203 196 A23 27 0 0 0 234 189" stroke="rgba(255,255,255,0.45)" stroke-width="1.1" stroke-linecap="round"/>
+                            </g>
+
+                            <!-- PART 6: Knurled Manual Focus Ring & Focal Distance Numbers -->
+                            <g id="sk-ring" class="sketch-part">
+                                <ellipse cx="246" cy="162" rx="44" ry="50" fill="rgba(5,5,5,0.68)" stroke="url(#glowStroke)" stroke-width="2.3"/>
+                                <ellipse cx="246" cy="162" rx="44" ry="50" stroke="#ffffff" stroke-width="4.5" stroke-dasharray="1.5 5" stroke-opacity="0.65"/>
+                                <ellipse cx="246" cy="162" rx="37" ry="42" stroke="rgba(255,255,255,0.3)" stroke-width="1.1"/>
+                                <text x="225" y="106" fill="rgba(255,255,255,0.65)" font-family="monospace" font-size="5.2" letter-spacing="1">24  35  50  70mm</text>
+                                <text x="228" y="223" fill="rgba(165,243,252,0.65)" font-family="monospace" font-size="5" letter-spacing="0.8">0.38m  1m  3m  ∞</text>
+                            </g>
+
+                            <!-- PART 7: Front Fluorite Glass Element 2 -->
+                            <g id="sk-glass2" class="sketch-part">
+                                <ellipse cx="276" cy="156" rx="40" ry="46" fill="url(#lensGlowFill)" stroke="#ffffff" stroke-width="1.7"/>
+                                <ellipse cx="262" cy="141" rx="9" ry="4.5" transform="rotate(-32 262 141)" fill="rgba(255,255,255,0.6)"/>
+                            </g>
+
+                            <!-- PART 8: Front Filter Ring & Lens Hood Spec -->
+                            <g id="sk-hood" class="sketch-part">
+                                <ellipse cx="306" cy="150" rx="45" ry="51" fill="rgba(5,5,5,0.55)" stroke="url(#glowStroke)" stroke-width="2.2"/>
+                                <ellipse cx="306" cy="150" rx="40" ry="45" stroke="rgba(255,255,255,0.35)" stroke-width="1.1"/>
+                                <text x="284" y="212" fill="rgba(255,255,255,0.6)" font-family="monospace" font-size="5.5" letter-spacing="1.2">Ø82MM • 1:1.4</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 2-ROW HORIZONTAL SLIDING PORTFOLIO GALLERY ==================== -->
+    <section id="portfolio" class="py-24 bg-[#08080a] border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Selected Works</span>
+                    <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
+                        Visual <span class="font-semibold">Portfolio</span>
+                    </h2>
+                </div>
+
+                <!-- Category Filter Pills + Horizontal Slide Controls -->
+                <div class="flex flex-wrap items-center justify-between md:justify-end gap-3">
+                    <div class="flex flex-wrap gap-2" id="portfolio-filters">
+                        <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase bg-white text-black font-semibold transition-all">
+                            All Frames
+                        </button>
+                        <button data-filter="photography" class="filter-btn px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                            Photography
+                        </button>
+                        <button data-filter="films" class="filter-btn px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                            Films
+                        </button>
+                        <button data-filter="aerials" class="filter-btn px-4 py-2 rounded-full text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                            Aerials
+                        </button>
+                    </div>
+
+                    <!-- Left / Right Slide Buttons -->
+                    <div class="flex items-center gap-2 pl-2 border-l border-white/10">
+                        <button id="slide-left-btn" aria-label="Slide Left" class="w-9 h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button id="slide-right-btn" aria-label="Slide Right" class="w-9 h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fixed 2-Row Horizontal Slider Container -->
+            <div id="portfolio-wrapper">
+                <div class="portfolio-slider" id="portfolio-grid">
+                    <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                        <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-xl mb-3"></i>
+                        <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Loading Studio Portfolio...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtle Swipe Hint -->
+            <div class="mt-3 flex items-center justify-end gap-2 text-[10px] font-display tracking-[0.2em] uppercase text-zinc-500">
+                <span>Swipe or use arrows to explore more frames</span>
+                <i class="fa-solid fa-arrows-left-right text-zinc-400"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICE CATALOG & PACKAGES ==================== -->
+    <section id="catalog" class="py-24 bg-[#050505] border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Service Catalog</span>
+                <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
+                    Production <span class="font-semibold">Packages</span>
+                </h2>
+                <p class="text-zinc-400 text-sm mt-4 font-light leading-relaxed">
+                    Select a tailored package below to automatically load it into your booking schedule. Custom enterprise & destination shoots are also available.
+                </p>
+            </div>
+
+            <!-- Dynamic Packages Grid -->
+            <div id="packages-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                    <i class="fa-solid fa-circle-notch fa-spin text-zinc-400 text-xl mb-3"></i>
+                    <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Loading Service Packages...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== INTERACTIVE SCHEDULE & ORDER BOOKING ==================== -->
+    <section id="booking" class="py-24 bg-[#08080a] border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-14">
+                <span class="font-display text-[11px] tracking-[0.35em] uppercase text-zinc-400">Schedule & Orders</span>
+                <h2 class="font-display text-2xl sm:text-4xl font-light tracking-[0.18em] uppercase text-white mt-2">
+                    Reserve Your <span class="font-semibold">Shoot Date</span>
+                </h2>
+                <p class="text-zinc-400 text-sm mt-3 font-light max-w-2xl">
+                    Check live availability starting November 2026. Tap any open date on the calendar and complete your production brief to lock in your schedule.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- LEFT COLUMN: UNLIMITED AVAILABILITY CALENDAR (5 cols) -->
+                <div class="lg:col-span-5 glass-panel rounded-2xl p-6 sm:p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 id="calendar-month-title" class="font-display text-base font-semibold tracking-[0.2em] uppercase text-white">
+                                November 2026
+                            </h3>
+                            <p class="text-[11px] text-zinc-400 mt-0.5">Select an available date</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="prev-month-btn" aria-label="Previous Month" class="w-9 h-9 rounded-lg border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition disabled:opacity-30 disabled:pointer-events-none">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button id="next-month-btn" aria-label="Next Month" class="w-9 h-9 rounded-lg border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Days of Week Header -->
+                    <div class="grid grid-cols-7 gap-1.5 text-center mb-3">
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Sun</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Mon</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Tue</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Wed</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Thu</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Fri</span>
+                        <span class="font-display text-[10px] tracking-widest uppercase text-zinc-500">Sat</span>
+                    </div>
+
+                    <!-- Calendar Days Grid -->
+                    <div id="calendar-days-grid" class="grid grid-cols-7 gap-1.5"></div>
+
+                    <!-- Legend -->
+                    <div class="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-[11px] text-zinc-400">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm border border-white/30 bg-white/5 inline-block"></span>
+                            <span>Available</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm bg-white inline-block"></span>
+                            <span class="text-white">Selected</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm bg-zinc-900 border border-zinc-800 inline-block"></span>
+                            <span class="line-through text-zinc-600">Booked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: ORDER & BOOKING FORM (7 cols) -->
+                <div class="lg:col-span-7 glass-panel rounded-2xl p-6 sm:p-8">
+                    <form id="booking-form" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <!-- Selected Date Display -->
+                            <div>
+                                <label class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                    Selected Shoot Date *
+                                </label>
+                                <div class="relative">
+                                    <input type="text" id="selected-date-input" readonly required
+                                           placeholder="Click a date on calendar"
+                                           class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm font-medium focus:outline-none focus:border-white cursor-pointer">
+                                    <i class="fa-regular fa-calendar absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Service / Package Select -->
+                            <div>
+                                <label for="package-select" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                    Service / Package *
+                                </label>
+                                <select id="package-select" required
+                                        class="w-full px-4 py-3.5 rounded-xl bg-black/80 border border-white/15 text-white text-sm focus:outline-none focus:border-white">
+                                    <option value="Custom Commercial / Event Production">Custom Commercial / Event Production</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <!-- Client Name -->
+                            <div>
+                                <label for="client-name" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                    Your Name / Brand *
+                                </label>
+                                <input type="text" id="client-name" required placeholder="Enter your name or brand"
+                                       class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                            </div>
+
+                            <!-- WhatsApp / Phone -->
+                            <div>
+                                <label for="client-phone" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                    WhatsApp / Contact Number *
+                                </label>
+                                <input type="tel" id="client-phone" required placeholder="Enter WhatsApp or contact number"
+                                       class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                            </div>
+                        </div>
+
+                        <!-- Shoot Location in Sri Lanka -->
+                        <div>
+                            <label for="shoot-location" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                Shoot Location (Sri Lanka) *
+                            </label>
+                            <input type="text" id="shoot-location" required placeholder="e.g., Colombo / Galle Fort / Ella / Kandy"
+                                   class="w-full px-4 py-3.5 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white">
+                        </div>
+
+                        <!-- Optional Production Add-ons -->
+                        <div>
+                            <span class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-3">
+                                Optional Add-Ons
+                            </span>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="flex items-center gap-2.5 p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
+                                    <input type="checkbox" name="addons" value="4K Drone Coverage" class="accent-white w-4 h-4">
+                                    <span class="text-xs text-zinc-300">4K Drone Aerials</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
+                                    <input type="checkbox" name="addons" value="Same-Day Teaser Edit" class="accent-white w-4 h-4">
+                                    <span class="text-xs text-zinc-300">Same-Day Edit</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 p-3 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 transition">
+                                    <input type="checkbox" name="addons" value="Extra 2 Hours" class="accent-white w-4 h-4">
+                                    <span class="text-xs text-zinc-300">Extra 2 Hours</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Project Notes -->
+                        <div>
+                            <label for="project-notes" class="block font-display text-[10px] tracking-[0.22em] uppercase text-zinc-400 mb-2">
+                                Creative Brief / Event Details
+                            </label>
+                            <textarea id="project-notes" rows="3" placeholder="Tell us about your vision, event schedule, or specific shots needed..."
+                                      class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white"></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submit-booking-btn" class="w-full py-4 rounded-xl bg-white text-black font-display text-xs font-bold tracking-[0.25em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 flex items-center justify-center gap-2.5">
+                            <span>Confirm Schedule Request</span>
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer id="contact" class="bg-[#030303] border-t border-white/10 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 pb-12 border-b border-white/10">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <span class="font-display text-lg tracking-[0.3em] uppercase text-white">
+                            <strong class="font-bold">OPEN</strong>FRAME VISUALS
+                        </span>
+                    </div>
+                    <p class="font-display text-[11px] tracking-[0.28em] uppercase text-zinc-400 mt-2">
+                        Photography • Films • Aerials
+                    </p>
+                    <p class="text-zinc-500 text-xs mt-3 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-zinc-300"></i>
+                        <span>Based in Sri Lanka • Available Islandwide & Worldwide</span>
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="https://wa.me/94770000000?text=Hi%20OpenFrame%20Visuals!%20I'd%20like%20to%20inquire%20about%20a%20shoot." 
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl glass-panel text-white text-xs font-display tracking-widest uppercase hover:bg-white hover:text-black transition">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>WhatsApp Inquiry</span>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                       class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                        <i class="fa-brands fa-instagram text-base"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
+                       class="w-11 h-11 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                        <i class="fa-brands fa-youtube text-base"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
+                <p>&copy; 2026 OpenFrame Visuals. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <p class="font-display tracking-widest uppercase text-[10px]">Every Frame. A New Perspective.</p>
+                    <a href="admin.html" class="font-display tracking-widest uppercase text-[10px] text-zinc-600 hover:text-zinc-300 transition">Studio Admin</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== PORTFOLIO LIGHTBOX MODAL ==================== -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-md p-4">
+        <div class="relative max-w-4xl w-full glass-panel rounded-2xl overflow-hidden border border-white/20">
+            <button id="close-lightbox" aria-label="Close Preview" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-white hover:text-black transition flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
             </button>
-          </form>
+            <div class="grid grid-cols-1 md:grid-cols-12">
+                <div class="md:col-span-7 bg-black flex items-center justify-center">
+                    <img id="lightbox-img" src="" alt="Preview" class="w-full max-h-[75vh] object-cover">
+                </div>
+                <div class="md:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <span id="lightbox-cat" class="font-display text-[10px] tracking-[0.25em] uppercase text-zinc-400"></span>
+                        <h3 id="lightbox-title" class="font-display text-2xl font-semibold text-white mt-2"></h3>
+                        <div class="w-10 h-[1px] bg-white/30 my-4"></div>
+                        <p id="lightbox-desc" class="text-sm text-zinc-300 font-light leading-relaxed">Captured by OpenFrame Visuals.</p>
+                        <a id="lightbox-video-link" href="#" target="_blank" class="hidden mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-lg glass-panel text-xs font-display tracking-widest uppercase text-white hover:bg-white hover:text-black transition">
+                            <i class="fa-solid fa-play text-[10px]"></i>
+                            <span>Watch Full Film</span>
+                        </a>
+                    </div>
+                    <div class="mt-8">
+                        <a href="#booking" id="lightbox-book-btn" class="block w-full py-3.5 rounded-xl bg-white text-black text-center font-display text-xs font-semibold tracking-widest uppercase hover:bg-zinc-200 transition">
+                            Book Similar Style
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="glass rounded-2xl overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-              <thead>
-                <tr class="border-b border-white/10 text-[10px] tracking-[0.2em] text-zinc-400 bg-white/[0.02]">
-                  <th class="p-4">DATE</th>
-                  <th class="p-4">CLIENT</th>
-                  <th class="p-4">PACKAGE</th>
-                  <th class="p-4">NOTES</th>
-                  <th class="p-4">STATUS</th>
-                  <th class="p-4 text-right">ACTIONS</th>
-                </tr>
-              </thead>
-              <tbody id="admin-bookings-list" class="divide-y divide-white/5 text-xs"></tbody>
-            </table>
-          </div>
+    <!-- ==================== BOOKING CONFIRMATION MODAL ==================== -->
+    <div id="confirmation-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-4">
+        <div class="max-w-md w-full glass-panel rounded-2xl p-8 border border-white/25 text-center relative">
+            <div class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center mx-auto mb-5 text-xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <span class="font-display text-[10px] tracking-[0.3em] uppercase text-zinc-400">Order Received</span>
+            <h3 class="font-display text-2xl font-semibold text-white mt-1">Schedule Requested</h3>
+            <p class="text-xs text-zinc-300 mt-3 leading-relaxed">
+                Thank you! Your shoot date has been reserved on our schedule. Our team will reach out via WhatsApp shortly to finalize your production details.
+            </p>
+
+            <!-- Summary Box -->
+            <div id="booking-summary-box" class="mt-6 p-4 rounded-xl bg-black/60 border border-white/10 text-left space-y-2 text-xs text-zinc-300"></div>
+
+            <button id="close-confirmation" class="mt-6 w-full py-3.5 rounded-xl bg-white text-black font-display text-xs font-semibold tracking-widest uppercase hover:bg-zinc-200 transition">
+                Done
+            </button>
         </div>
-      </section>
+    </div>
 
-      <!-- TAB 2: PORTFOLIO MANAGER -->
-      <section id="portfolio-tab" class="tab-content hidden space-y-8">
-        <div class="glass p-6 md:p-8 rounded-3xl">
-          <h3 class="text-xs font-semibold tracking-[0.25em] mb-6">UPLOAD NEW WORK</h3>
-          <form id="upload-portfolio-form" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div>
-              <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-2">PROJECT TITLE *</label>
-              <input type="text" id="work-title" required placeholder="e.g. Ella Drone Sunset" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-            </div>
-            <div>
-              <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-2">CATEGORY *</label>
-              <select id="work-category" class="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-white/10 text-xs">
-                <option value="photography">Photography</option>
-                <option value="films">Cinematography / Films</option>
-                <option value="aerials">Aerials (Drone)</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-2">PHOTO / THUMBNAIL IMAGE *</label>
-              <input type="file" id="work-file" accept="image/*" required class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-xs file:bg-white file:text-black">
-            </div>
-            <div>
-              <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-2">YOUTUBE / VIMEO LINK (OPTIONAL FOR FILMS)</label>
-              <input type="url" id="work-video" placeholder="https://youtube.com/watch?v=..." class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-            </div>
-            <div class="md:col-span-2">
-              <button type="submit" id="upload-btn" class="px-8 py-3.5 bg-white text-black text-xs font-semibold tracking-[0.25em] rounded-xl hover:bg-zinc-200 transition">
-                COMPRESS & PUBLISH TO WEBSITE
-              </button>
-            </div>
-          </form>
-        </div>
+    <!-- ==================== INTERACTIVE LOGIC & 60FPS 2D SKETCH CAMERA LOOP ==================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-        <div id="admin-portfolio-grid" class="grid grid-cols-2 md:grid-cols-4 gap-5"></div>
-      </section>
+        // 0. Butter-Smooth 60fps 2D Sketch Exploded Camera Loop
+        function initSmoothSketchLoop() {
+            const parts = {
+                body: document.getElementById('sk-body'),
+                sensor: document.getElementById('sk-sensor'),
+                mount: document.getElementById('sk-mount'),
+                barrel: document.getElementById('sk-barrel'),
+                glass1: document.getElementById('sk-glass1'),
+                ring: document.getElementById('sk-ring'),
+                glass2: document.getElementById('sk-glass2'),
+                hood: document.getElementById('sk-hood'),
+                svg: document.getElementById('sketch-camera-svg')
+            };
+            if (!parts.body) return;
 
-      <!-- TAB 3: PACKAGES MANAGER -->
-      <section id="packages-tab" class="tab-content hidden space-y-8">
-        <div class="glass p-6 md:p-8 rounded-3xl">
-          <h3 class="text-xs font-semibold tracking-[0.25em] mb-6">ADD SERVICE PACKAGE</h3>
-          <form id="add-package-form" class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div>
-              <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-2">PACKAGE NAME *</label>
-              <input type="text" id="pkg-name" required placeholder="Wedding Gold" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-            </div>
-            <div>
-              <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-2">CATEGORY *</label>
-              <input type="text" id="pkg-cat" required placeholder="PHOTOGRAPHY / FILMS" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-            </div>
-            <div>
-              <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-2">PRICE (LKR) *</label>
-              <input type="text" id="pkg-price" required placeholder="75,000" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-            </div>
-            <div class="md:col-span-3">
-              <label class="block text-[10px] tracking-[0.2em] text-zinc-400 mb-2">FEATURES (COMMA SEPARATED) *</label>
-              <input type="text" id="pkg-features" required placeholder="8 Hours Coverage, 300 Edited Photos, 4K Drone Shots" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-            </div>
-            <div class="md:col-span-3">
-              <button type="submit" class="px-8 py-3.5 bg-white text-black text-xs font-semibold tracking-[0.25em] rounded-xl">
-                ADD PACKAGE
-              </button>
-            </div>
-          </form>
-        </div>
+            let startTime = performance.now();
+            function tick(now) {
+                const t = (now - startTime) * 0.001; // seconds
 
-        <div id="admin-packages-list" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-      </section>
-    </main>
-  </div>
+                // Ultra-smooth harmonic wave between 0 (assembled) and 1 (exploded)
+                const wave = 0.5 - 0.5 * Math.cos(t * 0.9);
+                const e = Math.pow(wave, 1.3);
 
-  <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+                // Subtle continuous hover float
+                const floatY = Math.sin(t * 1.35) * 4.5;
+                parts.svg.style.transform = `translate3d(0, ${floatY}px, 0)`;
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyA5s9kytW7yte1jglGzoa-xhmdwl-aUa5w",
-      authDomain: "openframevisuals-bd5c7.firebaseapp.com",
-      projectId: "openframevisuals-bd5c7",
-      storageBucket: "openframevisuals-bd5c7.firebasestorage.app",
-      messagingSenderId: "861131525271",
-      appId: "1:861131525271:web:98cedbd90e3d29a0b5edd2",
-      measurementId: "G-MJLMB74DTY"
-    };
+                // Clean diagonal optical-axis explosion (dx: +1, dy: -0.2)
+                parts.body.style.transform = `translate3d(${-e * 30}px, ${e * 6}px, 0)`;
+                parts.sensor.style.transform = `translate3d(${-e * 10}px, ${e * 2}px, 0)`;
+                parts.sensor.style.opacity = 0.35 + e * 0.65;
+                parts.mount.style.transform = `translate3d(${e * 8}px, ${-e * 1.6}px, 0)`;
+                parts.barrel.style.transform = `translate3d(${e * 30}px, ${-e * 6}px, 0)`;
+                parts.glass1.style.transform = `translate3d(${e * 56}px, ${-e * 11.2}px, 0) rotate(${e * 12}deg)`;
+                parts.ring.style.transform = `translate3d(${e * 84}px, ${-e * 16.8}px, 0) rotate(${-e * 20}deg)`;
+                parts.glass2.style.transform = `translate3d(${e * 112}px, ${-e * 22.4}px, 0) rotate(${e * 16}deg)`;
+                parts.hood.style.transform = `translate3d(${e * 140}px, ${-e * 28}px, 0)`;
 
-    const CLOUDINARY_CLOUD_NAME = "kknhouao";
-    const CLOUDINARY_UPLOAD_PRESET = "openframevisuals";
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        document.getElementById('login-screen').classList.add('hidden');
-        document.getElementById('dashboard-screen').classList.remove('hidden');
-        loadAllAdminData();
-      } else {
-        document.getElementById('login-screen').classList.remove('hidden');
-        document.getElementById('dashboard-screen').classList.add('hidden');
-      }
-    });
-
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('admin-email').value;
-      const pass = document.getElementById('admin-pass').value;
-      const errEl = document.getElementById('login-error');
-      const btn = document.getElementById('login-btn');
-      btn.textContent = 'AUTHENTICATING...';
-      try {
-        await signInWithEmailAndPassword(auth, email, pass);
-        errEl.classList.add('hidden');
-      } catch (err) {
-        errEl.textContent = "Login Failed: " + err.message;
-        errEl.classList.remove('hidden');
-      } finally {
-        btn.textContent = 'ACCESS DASHBOARD';
-      }
-    });
-
-    document.getElementById('logout-btn').onclick = () => signOut(auth);
-
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => {
-          b.classList.remove('bg-white', 'text-black', 'font-semibold');
-          b.classList.add('glass', 'text-zinc-300');
-        });
-        btn.classList.add('bg-white', 'text-black', 'font-semibold');
-        btn.classList.remove('glass', 'text-zinc-300');
-
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-        document.getElementById(btn.dataset.tab).classList.remove('hidden');
-      });
-    });
-
-    function compressImage(file, maxWidth = 1600, quality = 0.82) {
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (e) => {
-          const img = new Image();
-          img.src = e.target.result;
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            let width = img.width;
-            let height = img.height;
-            if (width > maxWidth) {
-              height = Math.round((height * maxWidth) / width);
-              width = maxWidth;
+                requestAnimationFrame(tick);
             }
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
-            canvas.toBlob((blob) => resolve(blob), 'image/webp', quality);
-          };
+            requestAnimationFrame(tick);
+        }
+        initSmoothSketchLoop();
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA5s9kytW7yte1jglGzoa-xhmdwl-aUa5w",
+            authDomain: "openframevisuals-bd5c7.firebaseapp.com",
+            projectId: "openframevisuals-bd5c7",
+            storageBucket: "openframevisuals-bd5c7.firebasestorage.app",
+            messagingSenderId: "861131525271",
+            appId: "1:861131525271:web:98cedbd90e3d29a0b5edd2",
+            measurementId: "G-MJLMB74DTY"
         };
-      });
-    }
 
-    // Free Upload via Cloudinary + Save Link to Firestore
-    document.getElementById('upload-portfolio-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('upload-btn');
-      const file = document.getElementById('work-file').files[0];
-      if (!file) return;
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-      btn.disabled = true;
-      btn.textContent = 'COMPRESSING & UPLOADING...';
-
-      try {
-        const compressedBlob = await compressImage(file);
-        const formData = new FormData();
-        formData.append('file', compressedBlob, 'photo.webp');
-        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-          method: 'POST',
-          body: formData
-        });
-        const data = await res.json();
-        if (!data.secure_url) throw new Error(data.error?.message || "Cloudinary upload failed");
-
-        await addDoc(collection(db, "portfolio"), {
-          title: document.getElementById('work-title').value,
-          category: document.getElementById('work-category').value,
-          imageUrl: data.secure_url,
-          videoUrl: document.getElementById('work-video').value || '',
-          createdAt: serverTimestamp()
+        // 1. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
         });
 
-        e.target.reset();
-        loadAdminPortfolio();
-      } catch (err) {
-        alert("Upload failed: " + err.message);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'COMPRESS & PUBLISH TO WEBSITE';
-      }
-    });
+        // 2. 2-Row Horizontal Slider Portfolio Loader & Filtering
+        let allPortfolioItems = [];
+        let activeFilter = 'all';
+        const portfolioGrid = document.getElementById('portfolio-grid');
 
-    async function loadAdminPortfolio() {
-      const grid = document.getElementById('admin-portfolio-grid');
-      const q = query(collection(db, "portfolio"), orderBy("createdAt", "desc"));
-      const snap = await getDocs(q);
-      grid.innerHTML = snap.docs.map(d => {
-        const item = d.data();
-        return `
-          <div class="glass rounded-2xl overflow-hidden relative group">
-            <img src="${item.imageUrl}" class="w-full h-40 object-cover">
-            <div class="p-3">
-              <p class="text-[9px] tracking-widest text-zinc-400 uppercase">${item.category}</p>
-              <p class="text-xs font-medium truncate">${item.title}</p>
-              <button onclick="deleteDocItem('portfolio', '${d.id}')" class="mt-2 w-full py-1.5 rounded-lg bg-red-500/20 text-red-300 text-[10px] tracking-widest hover:bg-red-500/40">
-                DELETE
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
+        document.getElementById('slide-left-btn').addEventListener('click', () => {
+            portfolioGrid.scrollBy({ left: -portfolioGrid.clientWidth * 0.85, behavior: 'smooth' });
+        });
+        document.getElementById('slide-right-btn').addEventListener('click', () => {
+            portfolioGrid.scrollBy({ left: portfolioGrid.clientWidth * 0.85, behavior: 'smooth' });
+        });
 
-    async function loadAdminBookings() {
-      const tbody = document.getElementById('admin-bookings-list');
-      const q = query(collection(db, "bookings"), orderBy("date", "asc"));
-      const snap = await getDocs(q);
-      tbody.innerHTML = snap.docs.map(d => {
-        const b = d.data();
-        const isConfirmed = b.status === 'confirmed';
-        return `
-          <tr class="hover:bg-white/[0.02]">
-            <td class="p-4 font-semibold">${b.date}</td>
-            <td class="p-4">${b.clientName}<br><span class="text-zinc-400 text-[11px]">${b.phone}</span></td>
-            <td class="p-4">${b.package}</td>
-            <td class="p-4 text-zinc-400 max-w-xs truncate">${b.notes || '-'}</td>
-            <td class="p-4">
-              <span class="px-2.5 py-1 rounded-full text-[10px] tracking-widest uppercase ${isConfirmed ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">
-                ${b.status}
-              </span>
-            </td>
-            <td class="p-4 text-right space-x-2">
-              ${!isConfirmed ? `<button onclick="confirmBooking('${d.id}')" class="px-3 py-1.5 bg-white text-black rounded-lg text-[10px] font-semibold tracking-wider">CONFIRM</button>` : ''}
-              <button onclick="deleteDocItem('bookings', '${d.id}')" class="px-3 py-1.5 bg-red-500/20 text-red-300 rounded-lg text-[10px] tracking-wider">DELETE</button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-    }
+        async function loadPortfolio() {
+            try {
+                const q = query(collection(db, "portfolio"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
+                allPortfolioItems = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderPortfolio();
+            } catch (err) {
+                portfolioGrid.className = 'block';
+                portfolioGrid.innerHTML = `
+                    <div class="glass-panel rounded-2xl p-12 text-center">
+                        <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Portfolio items will appear here once uploaded via Admin Studio.</p>
+                    </div>`;
+            }
+        }
 
-    window.confirmBooking = async (id) => {
-      await updateDoc(doc(db, "bookings", id), { status: 'confirmed' });
-      loadAdminBookings();
-    };
+        function renderPortfolio() {
+            const filtered = activeFilter === 'all'
+                ? allPortfolioItems
+                : allPortfolioItems.filter(item => item.category === activeFilter);
 
-    document.getElementById('block-date-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      await addDoc(collection(db, "bookings"), {
-        clientName: document.getElementById('manual-note').value || 'Manual Block',
-        phone: '-',
-        date: document.getElementById('manual-date').value,
-        package: 'Direct Booking',
-        notes: 'Locked by Admin',
-        status: 'confirmed',
-        createdAt: serverTimestamp()
-      });
-      e.target.reset();
-      loadAdminBookings();
-    });
+            if (!filtered.length) {
+                portfolioGrid.className = 'block';
+                portfolioGrid.innerHTML = `
+                    <div class="glass-panel rounded-2xl p-12 text-center">
+                        <i class="fa-solid fa-camera text-zinc-600 text-2xl mb-3"></i>
+                        <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">No frames published in this category yet.</p>
+                    </div>`;
+                return;
+            }
 
-    document.getElementById('add-package-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const featuresArray = document.getElementById('pkg-features').value.split(',').map(s => s.trim()).filter(Boolean);
-      await addDoc(collection(db, "packages"), {
-        name: document.getElementById('pkg-name').value,
-        category: document.getElementById('pkg-cat').value,
-        price: document.getElementById('pkg-price').value,
-        features: featuresArray
-      });
-      e.target.reset();
-      loadAdminPackages();
-    });
+            portfolioGrid.className = 'portfolio-slider';
+            portfolioGrid.scrollTo({ left: 0, behavior: 'smooth' });
 
-    async function loadAdminPackages() {
-      const list = document.getElementById('admin-packages-list');
-      const snap = await getDocs(collection(db, "packages"));
-      list.innerHTML = snap.docs.map(d => {
-        const p = d.data();
-        return `
-          <div class="glass p-6 rounded-2xl flex flex-col justify-between">
-            <div>
-              <span class="text-[10px] tracking-widest text-zinc-400">${p.category}</span>
-              <h4 class="text-base font-medium mt-1">${p.name}</h4>
-              <p class="text-lg font-light my-2">LKR ${p.price}</p>
-            </div>
-            <button onclick="deleteDocItem('packages', '${d.id}')" class="mt-4 w-full py-2 rounded-xl bg-red-500/20 text-red-300 text-[10px] tracking-widest">
-              REMOVE PACKAGE
-            </button>
-          </div>
-        `;
-      }).join('');
-    }
+            portfolioGrid.innerHTML = filtered.map((item, idx) => `
+                <div class="portfolio-item gallery-tile group relative rounded-xl overflow-hidden cursor-pointer aspect-square" data-index="${idx}">
+                    <img src="${item.imageUrl}" alt="${item.title}" loading="lazy" class="portfolio-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent opacity-60 group-hover:opacity-95 transition-opacity duration-300"></div>
+                    <div class="absolute top-3 right-3 w-7 h-7 rounded-full glass-panel flex items-center justify-center text-white/80 opacity-0 group-hover:opacity-100 group-hover:bg-white group-hover:text-black transition-all duration-300">
+                        <i class="fa-solid ${item.videoUrl ? 'fa-play' : 'fa-expand'} text-[10px]"></i>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="font-display text-[9px] tracking-[0.22em] uppercase text-zinc-400 block">${item.category}</span>
+                        <h3 class="font-display text-xs sm:text-sm font-medium tracking-wider text-white truncate mt-0.5">${item.title}</h3>
+                    </div>
+                </div>
+            `).join('');
 
-    window.deleteDocItem = async (colName, id) => {
-      if (!confirm("Are you sure?")) return;
-      await deleteDoc(doc(db, colName, id));
-      loadAllAdminData();
-    };
+            document.querySelectorAll('.portfolio-item').forEach(card => {
+                card.addEventListener('click', () => {
+                    const item = filtered[card.dataset.index];
+                    openLightbox(item);
+                });
+            });
+        }
 
-    function loadAllAdminData() {
-      loadAdminBookings();
-      loadAdminPortfolio();
-      loadAdminPackages();
-    }
-  </script>
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-white', 'text-black', 'font-semibold');
+                    b.classList.add('glass-panel', 'text-zinc-300');
+                });
+                btn.classList.add('bg-white', 'text-black', 'font-semibold');
+                btn.classList.remove('glass-panel', 'text-zinc-300');
+                activeFilter = btn.getAttribute('data-filter');
+                renderPortfolio();
+            });
+        });
+
+        // Lightbox Controls
+        const lightboxModal = document.getElementById('lightbox-modal');
+        function openLightbox(item) {
+            document.getElementById('lightbox-img').src = item.imageUrl;
+            document.getElementById('lightbox-cat').textContent = item.category.toUpperCase() + ' • OPENFRAME VISUALS';
+            document.getElementById('lightbox-title').textContent = item.title;
+            const vidLink = document.getElementById('lightbox-video-link');
+            if (item.videoUrl) {
+                vidLink.href = item.videoUrl;
+                vidLink.classList.remove('hidden');
+            } else {
+                vidLink.classList.add('hidden');
+            }
+            lightboxModal.classList.remove('hidden');
+            lightboxModal.classList.add('flex');
+        }
+        const hideLightbox = () => {
+            lightboxModal.classList.add('hidden');
+            lightboxModal.classList.remove('flex');
+        };
+        document.getElementById('close-lightbox').addEventListener('click', hideLightbox);
+        document.getElementById('lightbox-book-btn').addEventListener('click', hideLightbox);
+        lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal) hideLightbox(); });
+
+        // 3. Dynamic Service Packages Loader
+        async function loadPackages() {
+            const grid = document.getElementById('packages-grid');
+            const selectEl = document.getElementById('package-select');
+            try {
+                const snap = await getDocs(collection(db, "packages"));
+                const pkgs = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                if (!pkgs.length) {
+                    grid.innerHTML = `
+                        <div class="col-span-full glass-panel rounded-2xl p-12 text-center">
+                            <p class="font-display text-xs tracking-[0.25em] uppercase text-zinc-400">Packages are being updated. Select "Custom Production" below to inquire.</p>
+                        </div>`;
+                    return;
+                }
+
+                grid.innerHTML = pkgs.map((pkg, idx) => {
+                    const isFeatured = idx === 1;
+                    return `
+                    <div class="glass-card viewfinder-box rounded-2xl p-8 flex flex-col justify-between ${isFeatured ? 'border-white/30 bg-gradient-to-b from-white/[0.08] to-transparent relative' : ''}">
+                        ${isFeatured ? `<div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white text-black font-display text-[9px] font-bold tracking-[0.25em] uppercase">Featured</div>` : ''}
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="px-3 py-1 rounded-full bg-white/10 font-display text-[10px] tracking-[0.2em] uppercase text-zinc-200">${pkg.category || 'Production'}</span>
+                                <i class="fa-solid fa-camera text-zinc-400 text-lg"></i>
+                            </div>
+                            <h3 class="font-display text-xl font-semibold tracking-wider text-white">${pkg.name}</h3>
+                            
+                            <div class="my-6 pb-6 border-b border-white/10">
+                                <span class="font-display text-3xl font-light text-white">LKR ${pkg.price}</span>
+                            </div>
+
+                            <ul class="space-y-3.5 text-xs text-zinc-300 mb-8">
+                                ${(pkg.features || []).map(f => `
+                                    <li class="flex items-center gap-3">
+                                        <i class="fa-solid fa-check text-white text-[10px]"></i>
+                                        <span>${f}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <button type="button" onclick="window.selectPackage('${pkg.name} (LKR ${pkg.price})')" 
+                                class="w-full py-3.5 rounded-xl ${isFeatured ? 'bg-white text-black font-semibold hover:bg-zinc-200' : 'border border-white/25 text-white font-medium hover:bg-white hover:text-black'} font-display text-xs tracking-[0.2em] uppercase transition-all">
+                            Select Package
+                        </button>
+                    </div>`;
+                }).join('');
+
+                pkgs.forEach(pkg => {
+                    const opt = document.createElement('option');
+                    const label = `${pkg.name} (LKR ${pkg.price})`;
+                    opt.value = label;
+                    opt.textContent = `${pkg.name} — LKR ${pkg.price}`;
+                    selectEl.insertBefore(opt, selectEl.firstChild);
+                });
+                selectEl.selectedIndex = 0;
+            } catch (err) {
+                grid.innerHTML = `<div class="col-span-full text-center text-xs text-zinc-500">Unable to load packages.</div>`;
+            }
+        }
+
+        window.selectPackage = (packageLabel) => {
+            const selectEl = document.getElementById('package-select');
+            for (let i = 0; i < selectEl.options.length; i++) {
+                if (selectEl.options[i].value === packageLabel) {
+                    selectEl.selectedIndex = i;
+                    break;
+                }
+            }
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // 4. Unlimited Dynamic Schedule Calendar (Starting November 2026)
+        const minYear = 2026;
+        const minMonth = 10; // November (0-indexed)
+        let viewYear = 2026;
+        let viewMonth = 10;
+        let selectedDateISO = '';
+        let bookedDatesSet = new Set();
+
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const calendarTitle = document.getElementById('calendar-month-title');
+        const calendarGrid = document.getElementById('calendar-days-grid');
+        const prevBtn = document.getElementById('prev-month-btn');
+        const nextBtn = document.getElementById('next-month-btn');
+        const selectedDateInput = document.getElementById('selected-date-input');
+
+        async function loadBookedDates() {
+            try {
+                const snap = await getDocs(collection(db, "bookings"));
+                bookedDatesSet.clear();
+                snap.docs.forEach(d => {
+                    const data = d.data();
+                    if ((data.status === 'confirmed' || data.status === 'pending') && data.date) {
+                        bookedDatesSet.add(data.date);
+                    }
+                });
+            } catch (e) {}
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            calendarTitle.textContent = `${monthNames[viewMonth]} ${viewYear}`;
+            calendarGrid.innerHTML = '';
+
+            prevBtn.disabled = (viewYear === minYear && viewMonth === minMonth);
+
+            const firstDayOfWeek = new Date(viewYear, viewMonth, 1).getDay();
+            const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'h-10 sm:h-11';
+                calendarGrid.appendChild(emptyCell);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const isoStr = `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const displayLabel = `${monthNames[viewMonth]} ${day}, ${viewYear}`;
+                const isBooked = bookedDatesSet.has(isoStr);
+                const isSelected = selectedDateISO === isoStr;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = day;
+                btn.className = 'h-10 sm:h-11 rounded-lg font-display text-xs transition-all flex items-center justify-center ';
+
+                if (isBooked) {
+                    btn.disabled = true;
+                    btn.title = 'Already Booked';
+                    btn.className += 'bg-zinc-900/80 text-zinc-600 line-through cursor-not-allowed border border-zinc-800/60';
+                } else if (isSelected) {
+                    btn.className += 'bg-white text-black font-bold shadow-md shadow-white/20 scale-105';
+                } else {
+                    btn.className += 'bg-white/[0.04] text-zinc-200 border border-white/10 hover:border-white hover:bg-white/15 cursor-pointer';
+                    btn.addEventListener('click', () => {
+                        selectedDateISO = isoStr;
+                        selectedDateInput.value = `${displayLabel} (${isoStr})`;
+                        renderCalendar();
+                    });
+                }
+
+                calendarGrid.appendChild(btn);
+            }
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (viewYear === minYear && viewMonth === minMonth) return;
+            viewMonth--;
+            if (viewMonth < 0) {
+                viewMonth = 11;
+                viewYear--;
+            }
+            renderCalendar();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            viewMonth++;
+            if (viewMonth > 11) {
+                viewMonth = 0;
+                viewYear++;
+            }
+            renderCalendar();
+        });
+
+        // 5. Submit Booking to Firebase Firestore & Immediately Lock Date
+        const bookingForm = document.getElementById('booking-form');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const summaryBox = document.getElementById('booking-summary-box');
+
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!selectedDateISO) {
+                alert("Please select an available shoot date from the calendar first.");
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-booking-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Submitting Request...</span> <i class="fa-solid fa-circle-notch fa-spin text-xs"></i>`;
+
+            const pkgVal = document.getElementById('package-select').value;
+            const nameVal = document.getElementById('client-name').value;
+            const phoneVal = document.getElementById('client-phone').value;
+            const locVal = document.getElementById('shoot-location').value;
+            const notesVal = document.getElementById('project-notes').value;
+            const checkedAddons = Array.from(document.querySelectorAll('input[name="addons"]:checked')).map(cb => cb.value);
+
+            const combinedNotes = [
+                `Location: ${locVal}`,
+                checkedAddons.length ? `Add-ons: ${checkedAddons.join(', ')}` : '',
+                notesVal ? `Brief: ${notesVal}` : ''
+            ].filter(Boolean).join(' | ');
+
+            try {
+                await addDoc(collection(db, "bookings"), {
+                    clientName: nameVal,
+                    phone: phoneVal,
+                    date: selectedDateISO,
+                    package: pkgVal,
+                    notes: combinedNotes,
+                    status: 'pending',
+                    createdAt: serverTimestamp()
+                });
+
+                summaryBox.innerHTML = `
+                    <div class="flex justify-between"><span class="text-zinc-500">Client:</span> <span class="text-white font-medium">${nameVal}</span></div>
+                    <div class="flex justify-between"><span class="text-zinc-500">Date:</span> <span class="text-white font-medium">${selectedDateInput.value}</span></div>
+                    <div class="flex justify-between"><span class="text-zinc-500">Location:</span> <span class="text-white font-medium">${locVal}</span></div>
+                    <div class="pt-2 border-t border-white/10">
+                        <span class="text-zinc-500 block">Selected Package:</span>
+                        <span class="text-white font-medium">${pkgVal}</span>
+                    </div>
+                    ${checkedAddons.length > 0 ? `
+                    <div class="pt-2 border-t border-white/10">
+                        <span class="text-zinc-500 block">Add-Ons:</span>
+                        <span class="text-zinc-200">${checkedAddons.join(', ')}</span>
+                    </div>` : ''}
+                    <div class="pt-2 border-t border-white/10 flex justify-between">
+                        <span class="text-zinc-500">WhatsApp:</span> <span class="text-white">${phoneVal}</span>
+                    </div>
+                `;
+
+                bookedDatesSet.add(selectedDateISO);
+                confirmationModal.classList.remove('hidden');
+                confirmationModal.classList.add('flex');
+                bookingForm.reset();
+                selectedDateISO = '';
+                renderCalendar();
+            } catch (err) {
+                alert("Could not submit booking: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span>Confirm Schedule Request</span> <i class="fa-solid fa-paper-plane text-xs"></i>`;
+            }
+        });
+
+        document.getElementById('close-confirmation').addEventListener('click', () => {
+            confirmationModal.classList.add('hidden');
+            confirmationModal.classList.remove('flex');
+        });
+
+        // Initialize Live Data
+        loadPortfolio();
+        loadPackages();
+        loadBookedDates();
+    </script>
 </body>
 </html>
