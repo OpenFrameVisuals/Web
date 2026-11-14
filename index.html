@@ -13,6 +13,21 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="icon" type="image/png" href="./icon.png">
     <link rel="apple-touch-icon" href="./icon.png">
+    
+    <style>
+        html, body { background-color: #050505 !important; margin: 0; padding: 0; overflow: hidden; }
+        #of-launch-screen {
+            position: fixed; inset: 0; z-index: 99999;
+            background-color: #050505;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        #shutter-top, #shutter-bottom {
+            position: absolute; left: 0; right: 0; height: 50%;
+            background-color: #050505;
+        }
+        #shutter-top { top: 0; }
+        #shutter-bottom { bottom: 0; }
+    </style>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
