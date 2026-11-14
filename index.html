@@ -40,7 +40,7 @@
 
         /* Floating Oval Glass Header */
         .glass-oval-nav {
-            background: rgba(18, 18, 22, 0.78);
+            background: rgba(18, 18, 22, 0.84);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.14);
@@ -173,12 +173,12 @@
 <body class="antialiased selection:bg-white selection:text-black">
 
     <!-- ==================== FLOATING OVAL GLASS HEADER ==================== -->
-    <header class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 lg:px-8 pointer-events-none">
+    <header class="fixed top-2.5 sm:top-5 left-0 right-0 z-50 px-2.5 sm:px-6 lg:px-8 pointer-events-none">
         <div class="max-w-6xl mx-auto pointer-events-auto">
-            <div class="glass-oval-nav rounded-full px-3.5 sm:px-7 h-13 sm:h-16 py-2 flex items-center justify-between transition-all duration-300">
+            <div class="glass-oval-nav rounded-full px-3 sm:px-7 h-12 sm:h-16 flex items-center justify-between gap-1.5 transition-all duration-300">
                 <!-- Brand Monogram + Wordmark -->
-                <a href="#home" class="flex items-center gap-2 sm:gap-3 group shrink-0">
-                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="#home" class="flex items-center gap-1.5 sm:gap-3 group shrink-0">
+                    <svg class="w-5 h-5 sm:w-8 sm:h-8 text-white transition-transform duration-300 group-hover:scale-105 shrink-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 28V12H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
                         <path d="M72 12H88V28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
                         <path d="M12 72V88H28" stroke="currentColor" stroke-width="5" stroke-linecap="square"/>
@@ -188,10 +188,10 @@
                         <path d="M63 45V74" stroke="currentColor" stroke-width="6.5" stroke-linecap="square"/>
                     </svg>
                     <div class="flex flex-col">
-                        <span class="font-display text-xs sm:text-sm tracking-[0.18em] sm:tracking-[0.22em] text-white font-normal leading-none">
+                        <span class="font-display text-[10.5px] sm:text-sm tracking-[0.14em] sm:tracking-[0.22em] text-white font-normal leading-none whitespace-nowrap">
                             <strong class="font-bold">OPEN</strong>FRAME
                         </span>
-                        <span class="font-display text-[7px] sm:text-[8px] tracking-[0.38em] text-zinc-400 uppercase mt-1 leading-none">
+                        <span class="font-display text-[6.5px] sm:text-[8px] tracking-[0.32em] sm:tracking-[0.38em] text-zinc-400 uppercase mt-0.5 sm:mt-1 leading-none">
                             VISUALS
                         </span>
                     </div>
@@ -206,29 +206,29 @@
                 </nav>
 
                 <!-- Client Auth + Book CTA + Mobile Toggle -->
-                <div class="flex items-center gap-1.5 sm:gap-2">
+                <div class="flex items-center gap-1 sm:gap-2 shrink-0">
                     <!-- Logged Out State: Sign In Button -->
-                    <button id="nav-signin-btn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 border border-white/15 text-white font-display text-[9.5px] sm:text-[10.5px] tracking-widest uppercase hover:bg-white/20 transition whitespace-nowrap">
-                        <i class="fa-regular fa-user text-[10px]"></i>
+                    <button id="nav-signin-btn" type="button" class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 border border-white/15 text-white font-display text-[9px] sm:text-[10.5px] tracking-wider sm:tracking-widest uppercase hover:bg-white/20 transition whitespace-nowrap">
+                        <i class="fa-regular fa-user text-[9px] sm:text-[10px]"></i>
                         <span>Sign In</span>
                     </button>
 
                     <!-- Logged In State: My Orders Button -->
-                    <button id="nav-orders-btn" type="button" class="hidden items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-emerald-500/20 border border-emerald-400/35 text-emerald-200 font-display text-[9.5px] sm:text-[10.5px] font-semibold tracking-widest uppercase hover:bg-emerald-500/30 transition whitespace-nowrap">
+                    <button id="nav-orders-btn" type="button" class="hidden items-center gap-1 sm:gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-emerald-500/20 border border-emerald-400/35 text-emerald-200 font-display text-[9px] sm:text-[10.5px] font-semibold tracking-wider sm:tracking-widest uppercase hover:bg-emerald-500/30 transition whitespace-nowrap">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span>My Orders</span>
-                        <span id="nav-orders-count" class="px-1.5 py-0.2 rounded-full bg-emerald-400 text-black text-[9px] font-bold">0</span>
+                        <span>Orders</span>
+                        <span id="nav-orders-count" class="px-1.5 py-0.2 rounded-full bg-emerald-400 text-black text-[8.5px] font-bold">0</span>
                     </button>
 
                     <!-- Book CTA -->
-                    <a href="#booking" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-white text-black font-display text-[9.5px] sm:text-[11px] font-semibold tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-md shadow-white/10 whitespace-nowrap">
+                    <a href="#booking" class="inline-flex items-center gap-1 px-2.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-white text-black font-display text-[9px] sm:text-[11px] font-semibold tracking-wider sm:tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-md shadow-white/10 whitespace-nowrap">
                         <span>Book</span>
-                        <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                        <i class="fa-solid fa-arrow-right text-[8px] sm:text-[9px]"></i>
                     </a>
 
                     <!-- Mobile Menu Toggle -->
-                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition">
-                        <i class="fa-solid fa-bars text-sm"></i>
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="lg:hidden w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition shrink-0">
+                        <i class="fa-solid fa-bars text-xs sm:text-sm"></i>
                     </button>
                 </div>
             </div>
@@ -249,59 +249,59 @@
     </header>
 
     <!-- ==================== CINEMATIC HERO ==================== -->
-    <section id="home" class="relative md:min-h-screen flex items-center pt-20 sm:pt-28 pb-8 sm:pb-12 overflow-hidden bg-[#050505]">
+    <section id="home" class="relative md:min-h-screen flex items-center pt-[68px] sm:pt-28 pb-6 sm:pb-12 overflow-hidden bg-[#050505]">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_72%_52%,rgba(255,255,255,0.06)_0%,rgba(5,5,5,1)_65%)] pointer-events-none"></div>
 
         <!-- Viewfinder Grid Frame -->
-        <div class="absolute top-[74px] sm:top-24 bottom-4 sm:bottom-8 left-3 right-3 sm:left-8 sm:right-8 border border-white/[0.04] pointer-events-none z-0">
-            <div class="absolute top-0 left-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-t border-l border-white/25"></div>
-            <div class="absolute top-0 right-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-t border-r border-white/25"></div>
-            <div class="absolute bottom-0 left-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-b border-l border-white/25"></div>
-            <div class="absolute bottom-0 right-0 w-3.5 h-3.5 sm:w-6 sm:h-6 border-b border-r border-white/25"></div>
+        <div class="absolute top-[60px] sm:top-24 bottom-3 sm:bottom-8 left-2.5 right-2.5 sm:left-8 sm:right-8 border border-white/[0.04] pointer-events-none z-0">
+            <div class="absolute top-0 left-0 w-3 h-3 sm:w-6 sm:h-6 border-t border-l border-white/25"></div>
+            <div class="absolute top-0 right-0 w-3 h-3 sm:w-6 sm:h-6 border-t border-r border-white/25"></div>
+            <div class="absolute bottom-0 left-0 w-3 h-3 sm:w-6 sm:h-6 border-b border-l border-white/25"></div>
+            <div class="absolute bottom-0 right-0 w-3 h-3 sm:w-6 sm:h-6 border-b border-r border-white/25"></div>
         </div>
 
-        <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 w-full py-3 sm:py-0">
+        <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 w-full py-2 sm:py-0">
             <div class="grid grid-cols-12 gap-2 sm:gap-6 items-center">
                 <!-- LEFT COLUMN -->
                 <div class="col-span-7 z-20">
                     <div class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full glass-panel border border-white/15 mb-3 sm:mb-6">
                         <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="font-display text-[8.5px] sm:text-xs tracking-[0.14em] sm:tracking-[0.22em] uppercase text-zinc-200 whitespace-nowrap">
+                        <span class="font-display text-[8px] sm:text-xs tracking-[0.14em] sm:tracking-[0.22em] uppercase text-zinc-200 whitespace-nowrap">
                             Bookings Open • Nov 2026
                         </span>
                     </div>
 
-                    <h1 class="font-display text-2xl sm:text-5xl lg:text-6xl font-light tracking-[0.16em] sm:tracking-[0.24em] text-white uppercase leading-tight">
+                    <h1 class="font-display text-[22px] sm:text-5xl lg:text-6xl font-light tracking-[0.15em] sm:tracking-[0.24em] text-white uppercase leading-tight">
                         <span class="font-bold">OPEN</span>FRAME<br>
-                        <span class="text-sm sm:text-3xl lg:text-4xl tracking-[0.34em] sm:tracking-[0.42em] text-zinc-300 font-extralight block mt-0.5 sm:mt-2">VISUALS</span>
+                        <span class="text-xs sm:text-3xl lg:text-4xl tracking-[0.34em] sm:tracking-[0.42em] text-zinc-300 font-extralight block mt-0.5 sm:mt-2">VISUALS</span>
                     </h1>
 
-                    <p class="mt-2.5 sm:mt-5 font-display text-[10.5px] sm:text-base tracking-[0.14em] sm:tracking-[0.26em] uppercase text-zinc-300 font-light leading-relaxed">
+                    <p class="mt-2 sm:mt-5 font-display text-[10px] sm:text-base tracking-[0.14em] sm:tracking-[0.26em] uppercase text-zinc-300 font-light leading-relaxed">
                         Every Frame. A New Perspective.
                     </p>
 
-                    <div class="w-10 sm:w-16 h-[1px] bg-white/40 my-3 sm:my-6"></div>
+                    <div class="w-10 sm:w-16 h-[1px] bg-white/40 my-2.5 sm:my-6"></div>
 
                     <div class="grid grid-cols-3 gap-1 sm:gap-4 max-w-md mb-4 sm:mb-8">
                         <div class="flex flex-col items-center justify-center text-center border-r border-white/15 px-1">
                             <i class="fa-solid fa-camera text-xs sm:text-lg text-white/90 mb-1 sm:mb-2"></i>
-                            <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Photo</span>
+                            <span class="font-display text-[7.5px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Photo</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center border-r border-white/15 px-1">
                             <i class="fa-solid fa-video text-xs sm:text-lg text-white/90 mb-1 sm:mb-2"></i>
-                            <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Cinema</span>
+                            <span class="font-display text-[7.5px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Cinema</span>
                         </div>
                         <div class="flex flex-col items-center justify-center text-center px-1">
                             <i class="fa-solid fa-helicopter text-xs sm:text-lg text-white/90 mb-1 sm:mb-2"></i>
-                            <span class="font-display text-[8px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Aerials</span>
+                            <span class="font-display text-[7.5px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-zinc-300">Aerials</span>
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3.5 max-w-[185px] sm:max-w-none">
-                        <a href="#booking" class="w-full sm:w-48 h-9 sm:h-12 inline-flex items-center justify-center rounded-full bg-white text-black font-display text-[9.5px] sm:text-xs font-semibold tracking-[0.18em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/5">
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3.5 max-w-[175px] sm:max-w-none">
+                        <a href="#booking" class="w-full sm:w-48 h-9 sm:h-12 inline-flex items-center justify-center rounded-full bg-white text-black font-display text-[9px] sm:text-xs font-semibold tracking-[0.16em] uppercase hover:bg-zinc-200 transition-all shadow-xl shadow-white/5">
                             Book Session
                         </a>
-                        <a href="#catalog" class="w-full sm:w-48 h-9 sm:h-12 inline-flex items-center justify-center rounded-full glass-panel border border-white/15 text-white font-display text-[9.5px] sm:text-xs font-medium tracking-[0.18em] uppercase hover:bg-white/10 transition-all">
+                        <a href="#catalog" class="w-full sm:w-48 h-9 sm:h-12 inline-flex items-center justify-center rounded-full glass-panel border border-white/15 text-white font-display text-[9px] sm:text-xs font-medium tracking-[0.16em] uppercase hover:bg-white/10 transition-all">
                             Packages
                         </a>
                     </div>
@@ -412,7 +412,7 @@
     </section>
 
     <!-- ==================== 2-ROW HORIZONTAL SLIDING PORTFOLIO GALLERY ==================== -->
-    <section id="portfolio" class="py-12 md:py-24 bg-[#08080a] border-t border-white/5">
+    <section id="portfolio" class="scroll-mt-20 sm:scroll-mt-24 py-12 md:py-24 bg-[#08080a] border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 md:mb-10 gap-4">
                 <div>
@@ -422,28 +422,29 @@
                     </h2>
                 </div>
 
+                <!-- Single-Row Filter Pills + Arrows -->
                 <div class="flex items-center justify-between md:justify-end gap-2 w-full md:w-auto">
-                    <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-0.5" id="portfolio-filters">
-                        <button data-filter="all" class="filter-btn active shrink-0 px-3.5 py-2 rounded-full text-[10px] sm:text-[11px] font-display tracking-widest uppercase bg-white text-black font-semibold transition-all">
+                    <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-0.5 flex-1 md:flex-initial" id="portfolio-filters">
+                        <button data-filter="all" class="filter-btn active shrink-0 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-[9.5px] sm:text-[11px] font-display tracking-widest uppercase bg-white text-black font-semibold transition-all">
                             All
                         </button>
-                        <button data-filter="photography" class="filter-btn shrink-0 px-3.5 py-2 rounded-full text-[10px] sm:text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                        <button data-filter="photography" class="filter-btn shrink-0 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-[9.5px] sm:text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
                             Photo
                         </button>
-                        <button data-filter="films" class="filter-btn shrink-0 px-3.5 py-2 rounded-full text-[10px] sm:text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                        <button data-filter="films" class="filter-btn shrink-0 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-[9.5px] sm:text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
                             Films
                         </button>
-                        <button data-filter="aerials" class="filter-btn shrink-0 px-3.5 py-2 rounded-full text-[10px] sm:text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
+                        <button data-filter="aerials" class="filter-btn shrink-0 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-[9.5px] sm:text-[11px] font-display tracking-widest uppercase glass-panel text-zinc-300 hover:text-white transition-all">
                             Aerials
                         </button>
                     </div>
 
                     <div class="flex items-center gap-1.5 shrink-0 pl-2 border-l border-white/10">
                         <button id="slide-left-btn" aria-label="Slide Left" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
-                            <i class="fa-solid fa-chevron-left text-[11px]"></i>
+                            <i class="fa-solid fa-chevron-left text-[10px] sm:text-[11px]"></i>
                         </button>
                         <button id="slide-right-btn" aria-label="Slide Right" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full glass-panel border border-white/15 flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
-                            <i class="fa-solid fa-chevron-right text-[11px]"></i>
+                            <i class="fa-solid fa-chevron-right text-[10px] sm:text-[11px]"></i>
                         </button>
                     </div>
                 </div>
@@ -458,7 +459,7 @@
                 </div>
             </div>
 
-            <div class="mt-2 flex items-center justify-end gap-2 text-[9.5px] font-display tracking-[0.18em] uppercase text-zinc-500">
+            <div class="mt-2 flex items-center justify-end gap-2 text-[9px] font-display tracking-[0.18em] uppercase text-zinc-500">
                 <span>Swipe or tap arrows for more</span>
                 <i class="fa-solid fa-arrows-left-right text-zinc-400"></i>
             </div>
@@ -466,7 +467,7 @@
     </section>
 
     <!-- ==================== SERVICE CATALOG & PACKAGES ==================== -->
-    <section id="catalog" class="py-12 md:py-24 bg-[#050505] border-t border-white/5 relative">
+    <section id="catalog" class="scroll-mt-20 sm:scroll-mt-24 py-12 md:py-24 bg-[#050505] border-t border-white/5 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-left md:text-center max-w-2xl md:mx-auto mb-8 md:mb-14">
                 <span class="font-display text-[10px] sm:text-[11px] tracking-[0.35em] uppercase text-zinc-400">Service Catalog</span>
@@ -488,7 +489,7 @@
     </section>
 
     <!-- ==================== INTERACTIVE SCHEDULE & ORDER BOOKING ==================== -->
-    <section id="booking" class="py-12 md:py-24 bg-[#08080a] border-t border-white/5">
+    <section id="booking" class="scroll-mt-20 sm:scroll-mt-24 py-12 md:py-24 bg-[#08080a] border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 md:mb-12">
                 <div>
@@ -661,17 +662,17 @@
         </div>
     </section>
 
-    <!-- ==================== COMPACT & ALIGNED FOOTER ==================== -->
-    <footer id="contact" class="bg-[#030303] border-t border-white/10 py-10 md:py-16">
+    <!-- ==================== COMPACT & SINGLE-ROW ALIGNED FOOTER ==================== -->
+    <footer id="contact" class="scroll-mt-20 sm:scroll-mt-24 bg-[#030303] border-t border-white/10 py-10 md:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-10 pb-8 md:pb-12 border-b border-white/10">
                 <div>
                     <div class="flex items-center gap-3">
-                        <span class="font-display text-base sm:text-lg tracking-[0.3em] uppercase text-white">
+                        <span class="font-display text-base sm:text-lg tracking-[0.26em] sm:tracking-[0.3em] uppercase text-white">
                             <strong class="font-bold">OPEN</strong>FRAME VISUALS
                         </span>
                     </div>
-                    <p class="font-display text-[10px] sm:text-[11px] tracking-[0.26em] uppercase text-zinc-400 mt-1.5">
+                    <p class="font-display text-[10px] sm:text-[11px] tracking-[0.24em] sm:tracking-[0.26em] uppercase text-zinc-400 mt-1.5">
                         Photography • Films • Aerials
                     </p>
                     <p class="text-zinc-500 text-xs mt-2.5 flex items-center gap-2">
@@ -680,20 +681,21 @@
                     </p>
                 </div>
 
-                <div class="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                <!-- Single-Row Social Action Buttons (Fits cleanly on 360px Mobile) -->
+                <div class="flex items-center gap-2 sm:gap-3 w-full md:w-auto">
                     <a href="https://wa.me/94770000000?text=Hi%20OpenFrame%20Visuals!%20I'd%20like%20to%20inquire%20about%20a%20shoot." 
                        target="_blank" rel="noopener noreferrer"
-                       class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 sm:px-5 h-11 rounded-xl glass-panel text-white text-[11px] font-display tracking-widest uppercase hover:bg-white hover:text-black transition whitespace-nowrap">
-                        <i class="fa-brands fa-whatsapp text-base"></i>
+                       class="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-5 h-10 sm:h-11 rounded-xl glass-panel text-white text-[10px] sm:text-[11px] font-display tracking-wider sm:tracking-widest uppercase hover:bg-white hover:text-black transition whitespace-nowrap">
+                        <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i>
                         <span>WhatsApp Inquiry</span>
                     </a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                       class="w-11 h-11 shrink-0 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
-                        <i class="fa-brands fa-instagram text-base"></i>
+                       class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                        <i class="fa-brands fa-instagram text-sm sm:text-base"></i>
                     </a>
                     <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
-                       class="w-11 h-11 shrink-0 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
-                        <i class="fa-brands fa-youtube text-base"></i>
+                       class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl glass-panel flex items-center justify-center text-zinc-300 hover:bg-white hover:text-black transition">
+                        <i class="fa-brands fa-youtube text-sm sm:text-base"></i>
                     </a>
                 </div>
             </div>
@@ -701,8 +703,8 @@
             <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-zinc-500 gap-3">
                 <p>&copy; 2026 OpenFrame Visuals. All rights reserved.</p>
                 <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-6">
-                    <p class="font-display tracking-widest uppercase text-[10px]">Every Frame. A New Perspective.</p>
-                    <a href="admin.html" class="font-display tracking-widest uppercase text-[10px] text-zinc-500 hover:text-white transition whitespace-nowrap">Studio Admin</a>
+                    <p class="font-display tracking-widest uppercase text-[9.5px] sm:text-[10px]">Every Frame. A New Perspective.</p>
+                    <a href="admin.html" class="font-display tracking-widest uppercase text-[9.5px] sm:text-[10px] text-zinc-500 hover:text-white transition whitespace-nowrap">Studio Admin</a>
                 </div>
             </div>
         </div>
@@ -769,7 +771,6 @@
     <!-- ==================== CUSTOMER "MY ORDERS" DASHBOARD MODAL ==================== -->
     <div id="my-orders-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4">
         <div class="max-w-2xl w-full glass-panel rounded-3xl border border-white/20 flex flex-col max-h-[88vh] overflow-hidden">
-            <!-- Modal Header -->
             <div class="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between gap-3">
                 <div class="min-w-0">
                     <span class="font-display text-[9.5px] tracking-[0.28em] uppercase text-emerald-400">Client Portal</span>
@@ -786,14 +787,12 @@
                 </div>
             </div>
 
-            <!-- Orders List Body -->
             <div id="my-orders-list" class="p-4 sm:p-6 overflow-y-auto space-y-3.5 flex-1">
                 <div class="text-center py-8 text-xs text-zinc-400">Loading your orders...</div>
             </div>
 
-            <!-- Modal Footer -->
             <div class="p-4 sm:px-6 border-t border-white/10 bg-black/40 flex items-center justify-between gap-3">
-                <span class="text-[11px] text-zinc-400">Status updates live when confirmed by studio.</span>
+                <span class="text-[11px] text-zinc-400">Updates live when confirmed by studio.</span>
                 <a href="#booking" id="orders-new-booking-btn" class="px-4 py-2 rounded-xl bg-white text-black font-display text-[10px] font-bold tracking-widest uppercase hover:bg-zinc-200 transition whitespace-nowrap">
                     + New Shoot
                 </a>
@@ -909,7 +908,7 @@
                 parts.sensor.style.transform = `translate3d(${-e * 10}px, ${e * 2}px, 0)`;
                 parts.sensor.style.opacity = 0.35 + e * 0.65;
                 parts.mount.style.transform = `translate3d(${e * 8}px, ${-e * 1.6}px, 0)`;
-                parts.barrel.style.transform = `translate3d(${e * 30}px, ${-e * 6}px, 0)`;
+                parts.barrel.style.transform = `translate3d(${e * 30}px, ${e * 6}px, 0)`;
                 parts.glass1.style.transform = `translate3d(${e * 56}px, ${-e * 11.2}px, 0) rotate(${e * 12}deg)`;
                 parts.ring.style.transform = `translate3d(${e * 84}px, ${-e * 16.8}px, 0) rotate(${-e * 20}deg)`;
                 parts.glass2.style.transform = `translate3d(${e * 112}px, ${-e * 22.4}px, 0) rotate(${e * 16}deg)`;
@@ -1073,7 +1072,6 @@
                 const identityLabel = user.displayName || user.email || 'Client';
                 document.getElementById('user-profile-subtitle').textContent = `${identityLabel} (${user.email})`;
 
-                // Auto-fill Booking Form fields from Google / Email profile
                 const nameInput = document.getElementById('client-name');
                 const emailInput = document.getElementById('client-email');
                 if (user.displayName && !nameInput.value) nameInput.value = user.displayName;
@@ -1082,7 +1080,6 @@
                 bookingAuthText.innerHTML = `<span class="text-emerald-300 font-medium"><i class="fa-solid fa-circle-check mr-1"></i>Signed in as ${identityLabel}</span>`;
                 bookingAuthActionBtn.textContent = 'My Orders';
 
-                // Subscribe to Live Orders for this User (by UID or Email)
                 const ordersListEl = document.getElementById('my-orders-list');
                 const q = query(collection(db, "bookings"), where("userEmail", "==", user.email));
 
