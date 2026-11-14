@@ -13,21 +13,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="icon" type="image/png" href="./icon.png">
     <link rel="apple-touch-icon" href="./icon.png">
-    
-    <style>
-        html, body { background-color: #050505 !important; margin: 0; padding: 0; overflow: hidden; }
-        #of-launch-screen {
-            position: fixed; inset: 0; z-index: 99999;
-            background-color: #050505;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
-        #shutter-top, #shutter-bottom {
-            position: absolute; left: 0; right: 0; height: 50%;
-            background-color: #050505;
-        }
-        #shutter-top { top: 0; }
-        #shutter-bottom { bottom: 0; }
-    </style>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -87,25 +72,25 @@
         .sketch-glow { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25)); }
         .sketch-part { will-change: transform, opacity; transform-box: fill-box; transform-origin: center; }
 
-        /* Cinematic Shutter & Viewfinder Launch Animations */
-        @keyframes ofSnapTL { 0% { opacity: 0; transform: translate(-18px, -18px); } 100% { opacity: 1; transform: translate(0, 0); } }
-        @keyframes ofSnapTR { 0% { opacity: 0; transform: translate(18px, -18px); } 100% { opacity: 1; transform: translate(0, 0); } }
-        @keyframes ofSnapBL { 0% { opacity: 0; transform: translate(-18px, 18px); } 100% { opacity: 1; transform: translate(0, 0); } }
-        @keyframes ofSnapBR { 0% { opacity: 0; transform: translate(18px, 18px); } 100% { opacity: 1; transform: translate(0, 0); } }
+        /* Instant Smooth Shutter & Viewfinder Animations */
+        @keyframes ofSnapTL { 0% { opacity: 0; transform: translate(-14px, -14px); } 100% { opacity: 1; transform: translate(0, 0); } }
+        @keyframes ofSnapTR { 0% { opacity: 0; transform: translate(14px, -14px); } 100% { opacity: 1; transform: translate(0, 0); } }
+        @keyframes ofSnapBL { 0% { opacity: 0; transform: translate(-14px, 14px); } 100% { opacity: 1; transform: translate(0, 0); } }
+        @keyframes ofSnapBR { 0% { opacity: 0; transform: translate(14px, 14px); } 100% { opacity: 1; transform: translate(0, 0); } }
         @keyframes ofDraw { to { stroke-dashoffset: 0; } }
-        @keyframes ofTextUp { 0% { opacity: 0; transform: translateY(14px); filter: blur(6px); } 100% { opacity: 1; transform: translateY(0); filter: blur(0); } }
+        @keyframes ofTextUp { 0% { opacity: 0; transform: translateY(10px); filter: blur(4px); } 100% { opacity: 1; transform: translateY(0); filter: blur(0); } }
 
-        .of-corner-tl { opacity: 0; animation: ofSnapTL 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; }
-        .of-corner-tr { opacity: 0; animation: ofSnapTR 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; }
-        .of-corner-bl { opacity: 0; animation: ofSnapBL 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; }
-        .of-corner-br { opacity: 0; animation: ofSnapBR 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; }
+        .of-corner-tl { animation: ofSnapTL 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+        .of-corner-tr { animation: ofSnapTR 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+        .of-corner-bl { animation: ofSnapBL 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
+        .of-corner-br { animation: ofSnapBR 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
 
-        .of-stroke-o { stroke-dasharray: 120; stroke-dashoffset: 120; animation: ofDraw 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards; }
-        .of-stroke-f1 { stroke-dasharray: 70; stroke-dashoffset: 70; animation: ofDraw 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards; }
-        .of-stroke-f2 { stroke-dasharray: 40; stroke-dashoffset: 40; animation: ofDraw 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards; }
+        .of-stroke-o { stroke-dasharray: 120; stroke-dashoffset: 120; animation: ofDraw 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards; }
+        .of-stroke-f1 { stroke-dasharray: 70; stroke-dashoffset: 70; animation: ofDraw 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards; }
+        .of-stroke-f2 { stroke-dasharray: 40; stroke-dashoffset: 40; animation: ofDraw 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards; }
 
-        .of-text-slide { opacity: 0; animation: ofTextUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards; }
-        .of-rec-badge { opacity: 0; animation: ofTextUp 0.6s ease 0.95s forwards; }
+        .of-text-slide { opacity: 0; animation: ofTextUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+        .of-rec-badge { opacity: 0; animation: ofTextUp 0.5s ease 0.6s forwards; }
 
         /* 2-Row Horizontal Slider Track */
         .portfolio-slider {
@@ -144,32 +129,29 @@
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
 
-    <!-- ==================== CINEMATIC SHUTTER & VIEWFINDER LAUNCH ==================== -->
-    <div id="of-launch-screen" class="fixed inset-0 z-[9999] bg-[#050505] flex flex-col items-center justify-center overflow-hidden select-none">
+    <!-- ==================== INSTANT CINEMATIC LAUNCH ==================== -->
+    <div id="of-launch-screen" class="fixed inset-0 z-[99999] bg-[#050505] flex flex-col items-center justify-center overflow-hidden select-none">
         
         <!-- Camera Shutter Blades (Top & Bottom) -->
-        <div id="shutter-top" class="absolute top-0 left-0 right-0 h-1/2 bg-[#08080a] border-b border-white/10 transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] z-20"></div>
-        <div id="shutter-bottom" class="absolute bottom-0 left-0 right-0 h-1/2 bg-[#08080a] border-t border-white/10 transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] z-20"></div>
+        <div id="shutter-top" class="absolute top-0 left-0 right-0 h-1/2 bg-[#050505] border-b border-white/10 transition-transform duration-600 ease-[cubic-bezier(0.76,0,0.24,1)] z-20"></div>
+        <div id="shutter-bottom" class="absolute bottom-0 left-0 right-0 h-1/2 bg-[#050505] border-t border-white/10 transition-transform duration-600 ease-[cubic-bezier(0.76,0,0.24,1)] z-20"></div>
 
         <!-- Center Studio Content -->
-        <div id="launch-center-box" class="relative z-30 flex flex-col items-center transition-all duration-500">
+        <div id="launch-center-box" class="relative z-30 flex flex-col items-center transition-all duration-400">
             
             <!-- Radial White Lens Flare -->
             <div class="absolute -inset-12 bg-white/10 blur-3xl rounded-full animate-pulse pointer-events-none"></div>
 
             <!-- Viewfinder Frame + Animated Monogram -->
             <div class="relative w-28 h-28 flex items-center justify-center">
-                <!-- Outer Rotating Focus Ring -->
                 <div class="absolute inset-0 rounded-full border border-dashed border-white/20 animate-[spin_8s_linear_infinite]"></div>
                 
                 <svg class="w-24 h-24 text-white overflow-visible" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- 4 Viewfinder Corners snapping inward -->
                     <path class="of-corner-tl" d="M12 28V12H28" stroke="currentColor" stroke-width="4.5" stroke-linecap="square"/>
                     <path class="of-corner-tr" d="M72 12H88V28" stroke="currentColor" stroke-width="4.5" stroke-linecap="square"/>
                     <path class="of-corner-bl" d="M12 72V88H28" stroke="currentColor" stroke-width="4.5" stroke-linecap="square"/>
                     <path class="of-corner-br" d="M72 88H88V72" stroke="currentColor" stroke-width="4.5" stroke-linecap="square"/>
 
-                    <!-- Monogram Drawing Live -->
                     <path class="of-stroke-o" d="M62 36C57.5 29.5 49.5 26 41 27.5C29 29.5 21 40.5 23 52.5C24.5 61.5 31 68.5 39.5 70.5" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>
                     <path class="of-stroke-f1" d="M36 73L63 45H78" stroke="currentColor" stroke-width="6.5" stroke-linecap="square"/>
                     <path class="of-stroke-f2" d="M63 45V74" stroke="currentColor" stroke-width="6.5" stroke-linecap="square"/>
@@ -652,7 +634,7 @@
         </div>
     </div>
 
-    <!-- Cinematic Shutter Launch & Service Worker Script -->
+    <!-- Instant Launch Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const screen = document.getElementById('of-launch-screen');
@@ -661,18 +643,19 @@
             const bottomBlade = document.getElementById('shutter-bottom');
 
             if (screen) {
+                // ඇප් එක Open වූ වගෙන් ඉතාම සුමටව Animation එක පටන් ගෙන Shutter එක ඇරේ
                 setTimeout(() => {
                     if (centerBox) {
                         centerBox.style.opacity = '0';
-                        centerBox.style.transform = 'scale(0.92)';
+                        centerBox.style.transform = 'scale(0.95)';
                     }
                     setTimeout(() => {
                         screen.style.backgroundColor = 'transparent';
                         if (topBlade) topBlade.style.transform = 'translateY(-100%)';
                         if (bottomBlade) bottomBlade.style.transform = 'translateY(100%)';
-                        setTimeout(() => screen.remove(), 750);
-                    }, 220);
-                }, 1850);
+                        setTimeout(() => screen.remove(), 600);
+                    }, 180);
+                }, 1400);
             }
 
             if ('serviceWorker' in navigator) {
